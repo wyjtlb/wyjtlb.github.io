@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>背包问题状态转移方程 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="0-1背包： 1dp[i][j] &#x3D; Math.max(dp[i - 1][j - nums[i - 1]],dp[i - 1][j]); 完全背包： 1dp[i][j] &#x3D; dp[i - 1][j] + dp[i][j - nums[i - 1]];">
+  <meta name="description" content="背包问题最好要排序 0-1背包： 1dp[i][j] &#x3D; Math.max(dp[i - 1][j - nums[i - 1]],dp[i - 1][j]); 完全背包： 1dp[i][j] &#x3D; dp[i - 1][j] + dp[i][j - nums[i - 1]]; 完全背包求组合数（顺序不同也计数），加一层循环就行了，表示在这一层可以使用其它的数 1234567891011for (int">
 <meta property="og:type" content="article">
 <meta property="og:title" content="背包问题状态转移方程">
 <meta property="og:url" content="http://example.com/2023/07/28/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="0-1背包： 1dp[i][j] &#x3D; Math.max(dp[i - 1][j - nums[i - 1]],dp[i - 1][j]); 完全背包： 1dp[i][j] &#x3D; dp[i - 1][j] + dp[i][j - nums[i - 1]];">
+<meta property="og:description" content="背包问题最好要排序 0-1背包： 1dp[i][j] &#x3D; Math.max(dp[i - 1][j - nums[i - 1]],dp[i - 1][j]); 完全背包： 1dp[i][j] &#x3D; dp[i - 1][j] + dp[i][j - nums[i - 1]]; 完全背包求组合数（顺序不同也计数），加一层循环就行了，表示在这一层可以使用其它的数 1234567891011for (int">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-07-28T14:00:20.000Z">
-<meta property="article:modified_time" content="2023-07-28T14:05:09.782Z">
+<meta property="article:modified_time" content="2023-08-26T02:02:56.024Z">
 <meta property="article:author" content="neja">
 <meta name="twitter:card" content="summary">
   
@@ -184,10 +184,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>0-1背包：</p>
+        <p>背包问题最好要排序</p>
+<p>0-1背包：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = Math.max(dp[i - 1][j - nums[i - 1]],dp[i - 1][j]);</span><br></pre></td></tr></table></figure>
 <p>完全背包：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = dp[i - 1][j] + dp[i][j - nums[i - 1]];</span><br></pre></td></tr></table></figure>
+<p>完全背包求组合数（顺序不同也计数），加一层循环就行了，表示在这一层可以使用其它的数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 1;i &lt;= n;i++)&#123;</span><br><span class="line">    for (int j = 1;j &lt;= target;j++)&#123;</span><br><span class="line">        for (int z = 1;z &lt;= i;z++)&#123;</span><br><span class="line">            if (j &lt; nums[z - 1])&#123;</span><br><span class="line">                f[i][j] = f[i - 1][j];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                f[i][j] += f[i][j - nums[z - 1]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -279,6 +282,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2023/07/29/%E5%89%8D%E7%BC%80%E6%A0%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          前缀树
+        
+      </div>
+    </a>
   
   
     <a href="/2023/07/26/java%E4%B8%ADBitSet%E7%B1%BB/" id="article-nav-older" class="article-nav-link-wrap">

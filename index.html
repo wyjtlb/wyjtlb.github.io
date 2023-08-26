@@ -162,6 +162,140 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-一些板子" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/08/15/%E4%B8%80%E4%BA%9B%E6%9D%BF%E5%AD%90/">一些板子</a>
+    </h1>
+  
+
+        
+        <a href="/2023/08/15/%E4%B8%80%E4%BA%9B%E6%9D%BF%E5%AD%90/" class="archive-article-date">
+  	<time datetime="2023-08-15T13:23:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-08-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>求质因数的个数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int MX = 100001;</span><br><span class="line">for (int i = 2;i &lt; MX;i++)&#123;</span><br><span class="line">    if (omega[i] == 0)&#123;</span><br><span class="line">        for (int j = i;j &lt; MX;j += i)&#123;</span><br><span class="line">            omega[j]++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>快速幂</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">long pow(long x,int n)&#123;</span><br><span class="line">    long res = 1;</span><br><span class="line">    for (;n &gt; 0;n /= 2)&#123;</span><br><span class="line">        if (n % 2 &gt; 0) &#123;</span><br><span class="line">            res = res * x % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        x = x * x % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>列表转数组，数组转列表<br><code>int[] a = l.stream().mapToInt(i -&gt; i).toArray();</code><br><code>List&lt;Integer&gt; l = Arrays.stream(slices).boxed().collect(Collectors.toList());</code><br>单调栈求递增</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int[] left = new int[n];</span><br><span class="line">int[] right = new int[n];</span><br><span class="line">Arrays.fill(right,n);</span><br><span class="line">Deque&lt;Integer&gt; st = new ArrayDeque&lt;&gt;();</span><br><span class="line">st.push(-1);</span><br><span class="line">for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">    while(st.size() &gt; 1 &amp;&amp; omega[a[st.peek()]] &lt; omega[a[i]])&#123;</span><br><span class="line">        right[st.pop()] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    left[i] = st.peek();</span><br><span class="line">    st.push(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>拿到字符串中某个数的ASCII值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s;</span><br><span class="line">s.codePointAt(1); // 拿到下标1处的字符的acsii值</span><br></pre></td></tr></table></figure>
+<p>二维数组前缀和(根据具体情况进行适当地修改)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">// java版本</span><br><span class="line">class MatrixSum &#123;</span><br><span class="line">    private final int[][] sum;</span><br><span class="line"></span><br><span class="line">    public MatrixSum(int[][] matrix) &#123;</span><br><span class="line">        int m = matrix.length, n = matrix[0].length;</span><br><span class="line">        sum = new int[m + 1][n + 1]; // 注意：如果 matrix[i][j] 范围很大，需要使用 long</span><br><span class="line">        for (int i = 0; i &lt; m; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; n; j++) &#123;</span><br><span class="line">                sum[i + 1][j + 1] = sum[i + 1][j] + sum[i][j + 1] - sum[i][j] + matrix[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 返回左上角在 (r1,c1) 右下角在 (r2-1,c2-1) 的子矩阵元素和（类似前缀和的左闭右开）</span><br><span class="line">    public int query(int r1, int c1, int r2, int c2) &#123;</span><br><span class="line">        return sum[r2][c2] - sum[r2][c1] - sum[r1][c2] + sum[r1][c1];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 如果你不习惯左闭右开，也可以这样写</span><br><span class="line">    // 返回左上角在 (r1,c1) 右下角在 (r2,c2) 的子矩阵元素和</span><br><span class="line">    public int query2(int r1, int c1, int r2, int c2) &#123;</span><br><span class="line">        return sum[r2 + 1][c2 + 1] - sum[r2 + 1][c1] - sum[r1][c2 + 1] + sum[r1][c1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// python版本</span><br><span class="line">class MatrixSum:</span><br><span class="line">    def __init__(self, matrix: List[List[int]]):</span><br><span class="line">        m, n = len(matrix), len(matrix[0])</span><br><span class="line">        s = [[0] * (n + 1) for _ in range(m + 1)]</span><br><span class="line">        for i, row in enumerate(matrix):</span><br><span class="line">            for j, x in enumerate(row):</span><br><span class="line">                s[i + 1][j + 1] = s[i + 1][j] + s[i][j + 1] - s[i][j] + x</span><br><span class="line">        self.s = s</span><br><span class="line"></span><br><span class="line">    # 返回左上角在 (r1,c1) 右下角在 (r2-1,c2-1) 的子矩阵元素和（类似前缀和的左闭右开）</span><br><span class="line">    def query(self, r1: int, c1: int, r2: int, c2: int) -&gt; int:</span><br><span class="line">        return self.s[r2][c2] - self.s[r2][c1] - self.s[r1][c2] + self.s[r1][c1]</span><br><span class="line"></span><br><span class="line">    # 如果你不习惯左闭右开，也可以这样写</span><br><span class="line">    # 返回左上角在 (r1,c1) 右下角在 (r2,c2) 的子矩阵元素和</span><br><span class="line">    def query2(self, r1: int, c1: int, r2: int, c2: int) -&gt; int:</span><br><span class="line">        return self.s[r2 + 1][c2 + 1] - self.s[r2 + 1][c1] - self.s[r1][c2 + 1] + self.s[r1][c1]</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/08/15/%E4%B8%80%E4%BA%9B%E6%9D%BF%E5%AD%90/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-前缀树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/07/29/%E5%89%8D%E7%BC%80%E6%A0%91/">前缀树</a>
+    </h1>
+  
+
+        
+        <a href="/2023/07/29/%E5%89%8D%E7%BC%80%E6%A0%91/" class="archive-article-date">
+  	<time datetime="2023-07-29T13:04:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>每个结点都是一个26的结点数组加一个布尔值组成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">class Trie &#123;</span><br><span class="line"></span><br><span class="line">    class Node&#123;</span><br><span class="line">        boolean isvaild;</span><br><span class="line">        Node[] next;</span><br><span class="line"></span><br><span class="line">        Node()&#123;</span><br><span class="line">            isvaild = false;</span><br><span class="line">            next = new Node[26];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Node root;</span><br><span class="line">    public Trie() &#123;</span><br><span class="line">        root = new Node();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void insert(String word) &#123;</span><br><span class="line">        Node node = root;</span><br><span class="line">        for (char c : word.toCharArray())&#123;</span><br><span class="line">            node.next[c - &#x27;a&#x27;] = new Node();</span><br><span class="line">            node = node.next[c - &#x27;a&#x27;];</span><br><span class="line">        &#125;</span><br><span class="line">        node.isvaild = true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public boolean search(String word) &#123;</span><br><span class="line">        Node node = root;</span><br><span class="line">        for (char c : word.toCharArray())&#123;</span><br><span class="line">            if (node.next[c - &#x27;a&#x27;] == null)&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.next[c - &#x27;a&#x27;];</span><br><span class="line">        &#125;</span><br><span class="line">        return node.isvaild;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public boolean startsWith(String prefix) &#123;</span><br><span class="line">        Node node = root;</span><br><span class="line">        for (char c : prefix.toCharArray())&#123;</span><br><span class="line">            if (node.next[c - &#x27;a&#x27;] == null)&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.next[c - &#x27;a&#x27;];</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your Trie object will be instantiated and called as such:</span><br><span class="line"> * Trie obj = new Trie();</span><br><span class="line"> * obj.insert(word);</span><br><span class="line"> * boolean param_2 = obj.search(word);</span><br><span class="line"> * boolean param_3 = obj.startsWith(prefix);</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/07/29/%E5%89%8D%E7%BC%80%E6%A0%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-背包问题状态转移方程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -182,10 +316,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>0-1背包：</p>
+        <p>背包问题最好要排序</p>
+<p>0-1背包：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = Math.max(dp[i - 1][j - nums[i - 1]],dp[i - 1][j]);</span><br></pre></td></tr></table></figure>
 <p>完全背包：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = dp[i - 1][j] + dp[i][j - nums[i - 1]];</span><br></pre></td></tr></table></figure>
+<p>完全背包求组合数（顺序不同也计数），加一层循环就行了，表示在这一层可以使用其它的数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 1;i &lt;= n;i++)&#123;</span><br><span class="line">    for (int j = 1;j &lt;= target;j++)&#123;</span><br><span class="line">        for (int z = 1;z &lt;= i;z++)&#123;</span><br><span class="line">            if (j &lt; nums[z - 1])&#123;</span><br><span class="line">                f[i][j] = f[i - 1][j];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                f[i][j] += f[i][j - nums[z - 1]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -382,6 +519,19 @@
 <p>数据库索引（设计理念）：加快海量数据的查询速度。类似于字典，根据拼音缩小数据的查询范围。</p>
 <p>联合索引：类似于字典根据部首来查询，先找到部首的列表，再根据笔画数来查询。</p>
 <p>聚集索引：一般来说，一张表就一个聚集索引，就是主键。可以拥有多个非聚集索引。</p>
+<p>redis高并发下三大场景：<br>redis缓存穿透:访问透过redis直接经过mysql，通常是一个不存在的key，在数据查询为null。每次请求都会落在数据库，然后高并发。数据库扛不住就会挂掉。<br>解决方案：<br>1、将查到的null设成该key的缓存对象<br>2、针对这个明显错误的key在逻辑层进行验证<br>3、分析用户行为，判断是否为爬虫或者攻击者，针对其访问进行限制<br>4、使用布隆过滤器（超大型hashmap）过滤<br>redis缓存雪崩：redis缓存集体大规模失效，使得高并发下key大规模访问mysql，从而导致数据库崩掉。<br>解决方案：<br>1、通常的解决方法是在key的过期时间后面再加上一个随机数，让key均匀的失效<br>2、热点数据可以考虑不失效<br>3、考虑使用队列或锁让程序执行在压力范围之内，当然这种方案可能会影响并发量<br>redis缓存击穿：指一个key非常热点，在不停地扛着高并发，当这个key失效的瞬间，持续的高并发就穿破缓存，直接干崩数据库。（抢票系统）<br>解决方案：<br>1、可以使用互斥锁避免大量请求同时落到db<br>2、将缓存设置为永不过期（使用部分情况）<br>3、布隆过滤器，判断某个容器是否在集合中<br>4、做好熔断，降级，防止系统崩溃</p>
+<p>mysql执行流程：<br>1、客户端请求<br>2、连接器：验证用户身份，给予权限<br>3、查询缓存：存在缓存直接返回，不存在就继续往下执行<br>4、分析器：对SQL语句尽心语法分析，词法分析<br>5、优化器：进行SQL调优<br>6、执行器：先判断是否具有执行权限，之后再调用引擎提供的接口<br>7、去引擎层获取获取数据返回，如何开启查询缓存则会缓存结果</p>
+<p>mysql内部构造：<br>1、服务层：涵盖mysql大部分功能，以及所有的内置函数<br>2、存储引擎层：架构模式是插件式的，默认使用innodb</p>
+<p>mysql优化：<br>1、为搜索字段创建索引<br>2、避免使用select *<br>3、垂直分割分表<br>4、选择正确的搜索引擎</p>
+<p>mysql事务的四大特性：<br>1、原子性，事务作为一个整体被执行，要么执行完，要么不执行<br>2、一致性：事务开始前和事务结束后，数据不会被破坏<br>3、隔离性：多个事务并发访问时，互不影响<br>4、持久性：事务完成后，更改将持久地保存在数据库之中</p>
+<p>事务的隔离级别：<br>1、可重复读：默认<br>2、读未提交：可能导致幻读，脏读，不可重复读<br>3、读已提交：只能阻止脏读<br>4、串行化：防止幻读，脏读，不可重复读</p>
+<p>幻读：事务A查询一个范围的结果集，并发事务B往这个范围内进行了增加、删除的操作，然后提交，然后A再查，两次的结果集不一样了。<br>脏读：事务A和事务B交替执行，A被B干扰到了，事务A读到了事务B未提交的数据。<br>不可重复读：一个事务范围内，两个相同的查询，读取同一条记录，却得到了不同的数据。</p>
+<p>数据库索引采用B+树：只要遍历叶子节点就可以遍历整棵树，效率高。B树只能中序遍历，效率低，可能出现o(n)的特殊情况。</p>
+<p>事务回滚机制：防止系统崩溃，防止操作发生操作，一个安全保险。</p>
+<p>mysql索引主要使用的两种数据结构：<br>1、哈希索引：哈希表<br>2、BTree索引：B+树</p>
+<p>垃圾回收（garbage collection）,简称gc，gc分为两大类，partial gc（部分收集）和full gc（整堆gc）。<br>partial gc：<br>1、young gc：指单单收集年轻代的gc<br>2、old gc：指单单收集老年代的gc<br>3、mixed gc：这是g1收集器特有的，指的是收集整个年轻代和部分老年代的gc<br>full gc：<br>收集整个堆，包括年轻代和老年代，如果有永久代也包括永久代</p>
+<p>young gc的触发条件：<br>大致可认为在年轻代的eden快要占满的时候触发young gc</p>
+<p>垃圾回收算法：<br>1、根可达算法：选定一些对象作为root，然后以这些对象作为起点，搜索走过的引用链，如果目标对象不可达，则说明目标对象需要被回收<br>2、标记算法：打标签</p>
 
       
 
@@ -644,136 +794,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/07/20/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-并查集模板" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/19/%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%A8%A1%E6%9D%BF/">并查集模板</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/19/%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%A8%A1%E6%9D%BF/" class="archive-article-date">
-  	<time datetime="2023-07-19T13:47:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="并查集通用模板"><a href="#并查集通用模板" class="headerlink" title="并查集通用模板"></a>并查集通用模板</h1>
-        
-          <a class="article-more-a" href="/2023/07/19/%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%A8%A1%E6%9D%BF/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/19/%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%A8%A1%E6%9D%BF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-nSum板子" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/">nSum板子</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/" class="archive-article-date">
-  	<time datetime="2023-07-15T03:02:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="使用递归解决nSum问题"><a href="#使用递归解决nSum问题" class="headerlink" title="使用递归解决nSum问题"></a>使用递归解决nSum问题</h1>
-        
-          <a class="article-more-a" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/">展开全文 >></a>
         </p>
       
 
