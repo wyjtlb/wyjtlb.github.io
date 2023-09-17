@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hexo</title>
+  <title>leetcode363周赛总结 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/page/2/index.html">
+  <meta name="description" content="t1.计算k置位下标对应元素和做法：读题目的题，看懂测试用例即可 1234567891011class Solution &amp;#123;    public int sumIndicesWithKSetBits(List&lt;Integer&gt; nums, int k) &amp;#123;        int sum &#x3D; 0;        for(int i &#x3D; 0;i &lt; nums.si">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode363周赛总结">
+<meta property="og:url" content="http://example.com/2023/09/17/leetcode363%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="t1.计算k置位下标对应元素和做法：读题目的题，看懂测试用例即可 1234567891011class Solution &amp;#123;    public int sumIndicesWithKSetBits(List&lt;Integer&gt; nums, int k) &amp;#123;        int sum &#x3D; 0;        for(int i &#x3D; 0;i &lt; nums.si">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-17T13:18:24.000Z">
+<meta property="article:modified_time" content="2023-09-17T13:58:23.831Z">
 <meta property="article:author" content="neja">
 <meta name="twitter:card" content="summary">
   
@@ -160,31 +164,59 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-搜索二维矩阵" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-leetcode363周赛总结" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/22/%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5/">搜索二维矩阵</a>
+    <h1 class="article-title" itemprop="name">
+      leetcode363周赛总结
     </h1>
   
 
         
-        <a href="/2023/07/22/%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5/" class="archive-article-date">
-  	<time datetime="2023-07-22T13:33:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-22</time>
+        <a href="/2023/09/17/leetcode363%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2023-09-17T13:18:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public boolean searchMatrix(int[][] matrix, int target) &#123;</span><br><span class="line">        // 从右上角看是一颗二叉搜索树，大往下，小往左</span><br><span class="line">        int m = matrix.length,n = matrix[0].length;</span><br><span class="line">        for (int i = 0,j = n - 1;i &gt;= 0 &amp;&amp; j &gt;= 0 &amp;&amp; i &lt; m &amp;&amp; j &lt; n;)&#123;</span><br><span class="line">            if (matrix[i][j] &gt; target)&#123; // 往左</span><br><span class="line">                j--;</span><br><span class="line">            &#125; else if (matrix[i][j] &lt; target)&#123; // 往下</span><br><span class="line">                i++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>t1.计算k置位下标对应元素和<br>做法：读题目的题，看懂测试用例即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int sumIndicesWithKSetBits(List&lt;Integer&gt; nums, int k) &#123;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        for(int i = 0;i &lt; nums.size();i++)&#123;</span><br><span class="line">            if (Integer.bitCount(i) == k)&#123;</span><br><span class="line">                sum += nums.get(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t2.让所有学生保持开心的分组方法数<br>做法：排序+贪心，依旧是读题目的题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int countWays(List&lt;Integer&gt; nums) &#123;</span><br><span class="line">        int[] f = nums.stream().mapToInt(i -&gt; i).toArray();</span><br><span class="line">        // 维护两个表，一个表的放被选中学生的值，一个表放没被选中的学生的最小值</span><br><span class="line">        int n = f.length;</span><br><span class="line">        Arrays.sort(f); // 核心，排好序之后问题迎刃而解</span><br><span class="line">        int cur = 0;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        if (cur &lt; f[0])&#123;</span><br><span class="line">            sum++;</span><br><span class="line">        &#125;</span><br><span class="line">        cur++;</span><br><span class="line">        for (int i = 0;i &lt; n - 1;i++)&#123;</span><br><span class="line">            if (cur &gt; f[i] &amp;&amp; cur &lt; f[i + 1])&#123;</span><br><span class="line">                sum++;</span><br><span class="line">            &#125;</span><br><span class="line">            cur++;</span><br><span class="line">        &#125;</span><br><span class="line">        if (cur &gt; f[n - 1])&#123;</span><br><span class="line">            sum++;</span><br><span class="line">        &#125;</span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：对于数组的题，先考虑是否需要排序<br>t3.最大合金数<br>做法：二分。此题很多细节需要理解。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxNumberOfAlloys(int n, int k, int budget, List&lt;List&lt;Integer&gt;&gt; composition, List&lt;Integer&gt; stock, List&lt;Integer&gt; cost) &#123;</span><br><span class="line">        long max = 0; // 细节一：对于二分的题一定要开long，防止溢出</span><br><span class="line">        for (List&lt;Integer&gt; l : composition)&#123;</span><br><span class="line">            long left = 0,right = 200000000; // 细节二，对于二分上界，直接取200000000是非常稳妥的做法</span><br><span class="line">            while (left &lt; right)&#123;</span><br><span class="line">                long mid = (left + right + 1) / 2,count = 0; // 细节三，mid取left+right+1/2</span><br><span class="line">                for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">                    count += cost.get(i) * Math.max(0,mid * l.get(i) - stock.get(i));</span><br><span class="line">                &#125;</span><br><span class="line">                if (count &gt; budget)&#123;</span><br><span class="line">                    right = mid - 1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    left = mid; // 细节四，固定左边界，移动右边界</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            max = Math.max(max,left);</span><br><span class="line">        &#125;</span><br><span class="line">        return (int)max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：对于数组类题目，先想排序再想二分，基本八九不离十。<br>t4.完全子集的最大元素和<br>做法：数学题，这种题如果第一次做是真的没办法，纯纯找规律</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public long maximumSum(List&lt;Integer&gt; nums) &#123;</span><br><span class="line">        long max = 0;</span><br><span class="line">        for (int i = 1;i &lt;= nums.size();i++)&#123;</span><br><span class="line">            long curr = 0;</span><br><span class="line">            for (int j = i;j * j / i &lt;= nums.size();j += i)&#123;</span><br><span class="line">                curr += nums.get(j * j / i - 1); // 核心规律</span><br><span class="line">            &#125;</span><br><span class="line">            max = Math.max(max,curr);</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结，记住结论，对于一个集合，如果集合中每一对数的乘积都为完全平方数，则这些数符合规律，i * 1,i * 4,i * 9,i * 16…</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -193,16 +225,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/22/%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wyjtlb.github.io/023/09/17/leetcode363%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2023/09/17/leetcode%E7%AC%AC113%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          leetcode第113场双周赛总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/09/04/%E8%AE%A1%E7%AE%97%E5%99%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">计算器</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -217,605 +317,32 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-单调队列解决滑动窗口更新最大值的问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/21/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E8%A7%A3%E5%86%B3%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9B%B4%E6%96%B0%E6%9C%80%E5%A4%A7%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/">单调队列解决滑动窗口更新最大值的问题</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/21/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E8%A7%A3%E5%86%B3%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9B%B4%E6%96%B0%E6%9C%80%E5%A4%A7%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2023-07-21T08:25:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="单调队列"><a href="#单调队列" class="headerlink" title="单调队列"></a>单调队列</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int findMaxValueOfEquation(int[][] points, int k) &#123;</span><br><span class="line">        int ans = Integer.MIN_VALUE;</span><br><span class="line">        // 双端队列 Deque</span><br><span class="line">        Deque&lt;int[]&gt; q = new ArrayDeque&lt;&gt;();</span><br><span class="line">        for (int[] f : points)&#123;</span><br><span class="line">            int x = f[0],y = f[1];</span><br><span class="line">            // 更新窗口的大小</span><br><span class="line">            while(!q.isEmpty() &amp;&amp; x - q.peekFirst()[0] &gt; k)&#123;</span><br><span class="line">                q.pollFirst();</span><br><span class="line">            &#125;</span><br><span class="line">            if (!q.isEmpty())&#123;</span><br><span class="line">                ans = Math.max(ans,y - x + q.peekFirst()[1]);</span><br><span class="line">            &#125;</span><br><span class="line">            // 将x,y添加进队列，并维持队列单调递减</span><br><span class="line">            while(!q.isEmpty() &amp;&amp; q.peekLast()[1] &lt;= y - x)&#123;</span><br><span class="line">                q.pollLast();</span><br><span class="line">            &#125;</span><br><span class="line">            q.addLast(new int[]&#123;x,y - x&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/21/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E8%A7%A3%E5%86%B3%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9B%B4%E6%96%B0%E6%9C%80%E5%A4%A7%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
-  
-    <article id="post-最大子数组和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/20/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/">最大子数组和</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/20/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/" class="archive-article-date">
-  	<time datetime="2023-07-20T13:24:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="非常简洁的写法0-0"><a href="#非常简洁的写法0-0" class="headerlink" title="非常简洁的写法0.0"></a>非常简洁的写法0.0</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxSubArray(int[] nums) &#123;</span><br><span class="line">        int max = Integer.MIN_VALUE,cnt = 0;</span><br><span class="line">        for (int num : nums)&#123;</span><br><span class="line">            cnt = Math.max(cnt + num,num);</span><br><span class="line">            max = Math.max(max,cnt);</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/20/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-并查集模板" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/19/%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%A8%A1%E6%9D%BF/">并查集模板</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/19/%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%A8%A1%E6%9D%BF/" class="archive-article-date">
-  	<time datetime="2023-07-19T13:47:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="并查集通用模板"><a href="#并查集通用模板" class="headerlink" title="并查集通用模板"></a>并查集通用模板</h1>
-        
-          <a class="article-more-a" href="/2023/07/19/%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%A8%A1%E6%9D%BF/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/19/%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%A8%A1%E6%9D%BF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-nSum板子" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/">nSum板子</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/" class="archive-article-date">
-  	<time datetime="2023-07-15T03:02:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="使用递归解决nSum问题"><a href="#使用递归解决nSum问题" class="headerlink" title="使用递归解决nSum问题"></a>使用递归解决nSum问题</h1>
-        
-          <a class="article-more-a" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-解决区间重叠问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/12/%E8%A7%A3%E5%86%B3%E5%8C%BA%E9%97%B4%E9%87%8D%E5%8F%A0%E9%97%AE%E9%A2%98/">解决区间重叠问题</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/12/%E8%A7%A3%E5%86%B3%E5%8C%BA%E9%97%B4%E9%87%8D%E5%8F%A0%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2023-07-12T14:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="逆向思维"><a href="#逆向思维" class="headerlink" title="逆向思维"></a>逆向思维</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    //逆向思维找不重叠的区间，然后减去即可</span><br><span class="line">    public int eraseOverlapIntervals(int[][] intervals) &#123;</span><br><span class="line">        Arrays.sort(intervals,(a,b) -&gt; a[1] - b[1]);</span><br><span class="line">        int cnt = 1;</span><br><span class="line">        int end = intervals[0][1];</span><br><span class="line">        for (int[] f : intervals)&#123;</span><br><span class="line">            if (f[0] &gt;= end)&#123;</span><br><span class="line">                cnt++;</span><br><span class="line">                end = f[1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return intervals.length - cnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/12/%E8%A7%A3%E5%86%B3%E5%8C%BA%E9%97%B4%E9%87%8D%E5%8F%A0%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-快速排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2023-07-12T03:49:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="快速排序解决链表排序问题"><a href="#快速排序解决链表排序问题" class="headerlink" title="快速排序解决链表排序问题"></a>快速排序解决链表排序问题</h1>
-        
-          <a class="article-more-a" href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Sieve-of-Eratosthenes" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/11/Sieve-of-Eratosthenes/">Sieve of Eratosthenes</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/11/Sieve-of-Eratosthenes/" class="archive-article-date">
-  	<time datetime="2023-07-11T02:58:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="使用Sieve-of-Eratosthenes算法高效解决素数计数问题"><a href="#使用Sieve-of-Eratosthenes算法高效解决素数计数问题" class="headerlink" title="使用Sieve of Eratosthenes算法高效解决素数计数问题"></a>使用Sieve of Eratosthenes算法高效解决素数计数问题</h1>
-        
-          <a class="article-more-a" href="/2023/07/11/Sieve-of-Eratosthenes/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/11/Sieve-of-Eratosthenes/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我的第一篇博客文章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">我的第一篇博客文章</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2023-07-05T03:24:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><p>内容</p>
-<hr>
-<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>内容</p>
-<hr>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="http://www.codeforce.com/">www.codeforce.com</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/05/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/05/hello-world/" class="archive-article-date">
-  	<time datetime="2023-07-05T03:22:14.239Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/05/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -840,8 +367,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
