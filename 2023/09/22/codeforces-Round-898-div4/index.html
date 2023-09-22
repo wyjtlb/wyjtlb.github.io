@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2023 | Hexo</title>
+  <title>codeforces Round 898(div4) | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2023/page/2/index.html">
+  <meta name="description" content="总结：非常值得练习的一场，涉及非常多经典的算法。虽然最后一题看错条件没搞出来，但复盘了一下感觉问题不大。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="codeforces Round 898(div4)">
+<meta property="og:url" content="http://example.com/2023/09/22/codeforces-Round-898-div4/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="总结：非常值得练习的一场，涉及非常多经典的算法。虽然最后一题看错条件没搞出来，但复盘了一下感觉问题不大。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-22T01:58:25.000Z">
+<meta property="article:modified_time" content="2023-09-22T02:33:57.632Z">
 <meta property="article:author" content="neja">
 <meta name="twitter:card" content="summary">
   
@@ -160,295 +164,186 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-codeforces-Round-898-div4" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      codeforces Round 898(div4)
+    </h1>
+  
+
+        
+        <a href="/2023/09/22/codeforces-Round-898-div4/" class="archive-article-date">
+  	<time datetime="2023-09-22T01:58:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-22</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>总结：非常值得练习的一场，涉及非常多经典的算法。虽然最后一题看错条件没搞出来，但复盘了一下感觉问题不大。</p>
+<span id="more"></span>
+<p>A-Short Sort<br>做法：判断0,1,2三个位置是否有一个位置对应a,b,c如果有就说明条件能成立</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"> </span><br><span class="line">public class Main&#123;</span><br><span class="line"> </span><br><span class="line">    static Scanner in;</span><br><span class="line"> </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        in = new Scanner(System.in);</span><br><span class="line">        int t = in.nextInt();</span><br><span class="line">        while(t-- &gt;0)&#123;</span><br><span class="line">            solve();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    static void solve()&#123;</span><br><span class="line">        String str = in.next();</span><br><span class="line">        if (str.equals(&quot;abc&quot;))&#123;</span><br><span class="line">            System.out.println(&quot;YES&quot;);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        if (str.charAt(0) == &#x27;a&#x27; || str.charAt(1) == &#x27;b&#x27; || str.charAt(2) == &#x27;c&#x27;)&#123;</span><br><span class="line">            System.out.println(&quot;YES&quot;);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;NO&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：送分题，快速模拟就行了<br>B-Good Kid<br>做法：排序+贪心，给数组排序然后把最小的数加一就行了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"> </span><br><span class="line">public class Main&#123;</span><br><span class="line"> </span><br><span class="line">    static Scanner in;</span><br><span class="line"> </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        in = new Scanner(System.in);</span><br><span class="line">        int t = in.nextInt();</span><br><span class="line">        while(t-- &gt;0)&#123;</span><br><span class="line">            solve();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    static void solve()&#123;</span><br><span class="line">        int n = in.nextInt();</span><br><span class="line">        int[] f = new int[n];</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            f[i] = in.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">        Arrays.sort(f);</span><br><span class="line">        f[0]++;</span><br><span class="line">        int ans = 1;</span><br><span class="line">        for (int i : f)&#123;</span><br><span class="line">            ans *= i;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：模拟，没啥好说的<br>C-Target Practice<br>做法：模拟，转圈圈即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"> </span><br><span class="line">public class Main&#123;</span><br><span class="line"> </span><br><span class="line">    static Scanner in;</span><br><span class="line"> </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        in = new Scanner(System.in);</span><br><span class="line">        int t = in.nextInt();</span><br><span class="line">        while(t-- &gt;0)&#123;</span><br><span class="line">            solve();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    static void solve()&#123;</span><br><span class="line">        String[] str = new String[10];</span><br><span class="line">        for (int i = 0;i &lt; 10;i++)&#123;</span><br><span class="line">            str[i] = in.next();</span><br><span class="line">        &#125;</span><br><span class="line">        char[][] f = new char[10][10];</span><br><span class="line">        int index = 0;</span><br><span class="line">        for (String s : str)&#123;</span><br><span class="line">            int i = 0;</span><br><span class="line">            for (char c : s.toCharArray())&#123;</span><br><span class="line">                f[index][i++] = c;</span><br><span class="line">            &#125;</span><br><span class="line">            index++;</span><br><span class="line">        &#125;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        for (int i = 0;i &lt; 10;i++)&#123;</span><br><span class="line">            if (f[0][i] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum++;</span><br><span class="line">            &#125;</span><br><span class="line">            if (f[9][i] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 1;i &lt; 9;i++)&#123;</span><br><span class="line">            if (f[i][0] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum++;</span><br><span class="line">            &#125;</span><br><span class="line">            if (f[i][9] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 1;i &lt; 9;i++)&#123;</span><br><span class="line">            if (f[1][i] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum+=2;</span><br><span class="line">            &#125;</span><br><span class="line">            if (f[8][i] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum+=2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 2;i &lt; 8;i++)&#123;</span><br><span class="line">            if (f[i][1] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum+=2;</span><br><span class="line">            &#125;</span><br><span class="line">            if (f[i][8] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum+=2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 2;i &lt; 8;i++)&#123;</span><br><span class="line">            if (f[2][i] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum+=3;</span><br><span class="line">            &#125;</span><br><span class="line">            if (f[7][i] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum+=3;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 3;i &lt; 7;i++)&#123;</span><br><span class="line">            if (f[i][2] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum+=3;</span><br><span class="line">            &#125;</span><br><span class="line">            if (f[i][7] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum+=3;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 3;i &lt; 7;i++)&#123;</span><br><span class="line">            if (f[3][i] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum+=4;</span><br><span class="line">            &#125;</span><br><span class="line">            if (f[6][i] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum+=4;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 4;i &lt; 6;i++)&#123;</span><br><span class="line">            if (f[i][3] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum+=4;</span><br><span class="line">            &#125;</span><br><span class="line">            if (f[i][6] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum+=4;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 4;i &lt; 6;i++)&#123;</span><br><span class="line">            if (f[4][i] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum+=5;</span><br><span class="line">            &#125;</span><br><span class="line">            if (f[5][i] == &#x27;X&#x27;)&#123;</span><br><span class="line">                sum+=5;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：可以统一封装成函数会更方便，但是由于数据比较小，就直接手敲了<br>D-1D Eraser<br>做法：用堆模拟就行了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"> </span><br><span class="line">public class Main&#123;</span><br><span class="line"> </span><br><span class="line">    static Scanner in;</span><br><span class="line"> </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        in = new Scanner(System.in);</span><br><span class="line">        int t = in.nextInt();</span><br><span class="line">        while(t-- &gt;0)&#123;</span><br><span class="line">            solve();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    static void solve()&#123;</span><br><span class="line">        int n = in.nextInt();</span><br><span class="line">        int k = in.nextInt();</span><br><span class="line">        String str = in.next();</span><br><span class="line">        PriorityQueue&lt;Integer&gt; q = new PriorityQueue&lt;&gt;((a,b) -&gt; a - b);</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            if (str.charAt(i) == &#x27;B&#x27;)&#123;</span><br><span class="line">                q.offer(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        int cnt = 0;</span><br><span class="line">        while(!q.isEmpty())&#123;</span><br><span class="line">            int start = q.poll();</span><br><span class="line">            while(!q.isEmpty() &amp;&amp; q.peek() - start + 1 &lt;= k)&#123;</span><br><span class="line">                q.poll();</span><br><span class="line">            &#125;</span><br><span class="line">            cnt++;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(cnt);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：需要时刻返回最小值，那么堆是一个不错的选择<br>E-Building an Aquarium<br>做法：二分猜答案</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"> </span><br><span class="line">public class Main&#123;</span><br><span class="line"> </span><br><span class="line">    static Scanner in;</span><br><span class="line"> </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        in = new Scanner(System.in);</span><br><span class="line">        int t = in.nextInt();</span><br><span class="line">        while(t-- &gt;0)&#123;</span><br><span class="line">            solve();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    static void solve()&#123;</span><br><span class="line">        int n = in.nextInt();</span><br><span class="line">        int x = in.nextInt();</span><br><span class="line">        int[] f = new int[n];</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            f[i] = in.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">        long left = 1,right = (long)1e10;</span><br><span class="line">        while (left &lt; right)&#123;</span><br><span class="line">            long mid = (left + right + 1) / 2;</span><br><span class="line">            long count = 0;</span><br><span class="line">            for (int i : f)&#123;</span><br><span class="line">                count += Math.max(0,mid - i);</span><br><span class="line">            &#125;</span><br><span class="line">            if (count &lt;= x)&#123;</span><br><span class="line">                left = mid;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                right = mid - 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(left);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：经典二分题，注意上界一般开2e9<br>F-money Trees<br>做法：滑动窗口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"> </span><br><span class="line">public class Main&#123;</span><br><span class="line"> </span><br><span class="line">    static Scanner in;</span><br><span class="line"> </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        in = new Scanner(System.in);</span><br><span class="line">        int t = in.nextInt();</span><br><span class="line">        while(t-- &gt;0)&#123;</span><br><span class="line">            solve();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    static void solve()&#123;</span><br><span class="line">        int n = in.nextInt();</span><br><span class="line">        int k = in.nextInt();</span><br><span class="line">        int[] a = new int[n];</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            a[i] = in.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">        int[] h = new int[n];</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            h[i] = in.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">        if (n == 1)&#123;</span><br><span class="line">            if (a[0] &lt;= k)&#123;</span><br><span class="line">                System.out.println(1);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                System.out.println(0);</span><br><span class="line">            &#125;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        // 不能排序</span><br><span class="line">        // 滑动窗口</span><br><span class="line">        int max = 0;</span><br><span class="line">        int sum = a[0];</span><br><span class="line">        int i = 0,j = 1;</span><br><span class="line">        for (;j &lt; n;j++)&#123;</span><br><span class="line">            if (h[j - 1] % h[j] == 0)&#123;</span><br><span class="line">                sum += a[j];</span><br><span class="line">                while (i &lt; j &amp;&amp; sum &gt; k)&#123;</span><br><span class="line">                    sum -= a[i];</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                max = Math.max(max,j - i + 1);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                max = Math.max(max,j - i);</span><br><span class="line">                sum = a[j];</span><br><span class="line">                i = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        max = Math.max(max,j - i);</span><br><span class="line">        System.out.println(max);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：需要处理好边界，这里一定要注意重新开窗口时，要特别判断左端点能不能用<br>G-ABBC or BACB<br>做法：很巧妙的题，A的个数减去所有B之间间隔的最小值，有点脑筋急转弯的意思</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line"> </span><br><span class="line">public class Main&#123;</span><br><span class="line"> </span><br><span class="line">    static Scanner in;</span><br><span class="line"> </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        in = new Scanner(System.in);</span><br><span class="line">        int t = in.nextInt();</span><br><span class="line">        while(t-- &gt;0)&#123;</span><br><span class="line">            solve();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    static void solve()&#123;</span><br><span class="line">        String s = in.next();</span><br><span class="line">        int count = 0;</span><br><span class="line">        int n = s.length();</span><br><span class="line">        if (s.charAt(0) == &#x27;B&#x27; || s.charAt(n - 1) == &#x27;B&#x27;)&#123;</span><br><span class="line">            for (char c : s.toCharArray())&#123;</span><br><span class="line">                count += (c == &#x27;A&#x27; ? 1 : 0);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(count);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        int pre = -1;</span><br><span class="line">        int min = Integer.MAX_VALUE;</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            if (s.charAt(i) == &#x27;B&#x27;)&#123;</span><br><span class="line">                min = Math.min(min,i - pre - 1);</span><br><span class="line">                pre = i;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (pre == -1)&#123;</span><br><span class="line">            System.out.println(0);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        min = Math.min(min,n - pre - 1);</span><br><span class="line">        System.out.println(count - min);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>H-Mad City<br>做法：判断a是否能阻止b入环,先计算b入环的点和步数，然后计算a到达该点的步数，比较即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line">import java.net.Inet4Address;</span><br><span class="line">import java.util.*;</span><br><span class="line"> </span><br><span class="line">public class Main&#123;</span><br><span class="line"> </span><br><span class="line">    static Scanner in;</span><br><span class="line"> </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        in = new Scanner(System.in);</span><br><span class="line">        int t = in.nextInt();</span><br><span class="line">        while(t-- &gt;0)&#123;</span><br><span class="line">            solve();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    static void solve()&#123;</span><br><span class="line">        int n = in.nextInt();</span><br><span class="line">        int a = in.nextInt() - 1;</span><br><span class="line">        int b = in.nextInt() - 1;</span><br><span class="line">        // 只要b在环里面或者说b比a先进环就行了</span><br><span class="line">        int[][] edges = new int[n][2];</span><br><span class="line">        int[] g = new int[n];</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            edges[i][0] = in.nextInt() - 1;</span><br><span class="line">            edges[i][1] = in.nextInt() - 1;</span><br><span class="line">        &#125;</span><br><span class="line">        if (a == b)&#123;</span><br><span class="line">            System.out.println(&quot;NO&quot;);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        // 双向bfs</span><br><span class="line">        Map&lt;Integer,Set&lt;Integer&gt;&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        for (int[] edge : edges)&#123;</span><br><span class="line">            map.computeIfAbsent(edge[0],t -&gt; new HashSet&lt;&gt;()).add(edge[1]);</span><br><span class="line">            map.computeIfAbsent(edge[1],t -&gt; new HashSet&lt;&gt;()).add(edge[0]);</span><br><span class="line">            g[edge[0]]++;</span><br><span class="line">            g[edge[1]]++;</span><br><span class="line">        &#125;</span><br><span class="line">        Set&lt;Integer&gt; seen = new HashSet&lt;&gt;();</span><br><span class="line">        Queue&lt;Integer&gt; q = new LinkedList&lt;&gt;();</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            if (g[i] == 1)&#123;</span><br><span class="line">                q.offer(i);</span><br><span class="line">                seen.add(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while(!q.isEmpty())&#123;</span><br><span class="line">            int sz = q.size();</span><br><span class="line">            for (int i = 0;i &lt; sz;i++)&#123;</span><br><span class="line">                int x = q.poll();</span><br><span class="line">                for (int s : map.getOrDefault(x,new HashSet&lt;&gt;()))&#123;</span><br><span class="line">                    g[s]--;</span><br><span class="line">                    if (g[s] == 1)&#123;</span><br><span class="line">                        q.offer(s);</span><br><span class="line">                        seen.add(s);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (!seen.contains(b))&#123;</span><br><span class="line">            System.out.println(&quot;YES&quot;); // b在环里</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        Queue&lt;Integer&gt; qa = new LinkedList&lt;&gt;();</span><br><span class="line">        Queue&lt;Integer&gt; qb = new LinkedList&lt;&gt;();</span><br><span class="line">        qa.offer(a);</span><br><span class="line">        qb.offer(b);</span><br><span class="line">        Set&lt;Integer&gt; sa = new HashSet&lt;&gt;();</span><br><span class="line">        Set&lt;Integer&gt; sb = new HashSet&lt;&gt;();</span><br><span class="line">        sa.add(a);</span><br><span class="line">        sb.add(b);</span><br><span class="line">        int target = -1;</span><br><span class="line">        int depth_b = 0;</span><br><span class="line">        while(!qb.isEmpty())&#123;</span><br><span class="line">            int sz = qb.size();</span><br><span class="line">            boolean t = false;</span><br><span class="line">            for (int i = 0;i &lt; sz;i++)&#123;</span><br><span class="line">                int x = qb.poll();</span><br><span class="line">                for (int s : map.getOrDefault(x,new HashSet&lt;&gt;()))&#123;</span><br><span class="line">                    if (!seen.contains(s))&#123;</span><br><span class="line">                        target = s;</span><br><span class="line">                        t = true;</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (sb.add(s))&#123;</span><br><span class="line">                        qb.offer(s);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            depth_b++;</span><br><span class="line">            if (t)&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if(a == target)&#123;</span><br><span class="line">            System.out.println(&quot;NO&quot;);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        int depth_a = 1;</span><br><span class="line">        while(!qa.isEmpty())&#123;</span><br><span class="line">            int sz = qa.size();</span><br><span class="line">            for (int i = 0;i &lt; sz;i++)&#123;</span><br><span class="line">                int x = qa.poll();</span><br><span class="line">                for (int s : map.getOrDefault(x,new HashSet&lt;&gt;()))&#123;</span><br><span class="line">                    if (s == target)&#123;</span><br><span class="line">                        if (depth_a &gt; depth_b)&#123;</span><br><span class="line">                            System.out.println(&quot;YES&quot;);</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            System.out.println(&quot;NO&quot;);</span><br><span class="line">                        &#125;</span><br><span class="line">                        return;</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (sa.add(s))&#123;</span><br><span class="line">                        qa.offer(s);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            depth_a++;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;NO&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：这题没做出来很可惜，比赛时题目没读清楚，以为存在好几个环，其实题目说了就一个环</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/07/24/%E6%B1%82%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/" class="archive-article-date">
-  	<time datetime="2023-07-24T14:27:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/07/24/%E6%B1%82%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/">求乘积最大子数组和</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wyjtlb.github.io/023/09/22/codeforces-Round-898-div4/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/07/22/%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5/" class="archive-article-date">
-  	<time datetime="2023-07-22T13:33:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-22</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2023/09/17/leetcode%E7%AC%AC113%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">leetcode第113场双周赛总结</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/07/22/%E6%90%9C%E7%B4%A2%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5/">搜索二维矩阵</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/07/21/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E8%A7%A3%E5%86%B3%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9B%B4%E6%96%B0%E6%9C%80%E5%A4%A7%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2023-07-21T08:25:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-21</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/07/21/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%E8%A7%A3%E5%86%B3%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%9B%B4%E6%96%B0%E6%9C%80%E5%A4%A7%E5%80%BC%E7%9A%84%E9%97%AE%E9%A2%98/">单调队列解决滑动窗口更新最大值的问题</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/07/20/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/" class="archive-article-date">
-  	<time datetime="2023-07-20T13:24:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/07/20/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/">最大子数组和</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/07/19/%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%A8%A1%E6%9D%BF/" class="archive-article-date">
-  	<time datetime="2023-07-19T13:47:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/07/19/%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%A8%A1%E6%9D%BF/">并查集模板</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/" class="archive-article-date">
-  	<time datetime="2023-07-15T03:02:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/">nSum板子</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/07/12/%E8%A7%A3%E5%86%B3%E5%8C%BA%E9%97%B4%E9%87%8D%E5%8F%A0%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2023-07-12T14:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/07/12/%E8%A7%A3%E5%86%B3%E5%8C%BA%E9%97%B4%E9%87%8D%E5%8F%A0%E9%97%AE%E9%A2%98/">解决区间重叠问题</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2023-07-12T03:49:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/07/11/Sieve-of-Eratosthenes/" class="archive-article-date">
-  	<time datetime="2023-07-11T02:58:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/07/11/Sieve-of-Eratosthenes/">Sieve of Eratosthenes</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/07/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2023-07-05T03:24:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/07/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">我的第一篇博客文章</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2023/">&amp;laquo; Prev</a><a class="page-number" href="/archives/2023/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2023/page/3/">3</a><a class="extend next" rel="next" href="/archives/2023/page/3/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -474,8 +369,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

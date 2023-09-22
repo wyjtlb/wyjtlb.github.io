@@ -162,6 +162,71 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-codeforces-Round-898-div4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/09/22/codeforces-Round-898-div4/">codeforces Round 898(div4)</a>
+    </h1>
+  
+
+        
+        <a href="/2023/09/22/codeforces-Round-898-div4/" class="archive-article-date">
+  	<time datetime="2023-09-22T01:58:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>总结：非常值得练习的一场，涉及非常多经典的算法。虽然最后一题看错条件没搞出来，但复盘了一下感觉问题不大。</p>
+        
+          <a class="article-more-a" href="/2023/09/22/codeforces-Round-898-div4/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/09/22/codeforces-Round-898-div4/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode第113场双周赛总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -398,6 +463,8 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">// java版本</span><br><span class="line">class MatrixSum &#123;</span><br><span class="line">    private final int[][] sum;</span><br><span class="line"></span><br><span class="line">    public MatrixSum(int[][] matrix) &#123;</span><br><span class="line">        int m = matrix.length, n = matrix[0].length;</span><br><span class="line">        sum = new int[m + 1][n + 1]; // 注意：如果 matrix[i][j] 范围很大，需要使用 long</span><br><span class="line">        for (int i = 0; i &lt; m; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; n; j++) &#123;</span><br><span class="line">                sum[i + 1][j + 1] = sum[i + 1][j] + sum[i][j + 1] - sum[i][j] + matrix[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 返回左上角在 (r1,c1) 右下角在 (r2-1,c2-1) 的子矩阵元素和（类似前缀和的左闭右开）</span><br><span class="line">    public int query(int r1, int c1, int r2, int c2) &#123;</span><br><span class="line">        return sum[r2][c2] - sum[r2][c1] - sum[r1][c2] + sum[r1][c1];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 如果你不习惯左闭右开，也可以这样写</span><br><span class="line">    // 返回左上角在 (r1,c1) 右下角在 (r2,c2) 的子矩阵元素和</span><br><span class="line">    public int query2(int r1, int c1, int r2, int c2) &#123;</span><br><span class="line">        return sum[r2 + 1][c2 + 1] - sum[r2 + 1][c1] - sum[r1][c2 + 1] + sum[r1][c1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// python版本</span><br><span class="line">class MatrixSum:</span><br><span class="line">    def __init__(self, matrix: List[List[int]]):</span><br><span class="line">        m, n = len(matrix), len(matrix[0])</span><br><span class="line">        s = [[0] * (n + 1) for _ in range(m + 1)]</span><br><span class="line">        for i, row in enumerate(matrix):</span><br><span class="line">            for j, x in enumerate(row):</span><br><span class="line">                s[i + 1][j + 1] = s[i + 1][j] + s[i][j + 1] - s[i][j] + x</span><br><span class="line">        self.s = s</span><br><span class="line"></span><br><span class="line">    # 返回左上角在 (r1,c1) 右下角在 (r2-1,c2-1) 的子矩阵元素和（类似前缀和的左闭右开）</span><br><span class="line">    def query(self, r1: int, c1: int, r2: int, c2: int) -&gt; int:</span><br><span class="line">        return self.s[r2][c2] - self.s[r2][c1] - self.s[r1][c2] + self.s[r1][c1]</span><br><span class="line"></span><br><span class="line">    # 如果你不习惯左闭右开，也可以这样写</span><br><span class="line">    # 返回左上角在 (r1,c1) 右下角在 (r2,c2) 的子矩阵元素和</span><br><span class="line">    def query2(self, r1: int, c1: int, r2: int, c2: int) -&gt; int:</span><br><span class="line">        return self.s[r2 + 1][c2 + 1] - self.s[r2 + 1][c1] - self.s[r1][c2 + 1] + self.s[r1][c1]</span><br></pre></td></tr></table></figure>
 <p>计算组合数公式C(n,k)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">long dfs(int n,int k)&#123;</span><br><span class="line">    if (k == 0 || n == k)&#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return dfs(n - 1,k - 1) + dfs(n - 1,k);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>给定字符串求去除重复字母并且字典序最小，贪心</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String removeDuplicateLetters(String s) &#123;</span><br><span class="line">        int[] f = new int[26];</span><br><span class="line">        for (char c : s.toCharArray())&#123;</span><br><span class="line">            f[c - &#x27;a&#x27;]++;</span><br><span class="line">        &#125;</span><br><span class="line">        Stack&lt;Character&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">        boolean[] visited = new boolean[26];</span><br><span class="line">        for (char c : s.toCharArray())&#123;</span><br><span class="line">            if (visited[c - &#x27;a&#x27;])&#123;</span><br><span class="line">                f[c - &#x27;a&#x27;]--;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            if (stack.isEmpty())&#123;</span><br><span class="line">                stack.push(c);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                if (stack.peek() &lt; c)&#123;</span><br><span class="line">                    stack.push(c);</span><br><span class="line">                &#125; else if (stack.peek() == c)&#123;</span><br><span class="line">                    stack.pop();</span><br><span class="line">                    stack.push(c);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    while(!stack.isEmpty() &amp;&amp; f[stack.peek() - &#x27;a&#x27;] &gt; 0 &amp;&amp; stack.peek() &gt;= c)&#123;</span><br><span class="line">                        visited[stack.pop() - &#x27;a&#x27;] = false;</span><br><span class="line">                    &#125;</span><br><span class="line">                    stack.push(c);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            f[c - &#x27;a&#x27;]--;</span><br><span class="line">            visited[c - &#x27;a&#x27;] = true;</span><br><span class="line">        &#125;</span><br><span class="line">        StringBuilder sb = new StringBuilder();</span><br><span class="line">        while(!stack.isEmpty())&#123;</span><br><span class="line">            sb.append(stack.pop());</span><br><span class="line">        &#125;</span><br><span class="line">        return sb.reverse().toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -780,72 +847,9 @@
 
 
   
-    <article id="post-求乘积最大子数组和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/24/%E6%B1%82%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/">求乘积最大子数组和</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/24/%E6%B1%82%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/" class="archive-article-date">
-  	<time datetime="2023-07-24T14:27:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>非常有意思的题目,有点类似于环形数组求最大子数组和，这里需要注意的就是对于负数将max和min交换来更新max和min</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxProduct(int[] nums) &#123;</span><br><span class="line">        int min = 1,max = 1;</span><br><span class="line">        int ans = Integer.MIN_VALUE;</span><br><span class="line">        for (int num : nums)&#123;</span><br><span class="line">            if (num &lt; 0)&#123;</span><br><span class="line">                int tmp = max;</span><br><span class="line">                max = Math.max(min * num,num);</span><br><span class="line">                min = Math.min(tmp * num,num);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                max = Math.max(max * num,num);</span><br><span class="line">                min = Math.min(min * num,num);</span><br><span class="line">            &#125;</span><br><span class="line">            ans = Math.max(ans,max);</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/24/%E6%B1%82%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 
