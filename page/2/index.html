@@ -162,6 +162,134 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-java中BitSet类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/07/26/java%E4%B8%ADBitSet%E7%B1%BB/">java中BitSet类</a>
+    </h1>
+  
+
+        
+        <a href="/2023/07/26/java%E4%B8%ADBitSet%E7%B1%BB/" class="archive-article-date">
+  	<time datetime="2023-07-26T14:05:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>BitSet，位图，一个作用类似于线段树的类，由于内部的方法已经被封装好了，所以使用起来比线段树简洁，类中有一个默认的构造方法和一个指定初始大小的构造方法。<br>内部具体方法，参考<a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-bitset-class.html">菜鸟教程</a><br>具体使用，给定一个二进制数组：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Main&#123;</span><br><span class="line">    void func(int[] nums)&#123;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        BitSet bitset = new BitSet(n); // 指定位图的大小</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            // set方法，指定索引处的位设置为true</span><br><span class="line">            if (nums[i] == 1)&#123;</span><br><span class="line">                bitset.set(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        bitset.flip(0,n); // flip方法，将每个位置设置为当前值的补码，具体到这里就是将0变成1,1变成0</span><br><span class="line">        bitset.cardinality(); // 返回设置为true的位数</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/07/26/java%E4%B8%ADBitSet%E7%B1%BB/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-codeforce888（div3）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/07/26/codeforce888%EF%BC%88div3%EF%BC%89/">codeforce888（div3）</a>
+    </h1>
+  
+
+        
+        <a href="/2023/07/26/codeforce888%EF%BC%88div3%EF%BC%89/" class="archive-article-date">
+  	<time datetime="2023-07-26T13:46:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>题目描述：给一个数组，判断数组是不是一个前缀和数组删除一个数后得到的。（数组元素1~n的整数，长度为n互不相同）</p>
+        
+          <a class="article-more-a" href="/2023/07/26/codeforce888%EF%BC%88div3%EF%BC%89/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/07/26/codeforce888%EF%BC%88div3%EF%BC%89/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-java学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -656,136 +784,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/07/12/%E8%A7%A3%E5%86%B3%E5%8C%BA%E9%97%B4%E9%87%8D%E5%8F%A0%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-快速排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2023-07-12T03:49:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="快速排序解决链表排序问题"><a href="#快速排序解决链表排序问题" class="headerlink" title="快速排序解决链表排序问题"></a>快速排序解决链表排序问题</h1>
-        
-          <a class="article-more-a" href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Sieve-of-Eratosthenes" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/11/Sieve-of-Eratosthenes/">Sieve of Eratosthenes</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/11/Sieve-of-Eratosthenes/" class="archive-article-date">
-  	<time datetime="2023-07-11T02:58:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="使用Sieve-of-Eratosthenes算法高效解决素数计数问题"><a href="#使用Sieve-of-Eratosthenes算法高效解决素数计数问题" class="headerlink" title="使用Sieve of Eratosthenes算法高效解决素数计数问题"></a>使用Sieve of Eratosthenes算法高效解决素数计数问题</h1>
-        
-          <a class="article-more-a" href="/2023/07/11/Sieve-of-Eratosthenes/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/11/Sieve-of-Eratosthenes/">展开全文 >></a>
         </p>
       
 
