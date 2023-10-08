@@ -162,6 +162,74 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-背包问题状态转移方程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/07/28/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B/">背包问题状态转移方程</a>
+    </h1>
+  
+
+        
+        <a href="/2023/07/28/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2023-07-28T14:00:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>背包问题最好要排序</p>
+<p>0-1背包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = Math.max(dp[i - 1][j - nums[i - 1]],dp[i - 1][j]);</span><br></pre></td></tr></table></figure>
+<p>完全背包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = dp[i - 1][j] + dp[i][j - nums[i - 1]];</span><br></pre></td></tr></table></figure>
+<p>完全背包求组合数（顺序不同也计数），加一层循环就行了，表示在这一层可以使用其它的数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 1;i &lt;= n;i++)&#123;</span><br><span class="line">    for (int j = 1;j &lt;= target;j++)&#123;</span><br><span class="line">        for (int z = 1;z &lt;= i;z++)&#123;</span><br><span class="line">            if (j &lt; nums[z - 1])&#123;</span><br><span class="line">                f[i][j] = f[i - 1][j];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                f[i][j] += f[i][j - nums[z - 1]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/07/28/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-java中BitSet类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -722,68 +790,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-解决区间重叠问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/12/%E8%A7%A3%E5%86%B3%E5%8C%BA%E9%97%B4%E9%87%8D%E5%8F%A0%E9%97%AE%E9%A2%98/">解决区间重叠问题</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/12/%E8%A7%A3%E5%86%B3%E5%8C%BA%E9%97%B4%E9%87%8D%E5%8F%A0%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2023-07-12T14:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="逆向思维"><a href="#逆向思维" class="headerlink" title="逆向思维"></a>逆向思维</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    //逆向思维找不重叠的区间，然后减去即可</span><br><span class="line">    public int eraseOverlapIntervals(int[][] intervals) &#123;</span><br><span class="line">        Arrays.sort(intervals,(a,b) -&gt; a[1] - b[1]);</span><br><span class="line">        int cnt = 1;</span><br><span class="line">        int end = intervals[0][1];</span><br><span class="line">        for (int[] f : intervals)&#123;</span><br><span class="line">            if (f[0] &gt;= end)&#123;</span><br><span class="line">                cnt++;</span><br><span class="line">                end = f[1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return intervals.length - cnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/12/%E8%A7%A3%E5%86%B3%E5%8C%BA%E9%97%B4%E9%87%8D%E5%8F%A0%E9%97%AE%E9%A2%98/">展开全文 >></a>
         </p>
       
 

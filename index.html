@@ -244,6 +244,77 @@
 
 
   
+    <article id="post-leetcode第366场周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/10/08/leetcode%E7%AC%AC366%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第366场周赛</a>
+    </h1>
+  
+
+        
+        <a href="/2023/10/08/leetcode%E7%AC%AC366%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
+  	<time datetime="2023-10-08T14:31:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>总结：本场上班没打，下班打了一下学到了不少东西<br>t1.分类求和并作差<br>做法：模拟，时间复杂度o(n)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int differenceOfSums(int n, int m) &#123;</span><br><span class="line">        int num1 = 0;</span><br><span class="line">        int num2 = 0;</span><br><span class="line">        for (int i = 1;i &lt;= n;i++)&#123;</span><br><span class="line">            if (i % m != 0)&#123;</span><br><span class="line">                num1 += i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 1;i &lt;= n;i++)&#123;</span><br><span class="line">            if (i % m == 0)&#123;</span><br><span class="line">                num2 += i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return num1 - num2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t2.最小处理时间<br>做法：贪心，之前做过一道类似的，排序然后按顺序分配取时间最大值即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minProcessingTime(List&lt;Integer&gt; processorTime, List&lt;Integer&gt; tasks) &#123;</span><br><span class="line">        int n = processorTime.size();</span><br><span class="line">        Collections.sort(tasks);</span><br><span class="line">        Collections.sort(processorTime);</span><br><span class="line">        int ans = 0;</span><br><span class="line">        for (int i = 0,j = 4 * n - 1;j &gt; -1;i++,j -= 4)&#123;</span><br><span class="line">            ans = Math.max(ans,processorTime.get(i) + tasks.get(j));</span><br><span class="line">            ans = Math.max(ans,processorTime.get(i) + tasks.get(j - 1));</span><br><span class="line">            ans = Math.max(ans,processorTime.get(i) + tasks.get(j - 2));</span><br><span class="line">            ans = Math.max(ans,processorTime.get(i) + tasks.get(j - 3));</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t3.执行操作使两个字符串相等<br>做法：dp+记忆化搜索，考虑状态转移，一共有两种操作，一种操作是消耗x，一种操作是消耗i和j之间连续的值，对于第一种操作，很明显是选择最左边的i和最右边的j，对于第二种操作，显然是选择最近的i和j，因此这道题具有最优子结构，可以使用动态规划。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line"></span><br><span class="line">    private int[][] visited;</span><br><span class="line">    public int minOperations(String s1, String s2, int x) &#123;</span><br><span class="line">        int n = s1.length();</span><br><span class="line">        List&lt;Integer&gt; l = new ArrayList&lt;&gt;();</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            if (s1.charAt(i) != s2.charAt(i))&#123;</span><br><span class="line">                l.add(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (l.size() % 2 == 1)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        visited = new int[n][n];</span><br><span class="line">        for (int[] f : visited)&#123;</span><br><span class="line">            Arrays.fill(f,-1);</span><br><span class="line">        &#125;</span><br><span class="line">        return dfs(l,0,l.size() - 1,x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int dfs(List&lt;Integer&gt; l,int i,int j,int x)&#123;</span><br><span class="line">        if (i &gt;= j || i &gt;= l.size() || j &lt; 0)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        if (visited[i][j] != -1)&#123;</span><br><span class="line">            return visited[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">        return visited[i][j] = Math.min(dfs(l,i + 2,j,x) + Math.min(x,l.get(i + 1) - l.get(i)), Math.min(dfs(l,i + 1,j - 1,x) + Math.min(x,l.get(j) - l.get(i)),dfs(l,i,j - 2,x) + Math.min(x,l.get(j) - l.get(j - 1))));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：这道题和以往的dp不同之处在于，一般的dp是单向转移，即从左往右转移或者从右往左转移，而这道题是从左右往内转移，因此切勿惯性思维。<br>t4.对数组执行操作使平方和最大<br>做法：模拟，统计二进制中1的个数，然后每个位置取k计算</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxSum(List&lt;Integer&gt; nums, int k) &#123;</span><br><span class="line">        int mod = (int)1e9 + 7;</span><br><span class="line">        int[] a = nums.stream().mapToInt(i -&gt; i).toArray();</span><br><span class="line">        int n = a.length;</span><br><span class="line">        int[] f = new int[32];</span><br><span class="line">        for (int j : a)&#123;</span><br><span class="line">            for (int i = 0;i &lt; 32;i++)&#123;</span><br><span class="line">                f[i] += (j &gt;&gt; i &amp; 1) == 1 ? 1 : 0;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        long ans = 0;</span><br><span class="line">        while (k-- &gt; 0)&#123;</span><br><span class="line">            long tmp = 0;</span><br><span class="line">            for (int i = 0;i &lt; 32;i++)&#123;</span><br><span class="line">                if (f[i] == 0)&#123;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                tmp = (tmp + (1L &lt;&lt; i)) % mod;</span><br><span class="line">                f[i]--;</span><br><span class="line">            &#125;</span><br><span class="line">            ans = (ans + tmp * tmp) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        return (int)ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：这道题值得学习的点在于，告诉我们两个数进行与操作和或操作时，本质是进行1的转移，或的结果为1的转移方向，与的结果为1的离开方向，从另外一个角度为我们揭示了位运算的本质</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/10/08/leetcode%E7%AC%AC366%E5%9C%BA%E5%91%A8%E8%B5%9B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode第365场周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -758,74 +829,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/07/29/%E5%89%8D%E7%BC%80%E6%A0%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-背包问题状态转移方程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/28/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B/">背包问题状态转移方程</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/28/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2023-07-28T14:00:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>背包问题最好要排序</p>
-<p>0-1背包：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = Math.max(dp[i - 1][j - nums[i - 1]],dp[i - 1][j]);</span><br></pre></td></tr></table></figure>
-<p>完全背包：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = dp[i - 1][j] + dp[i][j - nums[i - 1]];</span><br></pre></td></tr></table></figure>
-<p>完全背包求组合数（顺序不同也计数），加一层循环就行了，表示在这一层可以使用其它的数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 1;i &lt;= n;i++)&#123;</span><br><span class="line">    for (int j = 1;j &lt;= target;j++)&#123;</span><br><span class="line">        for (int z = 1;z &lt;= i;z++)&#123;</span><br><span class="line">            if (j &lt; nums[z - 1])&#123;</span><br><span class="line">                f[i][j] = f[i - 1][j];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                f[i][j] += f[i][j - nums[z - 1]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/28/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B/">展开全文 >></a>
         </p>
       
 
