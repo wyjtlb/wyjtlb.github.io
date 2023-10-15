@@ -162,6 +162,131 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-计算器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/09/04/%E8%AE%A1%E7%AE%97%E5%99%A8/">计算器</a>
+    </h1>
+  
+
+        
+        <a href="/2023/09/04/%E8%AE%A1%E7%AE%97%E5%99%A8/" class="archive-article-date">
+  	<time datetime="2023-09-04T14:10:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">class Solution&#123;</span><br><span class="line"></span><br><span class="line">    private int i = 0; // s的下标索引</span><br><span class="line"></span><br><span class="line">    public int calculate(String s)&#123;</span><br><span class="line">        return helper(s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int helper(String s)&#123;</span><br><span class="line">        int num = 0; // 记录当前数的大小</span><br><span class="line">        char sign = &#x27;+&#x27;; // 记录当前数的符号</span><br><span class="line">        Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">        for (;i &lt; s.length();i++)&#123;</span><br><span class="line">            char c = s.charAt(i);</span><br><span class="line">            if (c == &#x27;(&#x27;)&#123;</span><br><span class="line">                i++;</span><br><span class="line">                num = helper(s); // 计算这个括号内的数值并返回</span><br><span class="line">            &#125;</span><br><span class="line">            if (Character.isDigit(c))&#123;</span><br><span class="line">                num = num * 10 + (c - &#x27;0&#x27;); // 如果是数字就加到num中</span><br><span class="line">            &#125;</span><br><span class="line">            if ((!Character.isDigit(c) &amp;&amp; c != &#x27; &#x27;) || i == s.length() - 1)&#123;</span><br><span class="line">                if (sign == &#x27;+&#x27;)&#123;</span><br><span class="line">                    stack.push(num);</span><br><span class="line">                &#125; else if (sign == &#x27;-&#x27;)&#123;</span><br><span class="line">                    stack.push(-num);</span><br><span class="line">                &#125; else if (sign == &#x27;*&#x27;)&#123;</span><br><span class="line">                    stack.push(stack.pop() * num);</span><br><span class="line">                &#125; else if (sign == &#x27;/&#x27;)&#123;</span><br><span class="line">                    stack.push(stack.pop() / num);</span><br><span class="line">                &#125;</span><br><span class="line">                sign = c;</span><br><span class="line">                num = 0;</span><br><span class="line">            &#125;</span><br><span class="line">            if (c == &#x27;)&#x27;)&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        while(!stack.isEmpty())&#123;</span><br><span class="line">            sum += stack.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/09/04/%E8%AE%A1%E7%AE%97%E5%99%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-前缀树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/07/29/%E5%89%8D%E7%BC%80%E6%A0%91/">前缀树</a>
+    </h1>
+  
+
+        
+        <a href="/2023/07/29/%E5%89%8D%E7%BC%80%E6%A0%91/" class="archive-article-date">
+  	<time datetime="2023-07-29T13:04:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>每个结点都是一个26的结点数组加一个布尔值组成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">class Trie &#123;</span><br><span class="line"></span><br><span class="line">    class Node&#123;</span><br><span class="line">        boolean isvaild;</span><br><span class="line">        Node[] next;</span><br><span class="line"></span><br><span class="line">        Node()&#123;</span><br><span class="line">            isvaild = false;</span><br><span class="line">            next = new Node[26];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Node root;</span><br><span class="line">    public Trie() &#123;</span><br><span class="line">        root = new Node();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void insert(String word) &#123;</span><br><span class="line">        Node node = root;</span><br><span class="line">        for (char c : word.toCharArray())&#123;</span><br><span class="line">            if (node.next[c - &#x27;a&#x27;] == null)&#123;</span><br><span class="line">                node.next[c - &#x27;a&#x27;] = new Node();</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.next[c - &#x27;a&#x27;];</span><br><span class="line">        &#125;</span><br><span class="line">        node.isvaild = true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public boolean search(String word) &#123;</span><br><span class="line">        Node node = root;</span><br><span class="line">        for (char c : word.toCharArray())&#123;</span><br><span class="line">            if (node.next[c - &#x27;a&#x27;] == null)&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.next[c - &#x27;a&#x27;];</span><br><span class="line">        &#125;</span><br><span class="line">        return node.isvaild;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public boolean startsWith(String prefix) &#123;</span><br><span class="line">        Node node = root;</span><br><span class="line">        for (char c : prefix.toCharArray())&#123;</span><br><span class="line">            if (node.next[c - &#x27;a&#x27;] == null)&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.next[c - &#x27;a&#x27;];</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your Trie object will be instantiated and called as such:</span><br><span class="line"> * Trie obj = new Trie();</span><br><span class="line"> * obj.insert(word);</span><br><span class="line"> * boolean param_2 = obj.search(word);</span><br><span class="line"> * boolean param_3 = obj.startsWith(prefix);</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/07/29/%E5%89%8D%E7%BC%80%E6%A0%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-背包问题状态转移方程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -660,136 +785,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/07/20/%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-并查集模板" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/19/%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%A8%A1%E6%9D%BF/">并查集模板</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/19/%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%A8%A1%E6%9D%BF/" class="archive-article-date">
-  	<time datetime="2023-07-19T13:47:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="并查集通用模板"><a href="#并查集通用模板" class="headerlink" title="并查集通用模板"></a>并查集通用模板</h1>
-        
-          <a class="article-more-a" href="/2023/07/19/%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%A8%A1%E6%9D%BF/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/19/%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%A8%A1%E6%9D%BF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-nSum板子" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/">nSum板子</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/" class="archive-article-date">
-  	<time datetime="2023-07-15T03:02:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="使用递归解决nSum问题"><a href="#使用递归解决nSum问题" class="headerlink" title="使用递归解决nSum问题"></a>使用递归解决nSum问题</h1>
-        
-          <a class="article-more-a" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/">展开全文 >></a>
         </p>
       
 

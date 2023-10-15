@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2023/10 | Hexo</title>
+  <title>leetcode第115场双周赛 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2023/10/index.html">
+  <meta name="description" content="总结：前三题比较简单，最后一题坐牢一小时t1.上一个遍历的整数做法：模拟，用一个表存储数字就行了 123456789101112131415161718192021class Solution &amp;#123;    public List&lt;Integer&gt; lastVisitedIntegers(List&lt;String&gt; words) &amp;#123;        int n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode第115场双周赛">
+<meta property="og:url" content="http://example.com/2023/10/15/leetcode%E7%AC%AC115%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="总结：前三题比较简单，最后一题坐牢一小时t1.上一个遍历的整数做法：模拟，用一个表存储数字就行了 123456789101112131415161718192021class Solution &amp;#123;    public List&lt;Integer&gt; lastVisitedIntegers(List&lt;String&gt; words) &amp;#123;        int n">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-15T07:21:53.000Z">
+<meta property="article:modified_time" content="2023-10-15T08:07:32.299Z">
 <meta property="article:author" content="neja">
 <meta name="twitter:card" content="summary">
   
@@ -160,157 +164,177 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-leetcode第115场双周赛" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      leetcode第115场双周赛
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/10/15/leetcode%E7%AC%AC115%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
+
+        
+        <a href="/2023/10/15/leetcode%E7%AC%AC115%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
   	<time datetime="2023-10-15T07:21:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-15</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/10/15/leetcode%E7%AC%AC115%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">leetcode第115场双周赛</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>总结：前三题比较简单，最后一题坐牢一小时<br>t1.上一个遍历的整数<br>做法：模拟，用一个表存储数字就行了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;Integer&gt; lastVisitedIntegers(List&lt;String&gt; words) &#123;</span><br><span class="line">        int n = words.size();</span><br><span class="line">        List&lt;String&gt; l = new ArrayList&lt;&gt;();</span><br><span class="line">        List&lt;Integer&gt; ans = new ArrayList&lt;&gt;();</span><br><span class="line">        int j = -1;</span><br><span class="line">        for (String s : words)&#123;</span><br><span class="line">            if (s.charAt(0) - &#x27;0&#x27; &gt;= 0 &amp;&amp; s.charAt(0) - &#x27;0&#x27; &lt;= 9)&#123;</span><br><span class="line">                l.add(s);</span><br><span class="line">                j = l.size() - 1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                if (j &lt; 0)&#123;</span><br><span class="line">                    ans.add(-1);</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                ans.add(Integer.parseInt(l.get(j--)));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t2.最长相邻不相等子序列I<br>做法：贪心，先从groups中找出最长的下标，然后把words中对应下标的结果返回即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;String&gt; getWordsInLongestSubsequence(int n, String[] words, int[] groups) &#123;</span><br><span class="line">        List&lt;String&gt; ans = new ArrayList&lt;&gt;();</span><br><span class="line">        List&lt;Integer&gt; l = new ArrayList&lt;&gt;();</span><br><span class="line">        l.add(0);</span><br><span class="line">        for (int i = 1;i &lt; n;i++)&#123;</span><br><span class="line">            if (groups[i] != groups[l.get(l.size() - 1)])&#123;</span><br><span class="line">                l.add(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int x : l)&#123;</span><br><span class="line">            ans.add(words[x]);</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t3.最常相邻不相等子序列II<br>做法：dp，比较经典的LIS的变种题，需要多一个数组来记录最常序列的路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;String&gt; getWordsInLongestSubsequence(int n, String[] words, int[] groups) &#123;</span><br><span class="line">        int len = words.length;</span><br><span class="line">        if (len == 1)&#123;</span><br><span class="line">            return List.of(words[0]);</span><br><span class="line">        &#125;</span><br><span class="line">        int[] f = new int[len];</span><br><span class="line">        f[0] = 1;</span><br><span class="line">        int[] g = new int[len];</span><br><span class="line">        int max = 0;</span><br><span class="line">        for (int i = 1;i &lt; n;i++)&#123;</span><br><span class="line">            f[i] = 1;</span><br><span class="line">            g[i] = i;</span><br><span class="line">            for (int j = 0;j &lt; i;j++)&#123;</span><br><span class="line">                if (dfs(words[i],words[j]) &amp;&amp; groups[i] != groups[j])&#123;</span><br><span class="line">                    if (f[i] &lt; f[j] + 1)&#123;</span><br><span class="line">                        f[i] = f[j] + 1;</span><br><span class="line">                        g[i] = j;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            max = Math.max(max,f[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;String&gt; ans = new ArrayList&lt;&gt;();</span><br><span class="line">        int i = 0;</span><br><span class="line">        for (;i &lt; len;i++)&#123;</span><br><span class="line">            if (f[i] == max)&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while(g[i] != i)&#123;</span><br><span class="line">            ans.add(words[i]);</span><br><span class="line">            i = g[i];</span><br><span class="line">        &#125;</span><br><span class="line">        ans.add(words[g[i]]);</span><br><span class="line">        Collections.reverse(ans);</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    boolean dfs(String a,String b)&#123;</span><br><span class="line">        if (a.length() != b.length())&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        int count = 0;</span><br><span class="line">        for (int i = 0;i &lt; a.length();i++)&#123;</span><br><span class="line">            if (a.charAt(i) != b.charAt(i))&#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return count == 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t4.和带限制的子多重集合的数目<br>做法：背包，这题需要注意的是求组合数，所以状态转移的过程中把每次要加进来的数放进哈希表中就行了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int countSubMultisets(List&lt;Integer&gt; nums, int l, int r) &#123;</span><br><span class="line">        int[] a = nums.stream().mapToInt(i -&gt; i).toArray();</span><br><span class="line">        int n = a.length;</span><br><span class="line">        TreeMap&lt;Integer,Integer&gt; map = new TreeMap&lt;&gt;();</span><br><span class="line">        for (int i : a)&#123;</span><br><span class="line">            map.put(i,map.getOrDefault(i,0) + 1);</span><br><span class="line">        &#125;</span><br><span class="line">        int mod = (int)1e9 + 7;</span><br><span class="line">        int m = map.size();</span><br><span class="line">        long[][] f = new long[m][r + 1];</span><br><span class="line">        int x = map.firstKey(); // data base</span><br><span class="line">        int tmp = map.get(x);</span><br><span class="line">        for (int k = 1;k &lt;= tmp &amp;&amp; k * x &lt;= r;k++)&#123;</span><br><span class="line">            f[0][k * x]++;</span><br><span class="line">        &#125;</span><br><span class="line">        map.remove(x);</span><br><span class="line">        int z = 1;</span><br><span class="line">        for (int s : map.keySet())&#123;</span><br><span class="line">            int tmp1 = map.get(s);</span><br><span class="line">            for (int k = 1;k &lt;= tmp1 &amp;&amp; k * s &lt;= r;k++)&#123;</span><br><span class="line">                f[z][k * s]++;</span><br><span class="line">            &#125;</span><br><span class="line">            for (int i = 0;i &lt;= r;i++)&#123;</span><br><span class="line">                if (f[z - 1][i] != 0)&#123;</span><br><span class="line">                    for (int k = 0;k &lt;= tmp1 &amp;&amp; i + k * s &lt;= r;k++)&#123;</span><br><span class="line">                        f[z][k * s + i] = (f[z][k * s + i] + f[z - 1][i]) % mod;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            z++;</span><br><span class="line">        &#125;</span><br><span class="line">        long count = 0;</span><br><span class="line">        for (int i = l;i &lt;= r;i++)&#123;</span><br><span class="line">            count = (count + f[m - 1][i]) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        if (l == 0)&#123;</span><br><span class="line">            return (int)count + 1;</span><br><span class="line">        &#125;</span><br><span class="line">        return (int)count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：这题真的生气，一直以为是思路错了，结果复盘发现思路是对的，那为啥没做出来呢，我也想知道啊，昨晚到底发生了啥！！！</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wyjtlb.github.io/023/10/15/leetcode%E7%AC%AC115%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/10/15/leetcode%E7%AC%AC367%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-15T07:09:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-15</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2023/10/15/leetcode%E7%AC%AC367%E5%9C%BA%E5%91%A8%E8%B5%9B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">第367场周赛</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/10/15/leetcode%E7%AC%AC367%E5%9C%BA%E5%91%A8%E8%B5%9B/">第367场周赛</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/10/08/leetcode%E7%AC%AC366%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-08T14:31:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-08</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/10/08/leetcode%E7%AC%AC366%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第366场周赛</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/10/01/leetcode%E7%AC%AC365%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-01T06:25:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/10/01/leetcode%E7%AC%AC365%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第365场周赛</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/10/01/leetcode%E7%AC%AC114%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-01T05:57:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/10/01/leetcode%E7%AC%AC114%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">leetcode第114场双周赛</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -335,8 +359,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
