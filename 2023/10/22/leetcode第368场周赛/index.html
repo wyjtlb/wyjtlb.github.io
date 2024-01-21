@@ -16,7 +16,7 @@
 <meta property="og:description" content="t1.元素和最小的山形三元组I做法：模拟 12345678910111213141516class Solution &amp;#123;    public int minimumSum(int[] nums) &amp;#123;        int n &#x3D; nums.length;        int min &#x3D; Integer.MAX_VALUE;        for (int i &#x3D; 0;i &amp;l">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-22T09:09:18.000Z">
-<meta property="article:modified_time" content="2023-10-22T10:09:53.910Z">
+<meta property="article:modified_time" content="2024-01-21T05:43:28.925Z">
 <meta property="article:author" content="neja">
 <meta name="twitter:card" content="summary">
   
@@ -190,7 +190,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minimumSum(int[] nums) &#123;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        int min = Integer.MAX_VALUE;</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            for (int j = i + 1;j &lt; n;j++)&#123;</span><br><span class="line">                for (int z = j + 1;z &lt; n;z++)&#123;</span><br><span class="line">                    if (nums[i] &lt; nums[j] &amp;&amp; nums[j] &gt; nums[z])&#123;</span><br><span class="line">                        min = Math.min(min,nums[i] + nums[j] + nums[z]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return min == Integer.MAX_VALUE ? -1 : min;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>t3.合法分组的最少组数<br>做法：枚举</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minGroupsForValidAssignment(int[] nums) &#123;</span><br><span class="line">        Map&lt;Integer,Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        for (int i : nums)&#123;</span><br><span class="line">            map.put(i,map.getOrDefault(i,0) + 1);</span><br><span class="line">        &#125;</span><br><span class="line">        int k = nums.length;</span><br><span class="line">        for (int i : map.values())&#123;</span><br><span class="line">            k = Math.min(k,i);</span><br><span class="line">        &#125;</span><br><span class="line">        for (;;k--)&#123;</span><br><span class="line">            int ans = 0;</span><br><span class="line">            for (int c : map.values())&#123;</span><br><span class="line">                if(c % (k + 1) == 0)&#123;</span><br><span class="line">                    ans += c / (k + 1);</span><br><span class="line">                &#125; else if (c % (k + 1) != 0 &amp;&amp; c / (k + 1) + (c % (k + 1)) &gt;= k)&#123;</span><br><span class="line">                    ans += c / (k + 1) + 1;</span><br><span class="line">                &#125; else if (c % k == 0)&#123;</span><br><span class="line">                    ans += c / k;</span><br><span class="line">                &#125; else if (c % k != 0 &amp;&amp; c / k &gt;= c % k)&#123;</span><br><span class="line">                    ans += c / k + 1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ans = 0;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (ans &gt; 0)&#123;</span><br><span class="line">                return ans;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>总结：感觉这种枚举题非常好地体现了计算机的思维，按照人的思维一般想的是如何找最优的那个数，但是计算机的话就直接枚举就行了，这道题一个是这个枚举的思路，一个是如何判断一个数能不能被k和k+1分成多个组，合理的判断思路是先判断能不能分成k+1组，然后判断能不能分成k组。对于k+1组，判断余下的数加上分好的大小为k+1的组是不是大于k的，对于k组，判断余下的数能不能分配到分好的k组里面<br>t4.</p>
+<p>总结：感觉这种枚举题非常好地体现了计算机的思维，按照人的思维一般想的是如何找最优的那个数，但是计算机的话就直接枚举就行了，这道题一个是这个枚举的思路，一个是如何判断一个数能不能被k和k+1分成多个组，合理的判断思路是先判断能不能分成k+1组，然后判断能不能分成k组。对于k+1组，判断余下的数加上分好的大小为k+1的组是不是大于k的，对于k组，判断余下的数能不能分配到分好的k组里面</p>
 
       
 
@@ -283,6 +283,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2024/01/21/leetcode%E7%AC%AC122%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          leetcode第122场双周赛
+        
+      </div>
+    </a>
   
   
     <a href="/2023/10/15/leetcode%E7%AC%AC115%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" id="article-nav-older" class="article-nav-link-wrap">
@@ -425,6 +434,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">本场排名：269</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
