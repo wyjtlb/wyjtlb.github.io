@@ -241,6 +241,85 @@
 
 
   
+    <article id="post-leetcode第381场周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/01/21/leetcode%E7%AC%AC381%E5%9C%BA%E5%91%A8%E8%B5%9B/">‘leetcode第381场周赛’</a>
+    </h1>
+  
+
+        
+        <a href="/2024/01/21/leetcode%E7%AC%AC381%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
+  	<time datetime="2024-01-21T06:32:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>总结：</strong></p>
+<ol>
+<li>floyed算法需要防止走回头路，否则每次遍历的表会越来越大影响时间复杂度</li>
+</ol>
+<h2 id="t1-输入单词需要的最小按键次数I"><a href="#t1-输入单词需要的最小按键次数I" class="headerlink" title="t1. 输入单词需要的最小按键次数I"></a>t1. 输入单词需要的最小按键次数I</h2><p><strong>做法：</strong>见t3</p>
+<h2 id="t2-按距离统计房屋对数目I"><a href="#t2-按距离统计房屋对数目I" class="headerlink" title="t2. 按距离统计房屋对数目I"></a>t2. 按距离统计房屋对数目I</h2><p><strong>做法：</strong>统计每个点对的最小距离即可，方法用floyed</p>
+<p><strong>时间复杂度：</strong>n**3</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">from typing import List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Solution:</span><br><span class="line">    def countOfPairs(self, n: int, x: int, y: int) -&gt; List[int]:</span><br><span class="line">        res = [0] * n</span><br><span class="line">        graph = &#123;&#125;</span><br><span class="line">        for i in range(n):</span><br><span class="line">            if i not in graph:</span><br><span class="line">                graph[i] = []</span><br><span class="line">            if i &lt; n - 1:</span><br><span class="line">                graph[i].append(i + 1)</span><br><span class="line">            if i + 1 &lt; n and i + 1 not in graph:</span><br><span class="line">                graph[i + 1] = []</span><br><span class="line">            if i + 1 &lt; n:</span><br><span class="line">                graph[i + 1].append(i)</span><br><span class="line">        graph[x - 1].append(y - 1)</span><br><span class="line">        graph[y - 1].append(x - 1)</span><br><span class="line">        f = &#123;&#125;</span><br><span class="line">        for i in range(n):</span><br><span class="line">            # i + 1,i -&gt; j</span><br><span class="line">            for j in range(i + 1,n):</span><br><span class="line">                tmp = 0</span><br><span class="line">                q = [i]</span><br><span class="line">                l = set()</span><br><span class="line">                l.add(i)</span><br><span class="line">                while q:</span><br><span class="line">                    sz = len(q)</span><br><span class="line">                    for z in range(sz):</span><br><span class="line">                        x = q.pop(0)</span><br><span class="line">                        if x == j:</span><br><span class="line">                            f[tmp - 1] = f.get(tmp - 1,0) + 2</span><br><span class="line">                            q.clear()</span><br><span class="line">                            break</span><br><span class="line">                        for y in graph.get(x,[]):</span><br><span class="line">                            if y not in l:</span><br><span class="line">                                l.add(y)</span><br><span class="line">                                q.append(y)</span><br><span class="line">                    tmp += 1</span><br><span class="line">        for x in f:</span><br><span class="line">            res[x] = f[x]</span><br><span class="line">        return res</span><br></pre></td></tr></table></figure>
+
+<h2 id="t3-输入单词需要的最小按键次数II"><a href="#t3-输入单词需要的最小按键次数II" class="headerlink" title="t3. 输入单词需要的最小按键次数II"></a>t3. 输入单词需要的最小按键次数II</h2><p><strong>做法：</strong>统计每个字母的数目，然后每8个计一次数</p>
+<p><strong>时间复杂度：</strong>n</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def minimumPushes(self, word: str) -&gt; int:</span><br><span class="line">        f = [0] * 26</span><br><span class="line">        for i in word:</span><br><span class="line">            f[ord(i) - ord(&#x27;a&#x27;)] += 1</span><br><span class="line">        f.sort()</span><br><span class="line">        cnt = 0</span><br><span class="line">        for i in range(25,25 - 8,-1):</span><br><span class="line">            cnt += f[i]</span><br><span class="line">        for i in range(17,9,-1):</span><br><span class="line">            cnt += 2 * f[i]</span><br><span class="line">        for i in range(9,1,-1):</span><br><span class="line">            cnt += 3 * f[i]</span><br><span class="line">        return cnt + f[1] * 4 + f[0] * 4</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/01/21/leetcode%E7%AC%AC381%E5%9C%BA%E5%91%A8%E8%B5%9B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode第122场双周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -289,17 +368,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">本场排名：269</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -827,71 +895,6 @@
 
 
   
-    <article id="post-codeforces-Round-898-div4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/09/22/codeforces-Round-898-div4/">codeforces Round 898(div4)</a>
-    </h1>
-  
-
-        
-        <a href="/2023/09/22/codeforces-Round-898-div4/" class="archive-article-date">
-  	<time datetime="2023-09-22T01:58:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>总结：非常值得练习的一场，涉及非常多经典的算法。虽然最后一题看错条件没搞出来，但复盘了一下感觉问题不大。</p>
-        
-          <a class="article-more-a" href="/2023/09/22/codeforces-Round-898-div4/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/09/22/codeforces-Round-898-div4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -989,10 +992,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">本场排名：269</a>
-              </li>
             
             <div class="clearfix"></div>
           </ul>
