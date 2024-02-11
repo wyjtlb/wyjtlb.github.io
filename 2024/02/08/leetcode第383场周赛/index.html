@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hexo</title>
+  <title>leetcode第383场周赛 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/page/4/index.html">
+  <meta name="description" content="本场总结： 在上班，没参加，看评论区的大佬貌似说是手速场，其中t4比赛时python的暴力能过，但是赛后会被rejudge，总的来说算是模板题的一周，不怎么偏向思维。 t1. 边界上的蚂蚁边界上有一只蚂蚁，它有时向 左 走，有时向 右 走。 给你一个 非零 整数数组 nums 。蚂蚁会按顺序读取 nums 中的元素，从第一个元素开始直到结束。每一步，蚂蚁会根据当前元素的值移动：  如果 nums[">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode第383场周赛">
+<meta property="og:url" content="http://example.com/2024/02/08/leetcode%E7%AC%AC383%E5%9C%BA%E5%91%A8%E8%B5%9B/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本场总结： 在上班，没参加，看评论区的大佬貌似说是手速场，其中t4比赛时python的暴力能过，但是赛后会被rejudge，总的来说算是模板题的一周，不怎么偏向思维。 t1. 边界上的蚂蚁边界上有一只蚂蚁，它有时向 左 走，有时向 右 走。 给你一个 非零 整数数组 nums 。蚂蚁会按顺序读取 nums 中的元素，从第一个元素开始直到结束。每一步，蚂蚁会根据当前元素的值移动：  如果 nums[">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-02-08T07:22:30.000Z">
+<meta property="article:modified_time" content="2024-02-11T12:30:46.717Z">
 <meta property="article:author" content="neja">
 <meta name="twitter:card" content="summary">
   
@@ -160,34 +164,108 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-nSum板子" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-leetcode第383场周赛" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/">nSum板子</a>
+    <h1 class="article-title" itemprop="name">
+      leetcode第383场周赛
     </h1>
   
 
         
-        <a href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/" class="archive-article-date">
-  	<time datetime="2023-07-15T03:02:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-15</time>
+        <a href="/2024/02/08/leetcode%E7%AC%AC383%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
+  	<time datetime="2024-02-08T07:22:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="使用递归解决nSum问题"><a href="#使用递归解决nSum问题" class="headerlink" title="使用递归解决nSum问题"></a>使用递归解决nSum问题</h1>
-        
-          <a class="article-more-a" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/#more">more >></a>
-        
+        <p><strong>本场总结：</strong></p>
+<p>在上班，没参加，看评论区的大佬貌似说是手速场，其中t4比赛时python的暴力能过，但是赛后会被rejudge，总的来说算是模板题的一周，不怎么偏向思维。</p>
+<h1 id="t1-边界上的蚂蚁"><a href="#t1-边界上的蚂蚁" class="headerlink" title="t1. 边界上的蚂蚁"></a>t1. 边界上的蚂蚁</h1><p>边界上有一只蚂蚁，它有时向 <strong>左</strong> 走，有时向 <strong>右</strong> 走。</p>
+<p>给你一个 <strong>非零</strong> 整数数组 <code>nums</code> 。蚂蚁会按顺序读取 <code>nums</code> 中的元素，从第一个元素开始直到结束。每一步，蚂蚁会根据当前元素的值移动：</p>
+<ul>
+<li>如果 <code>nums[i] &lt; 0</code> ，向 <strong>左</strong> 移动 <code>-nums[i]</code>单位。</li>
+<li>如果 <code>nums[i] &gt; 0</code> ，向 <strong>右</strong> 移动 <code>nums[i]</code>单位。</li>
+</ul>
+<p>返回蚂蚁 <strong>返回</strong> 到边界上的次数。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>边界两侧有无限的空间。</li>
+<li>只有在蚂蚁移动了 <code>|nums[i]|</code> 单位后才检查它是否位于边界上。换句话说，如果蚂蚁只是在移动过程中穿过了边界，则不会计算在内。</li>
+</ul>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 100</code></li>
+<li><code>-10 &lt;= nums[i] &lt;= 10</code></li>
+<li><code>nums[i] != 0</code></li>
+</ul>
+<p><strong>做法：</strong>模拟，送分题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">from typing import List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Solution:</span><br><span class="line">    def returnToBoundaryCount(self, nums: List[int]) -&gt; int:</span><br><span class="line">        cnt = 0</span><br><span class="line">        cur = 0</span><br><span class="line">        n = len(nums)</span><br><span class="line">        for i in range(n):</span><br><span class="line">            cur += nums[i]</span><br><span class="line">            if cur == 0:</span><br><span class="line">                cnt += 1</span><br><span class="line">        return cnt</span><br></pre></td></tr></table></figure>
+
+<h1 id="t2-见t4"><a href="#t2-见t4" class="headerlink" title="t2. 见t4"></a>t2. 见t4</h1><h1 id="t3-找出网格的区域平均强度"><a href="#t3-找出网格的区域平均强度" class="headerlink" title="t3. 找出网格的区域平均强度"></a>t3. 找出网格的区域平均强度</h1><p>给你一个下标从 <strong>0</strong> 开始、大小为 <code>m x n</code> 的网格 <code>image</code> ，表示一个灰度图像，其中 <code>image[i][j]</code> 表示在范围 <code>[0..255]</code> 内的某个像素强度。另给你一个 <strong>非负</strong> 整数 <code>threshold</code> 。</p>
+<p>如果 <code>image[a][b]</code> 和 <code>image[c][d]</code> 满足 <code>|a - c| + |b - d| == 1</code> ，则称这两个像素是 <strong>相邻像素</strong> 。</p>
+<p><strong>区域</strong> 是一个 <code>3 x 3</code> 的子网格，且满足区域中任意两个 <strong>相邻</strong> 像素之间，像素强度的 <strong>绝对差</strong> <strong>小于或等于</strong> <code>threshold</code> 。</p>
+<p><strong>区域</strong> 内的所有像素都认为属于该区域，而一个像素 <strong>可以</strong> 属于 <strong>多个</strong> 区域。</p>
+<p>你需要计算一个下标从 <strong>0</strong> 开始、大小为 <code>m x n</code> 的网格 <code>result</code> ，其中 <code>result[i][j]</code> 是 <code>image[i][j]</code> 所属区域的 <strong>平均</strong> 强度，<strong>向下取整</strong> 到最接近的整数。如果 <code>image[i][j]</code> 属于多个区域，<code>result[i][j]</code> 是这些区域的 <strong>“取整后的平均强度”</strong> 的 <strong>平均值</strong>，也 <strong>向下取整</strong> 到最接近的整数。如果 <code>image[i][j]</code> 不属于任何区域，则 <code>result[i][j]</code> <strong>等于</strong> <code>image[i][j]</code> 。</p>
+<p>返回网格 <code>result</code> 。</p>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>3 &lt;= n, m &lt;= 500</code></li>
+<li><code>0 &lt;= image[i][j] &lt;= 255</code></li>
+<li><code>0 &lt;= threshold &lt;= 255</code></li>
+</ul>
+<p><strong>做法：</strong>纯纯模拟题，可以用差分数组加速，但是常规模拟即可，注意边界要判断清楚。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">import math</span><br><span class="line">from typing import List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Solution:</span><br><span class="line">    def resultGrid(self, image: List[List[int]], threshold: int) -&gt; List[List[int]]:</span><br><span class="line">        m = len(image)</span><br><span class="line">        n = len(image[0])</span><br><span class="line">        ans = [[[0, 0] for _ in range(n)] for _ in range(m)]</span><br><span class="line"></span><br><span class="line">        def isvaild(i: int, j: int) -&gt; bool:</span><br><span class="line">            nonlocal m, n</span><br><span class="line">            for z in range(i, i + 3):</span><br><span class="line">                for k in range(j, j + 3):</span><br><span class="line">                    if z &gt; -1 and z &lt; m and k &gt; -1 and k &lt; n:</span><br><span class="line">                        if z == i + 2 and k == j + 2:</span><br><span class="line">                            continue</span><br><span class="line">                        if z == i + 2:</span><br><span class="line">                            if k + 1 &lt; n and abs(image[z][k + 1] - image[z][k]) &gt; threshold:</span><br><span class="line">                                return False</span><br><span class="line">                            continue</span><br><span class="line">                        if k == j + 2:</span><br><span class="line">                            if z + 1 &lt; m and abs(image[z][k] - image[z + 1][k]) &gt; threshold:</span><br><span class="line">                                return False</span><br><span class="line">                            continue</span><br><span class="line">                        if z + 1 &lt; m and abs(image[z][k] - image[z + 1][k]) &gt; threshold:</span><br><span class="line">                            return False</span><br><span class="line">                        if k + 1 &lt; n and abs(image[z][k + 1] - image[z][k]) &gt; threshold:</span><br><span class="line">                            return False</span><br><span class="line">                    else:</span><br><span class="line">                        return False</span><br><span class="line">            return True</span><br><span class="line"></span><br><span class="line">        def _sum(i: int, j: int) -&gt; int:</span><br><span class="line">            ans = 0</span><br><span class="line">            for z in range(i, i + 3):</span><br><span class="line">                for k in range(j, j + 3):</span><br><span class="line">                    ans += image[z][k]</span><br><span class="line">            return int(math.floor(ans / 9))</span><br><span class="line"></span><br><span class="line">        for i in range(m):</span><br><span class="line">            for j in range(n):</span><br><span class="line">                if isvaild(i, j):</span><br><span class="line">                    tmp = _sum(i, j)</span><br><span class="line">                    for z in range(i, i + 3):</span><br><span class="line">                        for k in range(j, j + 3):</span><br><span class="line">                            ans[z][k][0] += tmp</span><br><span class="line">                            ans[z][k][1] += 1</span><br><span class="line">        res = [[0] * n for _ in range(m)]</span><br><span class="line">        for i in range(m):</span><br><span class="line">            for j in range(n):</span><br><span class="line">                if ans[i][j][1] == 0:</span><br><span class="line">                    res[i][j] = image[i][j]</span><br><span class="line">                else:</span><br><span class="line">                    res[i][j] = int(math.floor(ans[i][j][0] / ans[i][j][1]))</span><br><span class="line">        return res</span><br></pre></td></tr></table></figure>
+
+<h1 id="t4-将单词恢复初始状态所需最短时间II"><a href="#t4-将单词恢复初始状态所需最短时间II" class="headerlink" title="t4. 将单词恢复初始状态所需最短时间II"></a>t4. 将单词恢复初始状态所需最短时间II</h1><p>给你一个下标从 <strong>0</strong> 开始的字符串 <code>word</code> 和一个整数 <code>k</code> 。</p>
+<p>在每一秒，你必须执行以下操作：</p>
+<ul>
+<li>移除 <code>word</code> 的前 <code>k</code> 个字符。</li>
+<li>在 <code>word</code> 的末尾添加 <code>k</code> 个任意字符。</li>
+</ul>
+<p><strong>注意</strong> 添加的字符不必和移除的字符相同。但是，必须在每一秒钟都执行 <strong>两种</strong> 操作。</p>
+<p>返回将 <code>word</code> 恢复到其 <strong>初始</strong> 状态所需的 <strong>最短</strong> 时间（该时间必须大于零）。</p>
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= word.length &lt;= 106</code></li>
+<li><code>1 &lt;= k &lt;= word.length</code></li>
+<li><code>word</code>仅由小写英文字母组成。</li>
+</ul>
+<p><strong>做法：</strong>Z函数模板题,Z函数也叫kmp扩展，具体思路就是维护一个zbox，每次查询从zbox里面找到之前匹配的长度，从而避免了重复查找，时间复杂度为o(n)，具体可以看灵神的视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1it421W7D8/?vd_source=88ef309172c5397a3ee6bd88f4c6eb13">Z 函数（扩展 KMP)</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def minimumTimeToInitialState(self, s: str, k: int) -&gt; int:</span><br><span class="line">        n = len(s)</span><br><span class="line">        z = [0] * n</span><br><span class="line">        l = r = 0</span><br><span class="line">        for i in range(1, n):</span><br><span class="line">            if i &lt;= r:</span><br><span class="line">                z[i] = min(z[i - l], r - i + 1)</span><br><span class="line">            while i + z[i] &lt; n and s[z[i]] == s[i + z[i]]:</span><br><span class="line">                l, r = i, i + z[i]</span><br><span class="line">                z[i] += 1</span><br><span class="line">            if i % k == 0 and z[i] &gt;= n - i:</span><br><span class="line">                return i // k</span><br><span class="line">        return (n - 1) // k + 1</span><br></pre></td></tr></table></figure>
+
+<p>当然这题调python的api也能过，python牛逼！！！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def minimumTimeToInitialState(self, word: str, k: int) -&gt; int:</span><br><span class="line">        for i in count(1):</span><br><span class="line">            if word.startswith(word[k * i:]):</span><br><span class="line">                return i</span><br></pre></td></tr></table></figure>
+
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -196,16 +274,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wyjtlb.github.io/024/02/08/leetcode%E7%AC%AC383%E5%9C%BA%E5%91%A8%E8%B5%9B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2024/02/11/leetcode%E7%AC%AC384%E5%9C%BA%E5%91%A8%E8%B5%9B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          leetcode第384场周赛
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/02/08/leetcode%E7%AC%AC123%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">leetcode第123场双周赛</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -220,351 +366,32 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-解决区间重叠问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/12/%E8%A7%A3%E5%86%B3%E5%8C%BA%E9%97%B4%E9%87%8D%E5%8F%A0%E9%97%AE%E9%A2%98/">解决区间重叠问题</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/12/%E8%A7%A3%E5%86%B3%E5%8C%BA%E9%97%B4%E9%87%8D%E5%8F%A0%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2023-07-12T14:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="逆向思维"><a href="#逆向思维" class="headerlink" title="逆向思维"></a>逆向思维</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    //逆向思维找不重叠的区间，然后减去即可</span><br><span class="line">    public int eraseOverlapIntervals(int[][] intervals) &#123;</span><br><span class="line">        Arrays.sort(intervals,(a,b) -&gt; a[1] - b[1]);</span><br><span class="line">        int cnt = 1;</span><br><span class="line">        int end = intervals[0][1];</span><br><span class="line">        for (int[] f : intervals)&#123;</span><br><span class="line">            if (f[0] &gt;= end)&#123;</span><br><span class="line">                cnt++;</span><br><span class="line">                end = f[1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return intervals.length - cnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/12/%E8%A7%A3%E5%86%B3%E5%8C%BA%E9%97%B4%E9%87%8D%E5%8F%A0%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#t1-%E8%BE%B9%E7%95%8C%E4%B8%8A%E7%9A%84%E8%9A%82%E8%9A%81"><span class="toc-number">1.</span> <span class="toc-text">t1. 边界上的蚂蚁</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#t2-%E8%A7%81t4"><span class="toc-number">2.</span> <span class="toc-text">t2. 见t4</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#t3-%E6%89%BE%E5%87%BA%E7%BD%91%E6%A0%BC%E7%9A%84%E5%8C%BA%E5%9F%9F%E5%B9%B3%E5%9D%87%E5%BC%BA%E5%BA%A6"><span class="toc-number">3.</span> <span class="toc-text">t3. 找出网格的区域平均强度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#t4-%E5%B0%86%E5%8D%95%E8%AF%8D%E6%81%A2%E5%A4%8D%E5%88%9D%E5%A7%8B%E7%8A%B6%E6%80%81%E6%89%80%E9%9C%80%E6%9C%80%E7%9F%AD%E6%97%B6%E9%97%B4II"><span class="toc-number">4.</span> <span class="toc-text">t4. 将单词恢复初始状态所需最短时间II</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
-  
-    <article id="post-快速排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2023-07-12T03:49:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="快速排序解决链表排序问题"><a href="#快速排序解决链表排序问题" class="headerlink" title="快速排序解决链表排序问题"></a>快速排序解决链表排序问题</h1>
-        
-          <a class="article-more-a" href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Sieve-of-Eratosthenes" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/11/Sieve-of-Eratosthenes/">Sieve of Eratosthenes</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/11/Sieve-of-Eratosthenes/" class="archive-article-date">
-  	<time datetime="2023-07-11T02:58:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="使用Sieve-of-Eratosthenes算法高效解决素数计数问题"><a href="#使用Sieve-of-Eratosthenes算法高效解决素数计数问题" class="headerlink" title="使用Sieve of Eratosthenes算法高效解决素数计数问题"></a>使用Sieve of Eratosthenes算法高效解决素数计数问题</h1>
-        
-          <a class="article-more-a" href="/2023/07/11/Sieve-of-Eratosthenes/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/11/Sieve-of-Eratosthenes/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我的第一篇博客文章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">我的第一篇博客文章</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" class="archive-article-date">
-  	<time datetime="2023-07-05T03:24:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><p>内容</p>
-<hr>
-<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>内容</p>
-<hr>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="http://www.codeforce.com/">www.codeforce.com</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/05/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/05/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/05/hello-world/" class="archive-article-date">
-  	<time datetime="2023-07-05T03:22:14.239Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/05/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -589,8 +416,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

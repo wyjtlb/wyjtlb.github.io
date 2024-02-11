@@ -162,6 +162,219 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode第115场双周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/10/15/leetcode%E7%AC%AC115%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">leetcode第115场双周赛</a>
+    </h1>
+  
+
+        
+        <a href="/2023/10/15/leetcode%E7%AC%AC115%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
+  	<time datetime="2023-10-15T07:21:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>总结：前三题比较简单，最后一题坐牢一小时<br>t1.上一个遍历的整数<br>做法：模拟，用一个表存储数字就行了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;Integer&gt; lastVisitedIntegers(List&lt;String&gt; words) &#123;</span><br><span class="line">        int n = words.size();</span><br><span class="line">        List&lt;String&gt; l = new ArrayList&lt;&gt;();</span><br><span class="line">        List&lt;Integer&gt; ans = new ArrayList&lt;&gt;();</span><br><span class="line">        int j = -1;</span><br><span class="line">        for (String s : words)&#123;</span><br><span class="line">            if (s.charAt(0) - &#x27;0&#x27; &gt;= 0 &amp;&amp; s.charAt(0) - &#x27;0&#x27; &lt;= 9)&#123;</span><br><span class="line">                l.add(s);</span><br><span class="line">                j = l.size() - 1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                if (j &lt; 0)&#123;</span><br><span class="line">                    ans.add(-1);</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                ans.add(Integer.parseInt(l.get(j--)));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t2.最长相邻不相等子序列I<br>做法：贪心，先从groups中找出最长的下标，然后把words中对应下标的结果返回即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;String&gt; getWordsInLongestSubsequence(int n, String[] words, int[] groups) &#123;</span><br><span class="line">        List&lt;String&gt; ans = new ArrayList&lt;&gt;();</span><br><span class="line">        List&lt;Integer&gt; l = new ArrayList&lt;&gt;();</span><br><span class="line">        l.add(0);</span><br><span class="line">        for (int i = 1;i &lt; n;i++)&#123;</span><br><span class="line">            if (groups[i] != groups[l.get(l.size() - 1)])&#123;</span><br><span class="line">                l.add(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int x : l)&#123;</span><br><span class="line">            ans.add(words[x]);</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t3.最常相邻不相等子序列II<br>做法：dp，比较经典的LIS的变种题，需要多一个数组来记录最常序列的路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public List&lt;String&gt; getWordsInLongestSubsequence(int n, String[] words, int[] groups) &#123;</span><br><span class="line">        int len = words.length;</span><br><span class="line">        if (len == 1)&#123;</span><br><span class="line">            return List.of(words[0]);</span><br><span class="line">        &#125;</span><br><span class="line">        int[] f = new int[len];</span><br><span class="line">        f[0] = 1;</span><br><span class="line">        int[] g = new int[len];</span><br><span class="line">        int max = 0;</span><br><span class="line">        for (int i = 1;i &lt; n;i++)&#123;</span><br><span class="line">            f[i] = 1;</span><br><span class="line">            g[i] = i;</span><br><span class="line">            for (int j = 0;j &lt; i;j++)&#123;</span><br><span class="line">                if (dfs(words[i],words[j]) &amp;&amp; groups[i] != groups[j])&#123;</span><br><span class="line">                    if (f[i] &lt; f[j] + 1)&#123;</span><br><span class="line">                        f[i] = f[j] + 1;</span><br><span class="line">                        g[i] = j;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            max = Math.max(max,f[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;String&gt; ans = new ArrayList&lt;&gt;();</span><br><span class="line">        int i = 0;</span><br><span class="line">        for (;i &lt; len;i++)&#123;</span><br><span class="line">            if (f[i] == max)&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while(g[i] != i)&#123;</span><br><span class="line">            ans.add(words[i]);</span><br><span class="line">            i = g[i];</span><br><span class="line">        &#125;</span><br><span class="line">        ans.add(words[g[i]]);</span><br><span class="line">        Collections.reverse(ans);</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    boolean dfs(String a,String b)&#123;</span><br><span class="line">        if (a.length() != b.length())&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        int count = 0;</span><br><span class="line">        for (int i = 0;i &lt; a.length();i++)&#123;</span><br><span class="line">            if (a.charAt(i) != b.charAt(i))&#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return count == 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t4.和带限制的子多重集合的数目<br>做法：背包，这题需要注意的是求组合数，所以状态转移的过程中把每次要加进来的数放进哈希表中就行了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int countSubMultisets(List&lt;Integer&gt; nums, int l, int r) &#123;</span><br><span class="line">        int[] a = nums.stream().mapToInt(i -&gt; i).toArray();</span><br><span class="line">        int n = a.length;</span><br><span class="line">        TreeMap&lt;Integer,Integer&gt; map = new TreeMap&lt;&gt;();</span><br><span class="line">        for (int i : a)&#123;</span><br><span class="line">            map.put(i,map.getOrDefault(i,0) + 1);</span><br><span class="line">        &#125;</span><br><span class="line">        int mod = (int)1e9 + 7;</span><br><span class="line">        int m = map.size();</span><br><span class="line">        long[][] f = new long[m][r + 1];</span><br><span class="line">        int x = map.firstKey(); // data base</span><br><span class="line">        int tmp = map.get(x);</span><br><span class="line">        for (int k = 1;k &lt;= tmp &amp;&amp; k * x &lt;= r;k++)&#123;</span><br><span class="line">            f[0][k * x]++;</span><br><span class="line">        &#125;</span><br><span class="line">        map.remove(x);</span><br><span class="line">        int z = 1;</span><br><span class="line">        for (int s : map.keySet())&#123;</span><br><span class="line">            int tmp1 = map.get(s);</span><br><span class="line">            for (int k = 1;k &lt;= tmp1 &amp;&amp; k * s &lt;= r;k++)&#123;</span><br><span class="line">                f[z][k * s]++;</span><br><span class="line">            &#125;</span><br><span class="line">            for (int i = 0;i &lt;= r;i++)&#123;</span><br><span class="line">                if (f[z - 1][i] != 0)&#123;</span><br><span class="line">                    for (int k = 0;k &lt;= tmp1 &amp;&amp; i + k * s &lt;= r;k++)&#123;</span><br><span class="line">                        f[z][k * s + i] = (f[z][k * s + i] + f[z - 1][i]) % mod;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            z++;</span><br><span class="line">        &#125;</span><br><span class="line">        long count = 0;</span><br><span class="line">        for (int i = l;i &lt;= r;i++)&#123;</span><br><span class="line">            count = (count + f[m - 1][i]) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        if (l == 0)&#123;</span><br><span class="line">            return (int)count + 1;</span><br><span class="line">        &#125;</span><br><span class="line">        return (int)count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：这题真的生气，一直以为是思路错了，结果复盘发现思路是对的，那为啥没做出来呢，我也想知道啊，昨晚到底发生了啥！！！</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/10/15/leetcode%E7%AC%AC115%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode第367场周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/10/15/leetcode%E7%AC%AC367%E5%9C%BA%E5%91%A8%E8%B5%9B/">第367场周赛</a>
+    </h1>
+  
+
+        
+        <a href="/2023/10/15/leetcode%E7%AC%AC367%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
+  	<time datetime="2023-10-15T07:09:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>总结：t4比较可惜，比赛时想歪了，没考虑到前缀后缀和<br>t1.找出满足差值条件的下标I<br>做法：模拟，枚举二元组即可，注意i可以和j相等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] findIndices(int[] nums, int indexDifference, int valueDifference) &#123;</span><br><span class="line">        for (int i = 0;i &lt; nums.length;i++)&#123;</span><br><span class="line">            for (int j = i;j &lt; nums.length;j++)&#123;</span><br><span class="line">                if (Math.abs(i - j) &gt;= indexDifference &amp;&amp; Math.abs(nums[i] - nums[j]) &gt;= valueDifference)&#123;</span><br><span class="line">                    return new int[]&#123;i,j&#125;;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">            return new int[]&#123;-1,-1&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t2.最短且字典序最小的美丽子字符串<br>做法：滑动窗口，把条件写清楚就行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String shortestBeautifulSubstring(String s, int k) &#123;</span><br><span class="line">        int n = s.length();</span><br><span class="line">        int min = n;</span><br><span class="line">        int count = 0;</span><br><span class="line">        String ans = &quot;&quot;;</span><br><span class="line">        for (int i = 0,j = 0;j &lt; n;j++)&#123;</span><br><span class="line">            if (s.charAt(j) == &#x27;1&#x27;)&#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">            if (count == k)&#123;</span><br><span class="line">                if (ans.equals(&quot;&quot;))&#123;</span><br><span class="line">                    ans = s.substring(i,j + 1);</span><br><span class="line">                &#125;</span><br><span class="line">                if (min == j - i + 1)&#123;</span><br><span class="line">                    ans = ans.compareTo(s.substring(i,j + 1)) &gt;= 0 ? s.substring(i,j + 1) : ans;</span><br><span class="line">                &#125;</span><br><span class="line">                if (min &gt; j - i + 1)&#123;</span><br><span class="line">                    ans = s.substring(i,j + 1);</span><br><span class="line">                    min = j - i + 1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            while (i &lt;= j &amp;&amp; count == k)&#123;</span><br><span class="line">                if (s.charAt(i) == &#x27;1&#x27;)&#123;</span><br><span class="line">                    count--;</span><br><span class="line">                &#125;</span><br><span class="line">                i++;</span><br><span class="line">                if (count == k)&#123;</span><br><span class="line">                    if (ans.equals(&quot;&quot;))&#123;</span><br><span class="line">                        ans = s.substring(i,j + 1);</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (min == j - i + 1)&#123;</span><br><span class="line">                        ans = ans.compareTo(s.substring(i,j + 1)) &gt;= 0 ? s.substring(i,j + 1) : ans;</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (min &gt; j - i + 1)&#123;</span><br><span class="line">                        min = j - i + 1;</span><br><span class="line">                        ans = s.substring(i,j + 1);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t3.找出满足差值条件的下标II<br>做法：预处理每个位置的最大最小值，然后枚举每个点，找到它的左右边界能符合条件的值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] findIndices(int[] nums, int indexDifference, int valueDifference) &#123;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        int[] f1 = new int[n + 1];</span><br><span class="line">        int[] f2 = new int[n + 1];</span><br><span class="line">        Arrays.fill(f2,Integer.MAX_VALUE);</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            f1[i + 1] = Math.max(f1[i],nums[i]);</span><br><span class="line">            f2[i + 1] = Math.min(f2[i],nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        int[] f3 = new int[n + 1];</span><br><span class="line">        int[] f4 = new int[n + 1];</span><br><span class="line">        Arrays.fill(f4,Integer.MAX_VALUE);</span><br><span class="line">        for (int i = n - 1;i &gt; -1;i--)&#123;</span><br><span class="line">            f3[i] = Math.max(f3[i + 1],nums[i]);</span><br><span class="line">            f4[i] = Math.min(f4[i + 1],nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            if (i - indexDifference &gt; -1 &amp;&amp; Math.abs(nums[i] - f1[i - indexDifference + 1]) &gt;= valueDifference)&#123;</span><br><span class="line">                for (int j = i - indexDifference;j &gt; -1;j--)&#123;</span><br><span class="line">                    if (nums[j] == f1[i - indexDifference + 1])&#123;</span><br><span class="line">                        return new int[]&#123;i,j&#125;;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (i - indexDifference &gt; -1 &amp;&amp; Math.abs(nums[i] - f2[i - indexDifference + 1]) &gt;= valueDifference)&#123;</span><br><span class="line">                for (int j = i - indexDifference;j &gt; -1;j--)&#123;</span><br><span class="line">                    if (nums[j] == f2[i - indexDifference + 1])&#123;</span><br><span class="line">                        return new int[]&#123;i,j&#125;;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (i + indexDifference &lt; n &amp;&amp; Math.abs(nums[i] - f3[i + indexDifference]) &gt;= valueDifference)&#123;</span><br><span class="line">                for (int j = i +indexDifference;j &lt; n;j++)&#123;</span><br><span class="line">                    if (nums[j] == f3[i + indexDifference])&#123;</span><br><span class="line">                        return new int[]&#123;i,j&#125;;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (i + indexDifference &lt; n &amp;&amp; Math.abs(nums[i] - f4[i + indexDifference]) &gt;= valueDifference)&#123;</span><br><span class="line">                for (int j = i +indexDifference;j &lt; n;j++)&#123;</span><br><span class="line">                    if (nums[j] == f4[i + indexDifference])&#123;</span><br><span class="line">                        return new int[]&#123;i,j&#125;;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return new int[]&#123;-1,-1&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t4.构建乘积矩阵<br>做法：预处理前后缀和，然后枚举每个位置，将前缀和后缀乘起来即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[][] constructProductMatrix(int[][] grid) &#123;</span><br><span class="line">        int m = grid.length,n = grid[0].length;</span><br><span class="line">        int[] f = new int[m * n];</span><br><span class="line">        int mod = 12345;</span><br><span class="line">        for (int i = 0,z = 0;i &lt; m;i++)&#123;</span><br><span class="line">            for (int j = 0;j &lt; n;j++)&#123;</span><br><span class="line">                f[z++] = grid[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        int[] f1 = new int[m * n + 1];</span><br><span class="line">        int[] f2 = new int[m * n + 1];</span><br><span class="line">        Arrays.fill(f1,1);</span><br><span class="line">        Arrays.fill(f2,1);</span><br><span class="line">        for (int i = 0;i &lt; m * n;i++)&#123;</span><br><span class="line">            f1[i + 1] = ((f1[i] % mod) * (f[i] % mod)) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = m * n - 1;i &gt; -1;i--)&#123;</span><br><span class="line">            f2[i] = ((f2[i + 1] % mod) * (f[i] % mod)) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        int[][] ans = new int[m][n];</span><br><span class="line">        for (int i = 0,z = 0;i &lt; m;i++)&#123;</span><br><span class="line">            for (int j = 0;j &lt; n;j++)&#123;</span><br><span class="line">                ans[i][j] = ((f1[z] % mod) * (f2[z + 1] % mod)) % mod;</span><br><span class="line">                z++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：一开始想错方向了，想到怎么处理除法的余数的去了，感觉还是对于二维数组的前后缀不太熟，一般都是一维用的比较多</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/10/15/leetcode%E7%AC%AC367%E5%9C%BA%E5%91%A8%E8%B5%9B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode第366场周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/10/08/leetcode%E7%AC%AC366%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第366场周赛</a>
+    </h1>
+  
+
+        
+        <a href="/2023/10/08/leetcode%E7%AC%AC366%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
+  	<time datetime="2023-10-08T14:31:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>总结：本场上班没打，下班打了一下学到了不少东西<br>t1.分类求和并作差<br>做法：模拟，时间复杂度o(n)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int differenceOfSums(int n, int m) &#123;</span><br><span class="line">        int num1 = 0;</span><br><span class="line">        int num2 = 0;</span><br><span class="line">        for (int i = 1;i &lt;= n;i++)&#123;</span><br><span class="line">            if (i % m != 0)&#123;</span><br><span class="line">                num1 += i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 1;i &lt;= n;i++)&#123;</span><br><span class="line">            if (i % m == 0)&#123;</span><br><span class="line">                num2 += i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return num1 - num2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t2.最小处理时间<br>做法：贪心，之前做过一道类似的，排序然后按顺序分配取时间最大值即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minProcessingTime(List&lt;Integer&gt; processorTime, List&lt;Integer&gt; tasks) &#123;</span><br><span class="line">        int n = processorTime.size();</span><br><span class="line">        Collections.sort(tasks);</span><br><span class="line">        Collections.sort(processorTime);</span><br><span class="line">        int ans = 0;</span><br><span class="line">        for (int i = 0,j = 4 * n - 1;j &gt; -1;i++,j -= 4)&#123;</span><br><span class="line">            ans = Math.max(ans,processorTime.get(i) + tasks.get(j));</span><br><span class="line">            ans = Math.max(ans,processorTime.get(i) + tasks.get(j - 1));</span><br><span class="line">            ans = Math.max(ans,processorTime.get(i) + tasks.get(j - 2));</span><br><span class="line">            ans = Math.max(ans,processorTime.get(i) + tasks.get(j - 3));</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t3.执行操作使两个字符串相等<br>做法：dp+记忆化搜索，考虑状态转移，一共有两种操作，一种操作是消耗x，一种操作是消耗i和j之间连续的值，对于第一种操作，很明显是选择最左边的i和最右边的j，对于第二种操作，显然是选择最近的i和j，因此这道题具有最优子结构，可以使用动态规划。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line"></span><br><span class="line">    private int[][] visited;</span><br><span class="line">    public int minOperations(String s1, String s2, int x) &#123;</span><br><span class="line">        int n = s1.length();</span><br><span class="line">        List&lt;Integer&gt; l = new ArrayList&lt;&gt;();</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            if (s1.charAt(i) != s2.charAt(i))&#123;</span><br><span class="line">                l.add(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (l.size() % 2 == 1)&#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        visited = new int[n][n];</span><br><span class="line">        for (int[] f : visited)&#123;</span><br><span class="line">            Arrays.fill(f,-1);</span><br><span class="line">        &#125;</span><br><span class="line">        return dfs(l,0,l.size() - 1,x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int dfs(List&lt;Integer&gt; l,int i,int j,int x)&#123;</span><br><span class="line">        if (i &gt;= j || i &gt;= l.size() || j &lt; 0)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        if (visited[i][j] != -1)&#123;</span><br><span class="line">            return visited[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">        return visited[i][j] = Math.min(dfs(l,i + 2,j,x) + Math.min(x,l.get(i + 1) - l.get(i)), Math.min(dfs(l,i + 1,j - 1,x) + Math.min(x,l.get(j) - l.get(i)),dfs(l,i,j - 2,x) + Math.min(x,l.get(j) - l.get(j - 1))));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：这道题和以往的dp不同之处在于，一般的dp是单向转移，即从左往右转移或者从右往左转移，而这道题是从左右往内转移，因此切勿惯性思维。<br>t4.对数组执行操作使平方和最大<br>做法：模拟，统计二进制中1的个数，然后每个位置取k计算</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxSum(List&lt;Integer&gt; nums, int k) &#123;</span><br><span class="line">        int mod = (int)1e9 + 7;</span><br><span class="line">        int[] a = nums.stream().mapToInt(i -&gt; i).toArray();</span><br><span class="line">        int n = a.length;</span><br><span class="line">        int[] f = new int[32];</span><br><span class="line">        for (int j : a)&#123;</span><br><span class="line">            for (int i = 0;i &lt; 32;i++)&#123;</span><br><span class="line">                f[i] += (j &gt;&gt; i &amp; 1) == 1 ? 1 : 0;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        long ans = 0;</span><br><span class="line">        while (k-- &gt; 0)&#123;</span><br><span class="line">            long tmp = 0;</span><br><span class="line">            for (int i = 0;i &lt; 32;i++)&#123;</span><br><span class="line">                if (f[i] == 0)&#123;</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line">                tmp = (tmp + (1L &lt;&lt; i)) % mod;</span><br><span class="line">                f[i]--;</span><br><span class="line">            &#125;</span><br><span class="line">            ans = (ans + tmp * tmp) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        return (int)ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：这道题值得学习的点在于，告诉我们两个数进行与操作和或操作时，本质是进行1的转移，或的结果为1的转移方向，与的结果为1的离开方向，从另外一个角度为我们揭示了位运算的本质</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/10/08/leetcode%E7%AC%AC366%E5%9C%BA%E5%91%A8%E8%B5%9B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode第365场周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -613,200 +826,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/09/04/%E8%AE%A1%E7%AE%97%E5%99%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-前缀树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/29/%E5%89%8D%E7%BC%80%E6%A0%91/">前缀树</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/29/%E5%89%8D%E7%BC%80%E6%A0%91/" class="archive-article-date">
-  	<time datetime="2023-07-29T13:04:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>每个结点都是一个26的结点数组加一个布尔值组成</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">class Trie &#123;</span><br><span class="line"></span><br><span class="line">    class Node&#123;</span><br><span class="line">        boolean isvaild;</span><br><span class="line">        Node[] next;</span><br><span class="line"></span><br><span class="line">        Node()&#123;</span><br><span class="line">            isvaild = false;</span><br><span class="line">            next = new Node[26];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Node root;</span><br><span class="line">    public Trie() &#123;</span><br><span class="line">        root = new Node();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void insert(String word) &#123;</span><br><span class="line">        Node node = root;</span><br><span class="line">        for (char c : word.toCharArray())&#123;</span><br><span class="line">            if (node.next[c - &#x27;a&#x27;] == null)&#123;</span><br><span class="line">                node.next[c - &#x27;a&#x27;] = new Node();</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.next[c - &#x27;a&#x27;];</span><br><span class="line">        &#125;</span><br><span class="line">        node.isvaild = true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public boolean search(String word) &#123;</span><br><span class="line">        Node node = root;</span><br><span class="line">        for (char c : word.toCharArray())&#123;</span><br><span class="line">            if (node.next[c - &#x27;a&#x27;] == null)&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.next[c - &#x27;a&#x27;];</span><br><span class="line">        &#125;</span><br><span class="line">        return node.isvaild;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public boolean startsWith(String prefix) &#123;</span><br><span class="line">        Node node = root;</span><br><span class="line">        for (char c : prefix.toCharArray())&#123;</span><br><span class="line">            if (node.next[c - &#x27;a&#x27;] == null)&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.next[c - &#x27;a&#x27;];</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your Trie object will be instantiated and called as such:</span><br><span class="line"> * Trie obj = new Trie();</span><br><span class="line"> * obj.insert(word);</span><br><span class="line"> * boolean param_2 = obj.search(word);</span><br><span class="line"> * boolean param_3 = obj.startsWith(prefix);</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/29/%E5%89%8D%E7%BC%80%E6%A0%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-背包问题状态转移方程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/28/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B/">背包问题状态转移方程</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/28/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2023-07-28T14:00:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>背包问题最好要排序</p>
-<p>0-1背包：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = Math.max(dp[i - 1][j - nums[i - 1]],dp[i - 1][j]);</span><br></pre></td></tr></table></figure>
-<p>完全背包：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = dp[i - 1][j] + dp[i][j - nums[i - 1]];</span><br></pre></td></tr></table></figure>
-<p>完全背包求组合数（顺序不同也计数），加一层循环就行了，表示在这一层可以使用其它的数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 1;i &lt;= n;i++)&#123;</span><br><span class="line">    for (int j = 1;j &lt;= target;j++)&#123;</span><br><span class="line">        for (int z = 1;z &lt;= i;z++)&#123;</span><br><span class="line">            if (j &lt; nums[z - 1])&#123;</span><br><span class="line">                f[i][j] = f[i - 1][j];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                f[i][j] += f[i][j - nums[z - 1]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/28/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-java中BitSet类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/26/java%E4%B8%ADBitSet%E7%B1%BB/">java中BitSet类</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/26/java%E4%B8%ADBitSet%E7%B1%BB/" class="archive-article-date">
-  	<time datetime="2023-07-26T14:05:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>BitSet，位图，一个作用类似于线段树的类，由于内部的方法已经被封装好了，所以使用起来比线段树简洁，类中有一个默认的构造方法和一个指定初始大小的构造方法。<br>内部具体方法，参考<a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-bitset-class.html">菜鸟教程</a><br>具体使用，给定一个二进制数组：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Main&#123;</span><br><span class="line">    void func(int[] nums)&#123;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        BitSet bitset = new BitSet(n); // 指定位图的大小</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            // set方法，指定索引处的位设置为true</span><br><span class="line">            if (nums[i] == 1)&#123;</span><br><span class="line">                bitset.set(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        bitset.flip(0,n); // flip方法，将每个位置设置为当前值的补码，具体到这里就是将0变成1,1变成0</span><br><span class="line">        bitset.cardinality(); // 返回设置为true的位数</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/26/java%E4%B8%ADBitSet%E7%B1%BB/">展开全文 >></a>
         </p>
       
 

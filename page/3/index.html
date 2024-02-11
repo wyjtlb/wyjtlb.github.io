@@ -162,6 +162,200 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-前缀树" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/07/29/%E5%89%8D%E7%BC%80%E6%A0%91/">前缀树</a>
+    </h1>
+  
+
+        
+        <a href="/2023/07/29/%E5%89%8D%E7%BC%80%E6%A0%91/" class="archive-article-date">
+  	<time datetime="2023-07-29T13:04:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>每个结点都是一个26的结点数组加一个布尔值组成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">class Trie &#123;</span><br><span class="line"></span><br><span class="line">    class Node&#123;</span><br><span class="line">        boolean isvaild;</span><br><span class="line">        Node[] next;</span><br><span class="line"></span><br><span class="line">        Node()&#123;</span><br><span class="line">            isvaild = false;</span><br><span class="line">            next = new Node[26];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Node root;</span><br><span class="line">    public Trie() &#123;</span><br><span class="line">        root = new Node();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void insert(String word) &#123;</span><br><span class="line">        Node node = root;</span><br><span class="line">        for (char c : word.toCharArray())&#123;</span><br><span class="line">            if (node.next[c - &#x27;a&#x27;] == null)&#123;</span><br><span class="line">                node.next[c - &#x27;a&#x27;] = new Node();</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.next[c - &#x27;a&#x27;];</span><br><span class="line">        &#125;</span><br><span class="line">        node.isvaild = true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public boolean search(String word) &#123;</span><br><span class="line">        Node node = root;</span><br><span class="line">        for (char c : word.toCharArray())&#123;</span><br><span class="line">            if (node.next[c - &#x27;a&#x27;] == null)&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.next[c - &#x27;a&#x27;];</span><br><span class="line">        &#125;</span><br><span class="line">        return node.isvaild;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public boolean startsWith(String prefix) &#123;</span><br><span class="line">        Node node = root;</span><br><span class="line">        for (char c : prefix.toCharArray())&#123;</span><br><span class="line">            if (node.next[c - &#x27;a&#x27;] == null)&#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            node = node.next[c - &#x27;a&#x27;];</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your Trie object will be instantiated and called as such:</span><br><span class="line"> * Trie obj = new Trie();</span><br><span class="line"> * obj.insert(word);</span><br><span class="line"> * boolean param_2 = obj.search(word);</span><br><span class="line"> * boolean param_3 = obj.startsWith(prefix);</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/07/29/%E5%89%8D%E7%BC%80%E6%A0%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-背包问题状态转移方程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/07/28/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B/">背包问题状态转移方程</a>
+    </h1>
+  
+
+        
+        <a href="/2023/07/28/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B/" class="archive-article-date">
+  	<time datetime="2023-07-28T14:00:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>背包问题最好要排序</p>
+<p>0-1背包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = Math.max(dp[i - 1][j - nums[i - 1]],dp[i - 1][j]);</span><br></pre></td></tr></table></figure>
+<p>完全背包：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = dp[i - 1][j] + dp[i][j - nums[i - 1]];</span><br></pre></td></tr></table></figure>
+<p>完全背包求组合数（顺序不同也计数），加一层循环就行了，表示在这一层可以使用其它的数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 1;i &lt;= n;i++)&#123;</span><br><span class="line">    for (int j = 1;j &lt;= target;j++)&#123;</span><br><span class="line">        for (int z = 1;z &lt;= i;z++)&#123;</span><br><span class="line">            if (j &lt; nums[z - 1])&#123;</span><br><span class="line">                f[i][j] = f[i - 1][j];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                f[i][j] += f[i][j - nums[z - 1]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/07/28/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-java中BitSet类" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/07/26/java%E4%B8%ADBitSet%E7%B1%BB/">java中BitSet类</a>
+    </h1>
+  
+
+        
+        <a href="/2023/07/26/java%E4%B8%ADBitSet%E7%B1%BB/" class="archive-article-date">
+  	<time datetime="2023-07-26T14:05:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>BitSet，位图，一个作用类似于线段树的类，由于内部的方法已经被封装好了，所以使用起来比线段树简洁，类中有一个默认的构造方法和一个指定初始大小的构造方法。<br>内部具体方法，参考<a target="_blank" rel="noopener" href="https://www.runoob.com/java/java-bitset-class.html">菜鸟教程</a><br>具体使用，给定一个二进制数组：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Main&#123;</span><br><span class="line">    void func(int[] nums)&#123;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        BitSet bitset = new BitSet(n); // 指定位图的大小</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            // set方法，指定索引处的位设置为true</span><br><span class="line">            if (nums[i] == 1)&#123;</span><br><span class="line">                bitset.set(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        bitset.flip(0,n); // flip方法，将每个位置设置为当前值的补码，具体到这里就是将0变成1,1变成0</span><br><span class="line">        bitset.cardinality(); // 返回设置为true的位数</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/07/26/java%E4%B8%ADBitSet%E7%B1%BB/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-codeforce888（div3）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -594,198 +788,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/07/19/%E5%B9%B6%E6%9F%A5%E9%9B%86%E6%A8%A1%E6%9D%BF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-nSum板子" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/">nSum板子</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/" class="archive-article-date">
-  	<time datetime="2023-07-15T03:02:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="使用递归解决nSum问题"><a href="#使用递归解决nSum问题" class="headerlink" title="使用递归解决nSum问题"></a>使用递归解决nSum问题</h1>
-        
-          <a class="article-more-a" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/15/nSum%E6%9D%BF%E5%AD%90/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-解决区间重叠问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/12/%E8%A7%A3%E5%86%B3%E5%8C%BA%E9%97%B4%E9%87%8D%E5%8F%A0%E9%97%AE%E9%A2%98/">解决区间重叠问题</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/12/%E8%A7%A3%E5%86%B3%E5%8C%BA%E9%97%B4%E9%87%8D%E5%8F%A0%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2023-07-12T14:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="逆向思维"><a href="#逆向思维" class="headerlink" title="逆向思维"></a>逆向思维</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    //逆向思维找不重叠的区间，然后减去即可</span><br><span class="line">    public int eraseOverlapIntervals(int[][] intervals) &#123;</span><br><span class="line">        Arrays.sort(intervals,(a,b) -&gt; a[1] - b[1]);</span><br><span class="line">        int cnt = 1;</span><br><span class="line">        int end = intervals[0][1];</span><br><span class="line">        for (int[] f : intervals)&#123;</span><br><span class="line">            if (f[0] &gt;= end)&#123;</span><br><span class="line">                cnt++;</span><br><span class="line">                end = f[1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return intervals.length - cnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/12/%E8%A7%A3%E5%86%B3%E5%8C%BA%E9%97%B4%E9%87%8D%E5%8F%A0%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-快速排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2023-07-12T03:49:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="快速排序解决链表排序问题"><a href="#快速排序解决链表排序问题" class="headerlink" title="快速排序解决链表排序问题"></a>快速排序解决链表排序问题</h1>
-        
-          <a class="article-more-a" href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/12/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">展开全文 >></a>
         </p>
       
 
