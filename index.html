@@ -241,6 +241,112 @@
 
 
   
+    <article id="post-Sybase安装问题记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/03/01/Sybase%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">Sybase安装问题记录</a>
+    </h1>
+  
+
+        
+        <a href="/2024/03/01/Sybase%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="archive-article-date">
+  	<time datetime="2024-03-01T07:54:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Sybase安装问题记录"><a href="#Sybase安装问题记录" class="headerlink" title="Sybase安装问题记录"></a>Sybase安装问题记录</h1><p>安装参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/xianjie0318/article/details/109641910">windows&#x2F;Linux下安装Sybase ASE 16&#x2F;15.7-CSDN博客</a>。亲测可用，这里需要注意里面配置备份服务端时有个<strong>Allow Hosts</strong>的选项，建议填入<strong>all</strong>。</p>
+<h2 id="问题一：配置服务端报错：本地主机名非法"><a href="#问题一：配置服务端报错：本地主机名非法" class="headerlink" title="问题一：配置服务端报错：本地主机名非法"></a>问题一：配置服务端报错：本地主机名非法</h2><p><strong>报错内容：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;datacheck1&#x27; is an invalid TCP hostname</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决方式：</strong></p>
+<p>可以先尝试在命令行中<strong>ping</strong>一下这个主机名称，我这里是<strong>ping</strong>不通，所以试着在**&#x2F;etc&#x2F;hosts**文件中加入了域名解析，之后成功解决。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(填入你的虚拟机ip地址) + datacheck1(改成你的主机名)</span><br></pre></td></tr></table></figure>
+
+<h2 id="问题二：Sybase一直卡着不动了，啥情况"><a href="#问题二：Sybase一直卡着不动了，啥情况" class="headerlink" title="问题二：Sybase一直卡着不动了，啥情况"></a>问题二：Sybase一直卡着不动了，啥情况</h2><p>只要不报错，一直等着就完事了，我这里也是等了将近一小时才安装完毕</p>
+<h2 id="问题三：连接Sybase服务端失败"><a href="#问题三：连接Sybase服务端失败" class="headerlink" title="问题三：连接Sybase服务端失败"></a>问题三：连接Sybase服务端失败</h2><p><strong>报错内容：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ct_connect():protocol specific layer:external error:The attempt to connect to the server failed</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决方式：</strong></p>
+<p>先查看下服务端连接有没有：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">showserver</span><br></pre></td></tr></table></figure>
+
+<p>检查下登录的命令，命令格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isql -U sa -P 密码 -H (你的ip地址) -S (服务端的名称)</span><br></pre></td></tr></table></figure>
+
+<p>也可以杀掉Sybase的服务端，然后重启</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kill (sybase服务端端口号)</span><br><span class="line">startserver RUN%(Sybase启动文件，通常在/opt/sybase/ASK.../install/里面)</span><br></pre></td></tr></table></figure>
+
+<p>实在不行，删掉目录，重装，保证每一步的步骤不出错，我是重装了</p>
+<h1 id="Sybase安装驱动和配置源步骤及问题记录"><a href="#Sybase安装驱动和配置源步骤及问题记录" class="headerlink" title="Sybase安装驱动和配置源步骤及问题记录"></a>Sybase安装驱动和配置源步骤及问题记录</h1><p>下载相关的包，解决pyodbc无法使用的问题：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/mkleehammer/pyodbc/wiki/Install#installing-on-linux">https://github.com/mkleehammer/pyodbc/wiki/Install#installing-on-linux</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install epel-release</span><br><span class="line">sudo yum install python3-pip gcc-c++ python3-devel unixODBC-devel</span><br><span class="line">pip3 install --user pyodbc</span><br></pre></td></tr></table></figure>
+
+<p>安装好<strong>unixODBC</strong>驱动管理器后在控制台执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(venv) [root@datacheck1 opt]# odbcinst -j</span><br><span class="line">unixODBC 2.3.1</span><br><span class="line">DRIVERS............: /etc/odbcinst.ini</span><br><span class="line">SYSTEM DATA SOURCES: /etc/odbc.ini</span><br><span class="line">FILE DATA SOURCES..: /etc/ODBCDataSources</span><br><span class="line">USER DATA SOURCES..: /root/.odbc.ini</span><br><span class="line">SQLULEN Size.......: 8</span><br><span class="line">SQLLEN Size........: 8</span><br><span class="line">SQLSETPOSIROW Size.: 8</span><br></pre></td></tr></table></figure>
+
+<p>查看相关目录的位置</p>
+<h2 id="配置ASE驱动"><a href="#配置ASE驱动" class="headerlink" title="配置ASE驱动"></a>配置ASE驱动</h2><p>查看<strong>DataAccess&#x2F;ODBC&#x2F;samples&#x2F;readme.txt</strong>文件，里面记录了如何配置odbc驱动的步骤。</p>
+<p>这里主要记录几个关键点：</p>
+<p>64位机ASE驱动位于<strong>DataAccess64&#x2F;ODBC&#x2F;lib&#x2F;libsybdrvodb.so</strong>处，在修改<strong>driver</strong>路径时填这个文件的位置。</p>
+<p>修改完配置文件后执行以下命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">odbcinst -i -d -f drivertemplate.txt</span><br></pre></td></tr></table></figure>
+
+<p>这样ASE驱动就会成功启动，可以在**&#x2F;etc&#x2F;odbcinst.ini**文件里查看</p>
+<h2 id="配置ASE数据源"><a href="#配置ASE数据源" class="headerlink" title="配置ASE数据源"></a>配置ASE数据源</h2><p>修改完配置文件后执行以下命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">odbcinst -i -s -f sampletemplate.txt</span><br></pre></td></tr></table></figure>
+
+<p>数据源会加载到**&#x2F;root&#x2F;.odbc.ini**文件处</p>
+<h2 id="执行连接脚本"><a href="#执行连接脚本" class="headerlink" title="执行连接脚本"></a>执行连接脚本</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import pyodbc</span><br><span class="line"></span><br><span class="line">#  参考http://bbs.csdn.net/topics/380063945，从中获得灵感，无需配置DSN。</span><br><span class="line">conn = pyodbc.connect(</span><br><span class="line">    &#x27;DRIVER=&#123;Adaptive Server Enterprise&#125;;SERVER=DATACHECK1;PORT=5001;DATABASE=testdb;UID=sa;PWD=123456&#x27;)</span><br><span class="line">print(&quot;连接成功&quot;)</span><br><span class="line">cursor = conn.cursor()</span><br><span class="line">cursor.execute()</span><br><span class="line">cursor.close()</span><br><span class="line">conn.close()</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/03/01/Sybase%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode第384场周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -678,9 +784,8 @@
 
 <p>之后就可以正常使用yum命令了，wget无法使用的，此时可以执行yum install wget下载即可</p>
 <h3 id="1-5-键盘发出“滴”的声音"><a href="#1-5-键盘发出“滴”的声音" class="headerlink" title="1.5 键盘发出“滴”的声音"></a>1.5 键盘发出“滴”的声音</h3><p>装好虚拟机后，如果没有使用外部终端连接，直接再虚拟机的控制台上操作，有时按某些按键可能会发出”滴”的一声非常的响，推测原因可能是有些按键虚拟机不会识别所以发出警报？总之不影响操作。</p>
-<p>##2、安装python环境</p>
-<p>此次安装选择python3.9.16版本，复制以下命令到控制台执行一下即可</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#==============================================================#</span><br><span class="line"># 此脚本用于python3.9.16版本的安装，虚拟环境等需自行创建</span><br><span class="line">#==============================================================#</span><br><span class="line">yum install -y gcc openssl-devel bzip2-devel libffi-devel</span><br><span class="line"></span><br><span class="line"># 下载python3.9.16包</span><br><span class="line">mkdir -p /opt/soft</span><br><span class="line">cd /opt/soft</span><br><span class="line">wget https://www.python.org/ftp/python/3.9.16/Python-3.9.16.tgz</span><br><span class="line"></span><br><span class="line"># 解压</span><br><span class="line">mkdir -m 755 -p /usr/local/python/3.9</span><br><span class="line">cd /opt/soft</span><br><span class="line">tar zxvf Python-3.9.16.tgz</span><br><span class="line">cd /opt/soft/Python-3.9.16</span><br><span class="line">./configure --prefix=/usr/local/python/3.9 --enable-optimizations --enable-shared</span><br><span class="line">make altinstall</span><br><span class="line"></span><br><span class="line">ln -s /usr/local/python/3.9.16/bin/python3.9 /usr/bin/python3</span><br><span class="line">ln -s /usr/local/python/3.9.16/bin/pip3.9 /usr/bin/pip3</span><br></pre></td></tr></table></figure>
+<h2 id="2、安装python环境"><a href="#2、安装python环境" class="headerlink" title="2、安装python环境"></a>2、安装python环境</h2><p>此次安装选择python3.9.16版本，复制以下命令到控制台执行一下即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#==============================================================#</span><br><span class="line"># 此脚本用于python3.9.16版本的安装，虚拟环境等需自行创建</span><br><span class="line">#==============================================================#</span><br><span class="line">yum install -y gcc openssl-devel bzip2-devel libffi-devel</span><br><span class="line"></span><br><span class="line"># 下载python3.9.16包</span><br><span class="line">mkdir -p /opt/soft</span><br><span class="line">cd /opt/soft</span><br><span class="line">wget https://www.python.org/ftp/python/3.9.16/Python-3.9.16.tgz</span><br><span class="line"></span><br><span class="line"># 解压</span><br><span class="line">mkdir -m 755 -p /usr/local/python/3.9</span><br><span class="line">cd /opt/soft</span><br><span class="line">tar zxvf Python-3.9.16.tgz</span><br><span class="line">cd /opt/soft/Python-3.9.16</span><br><span class="line">./configure --prefix=/usr/local/python/3.9 --enable-optimizations --enable-shared</span><br><span class="line">make altinstall</span><br><span class="line"></span><br><span class="line">#复制软链接</span><br><span class="line">cp /usr/local/python/3.9/lib/libpython3.so /usr/lib64/</span><br><span class="line">cp /usr/local/python/3.9/lib/libpython3.9.so.1.0 /usr/lib64/</span><br><span class="line">cd /usr/lib64</span><br><span class="line">ln -s libpython3.9.so.1.0 libpython3.9.so</span><br><span class="line">ln -s /usr/local/python/3.9/bin/python3.9 /usr/bin/python3</span><br><span class="line">ln -s /usr/local/python/3.9/bin/pip3.9 /usr/bin/pip3</span><br></pre></td></tr></table></figure>
 
 <p>安装成功后检查python版本和pip版本</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost install]# python3 -V</span><br><span class="line">Python 3.9.16</span><br><span class="line">[root@localhost install]# pip3 -V</span><br><span class="line">pip 22.0.4 from /usr/local/python/3.9.16/lib/python3.9/site-packages/pip (python 3.9)</span><br></pre></td></tr></table></figure>
@@ -1064,75 +1169,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2024/01/21/leetcode%E7%AC%AC122%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode第368场周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/10/22/leetcode%E7%AC%AC368%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第368场周赛</a>
-    </h1>
-  
-
-        
-        <a href="/2023/10/22/leetcode%E7%AC%AC368%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-22T09:09:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>t1.元素和最小的山形三元组I<br>做法：模拟</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minimumSum(int[] nums) &#123;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        int min = Integer.MAX_VALUE;</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            for (int j = i + 1;j &lt; n;j++)&#123;</span><br><span class="line">                for (int z = j + 1;z &lt; n;z++)&#123;</span><br><span class="line">                    if (nums[i] &lt; nums[j] &amp;&amp; nums[j] &gt; nums[z])&#123;</span><br><span class="line">                        min = Math.min(min,nums[i] + nums[j] + nums[z]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return min == Integer.MAX_VALUE ? -1 : min;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>t2.元素和最小的山形三元组II<br>做法：前后缀预处理</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minimumSum(int[] nums) &#123;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        int min = Integer.MAX_VALUE;</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            for (int j = i + 1;j &lt; n;j++)&#123;</span><br><span class="line">                for (int z = j + 1;z &lt; n;z++)&#123;</span><br><span class="line">                    if (nums[i] &lt; nums[j] &amp;&amp; nums[j] &gt; nums[z])&#123;</span><br><span class="line">                        min = Math.min(min,nums[i] + nums[j] + nums[z]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return min == Integer.MAX_VALUE ? -1 : min;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>t3.合法分组的最少组数<br>做法：枚举</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minGroupsForValidAssignment(int[] nums) &#123;</span><br><span class="line">        Map&lt;Integer,Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        for (int i : nums)&#123;</span><br><span class="line">            map.put(i,map.getOrDefault(i,0) + 1);</span><br><span class="line">        &#125;</span><br><span class="line">        int k = nums.length;</span><br><span class="line">        for (int i : map.values())&#123;</span><br><span class="line">            k = Math.min(k,i);</span><br><span class="line">        &#125;</span><br><span class="line">        for (;;k--)&#123;</span><br><span class="line">            int ans = 0;</span><br><span class="line">            for (int c : map.values())&#123;</span><br><span class="line">                if(c % (k + 1) == 0)&#123;</span><br><span class="line">                    ans += c / (k + 1);</span><br><span class="line">                &#125; else if (c % (k + 1) != 0 &amp;&amp; c / (k + 1) + (c % (k + 1)) &gt;= k)&#123;</span><br><span class="line">                    ans += c / (k + 1) + 1;</span><br><span class="line">                &#125; else if (c % k == 0)&#123;</span><br><span class="line">                    ans += c / k;</span><br><span class="line">                &#125; else if (c % k != 0 &amp;&amp; c / k &gt;= c % k)&#123;</span><br><span class="line">                    ans += c / k + 1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ans = 0;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (ans &gt; 0)&#123;</span><br><span class="line">                return ans;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>总结：感觉这种枚举题非常好地体现了计算机的思维，按照人的思维一般想的是如何找最优的那个数，但是计算机的话就直接枚举就行了，这道题一个是这个枚举的思路，一个是如何判断一个数能不能被k和k+1分成多个组，合理的判断思路是先判断能不能分成k+1组，然后判断能不能分成k组。对于k+1组，判断余下的数加上分好的大小为k+1的组是不是大于k的，对于k组，判断余下的数能不能分配到分好的k组里面</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/10/22/leetcode%E7%AC%AC368%E5%9C%BA%E5%91%A8%E8%B5%9B/">展开全文 >></a>
         </p>
       
 

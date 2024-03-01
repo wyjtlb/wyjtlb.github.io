@@ -162,6 +162,75 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode第368场周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/10/22/leetcode%E7%AC%AC368%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第368场周赛</a>
+    </h1>
+  
+
+        
+        <a href="/2023/10/22/leetcode%E7%AC%AC368%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
+  	<time datetime="2023-10-22T09:09:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>t1.元素和最小的山形三元组I<br>做法：模拟</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minimumSum(int[] nums) &#123;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        int min = Integer.MAX_VALUE;</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            for (int j = i + 1;j &lt; n;j++)&#123;</span><br><span class="line">                for (int z = j + 1;z &lt; n;z++)&#123;</span><br><span class="line">                    if (nums[i] &lt; nums[j] &amp;&amp; nums[j] &gt; nums[z])&#123;</span><br><span class="line">                        min = Math.min(min,nums[i] + nums[j] + nums[z]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return min == Integer.MAX_VALUE ? -1 : min;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t2.元素和最小的山形三元组II<br>做法：前后缀预处理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minimumSum(int[] nums) &#123;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        int min = Integer.MAX_VALUE;</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            for (int j = i + 1;j &lt; n;j++)&#123;</span><br><span class="line">                for (int z = j + 1;z &lt; n;z++)&#123;</span><br><span class="line">                    if (nums[i] &lt; nums[j] &amp;&amp; nums[j] &gt; nums[z])&#123;</span><br><span class="line">                        min = Math.min(min,nums[i] + nums[j] + nums[z]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return min == Integer.MAX_VALUE ? -1 : min;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t3.合法分组的最少组数<br>做法：枚举</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minGroupsForValidAssignment(int[] nums) &#123;</span><br><span class="line">        Map&lt;Integer,Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        for (int i : nums)&#123;</span><br><span class="line">            map.put(i,map.getOrDefault(i,0) + 1);</span><br><span class="line">        &#125;</span><br><span class="line">        int k = nums.length;</span><br><span class="line">        for (int i : map.values())&#123;</span><br><span class="line">            k = Math.min(k,i);</span><br><span class="line">        &#125;</span><br><span class="line">        for (;;k--)&#123;</span><br><span class="line">            int ans = 0;</span><br><span class="line">            for (int c : map.values())&#123;</span><br><span class="line">                if(c % (k + 1) == 0)&#123;</span><br><span class="line">                    ans += c / (k + 1);</span><br><span class="line">                &#125; else if (c % (k + 1) != 0 &amp;&amp; c / (k + 1) + (c % (k + 1)) &gt;= k)&#123;</span><br><span class="line">                    ans += c / (k + 1) + 1;</span><br><span class="line">                &#125; else if (c % k == 0)&#123;</span><br><span class="line">                    ans += c / k;</span><br><span class="line">                &#125; else if (c % k != 0 &amp;&amp; c / k &gt;= c % k)&#123;</span><br><span class="line">                    ans += c / k + 1;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    ans = 0;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (ans &gt; 0)&#123;</span><br><span class="line">                return ans;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：感觉这种枚举题非常好地体现了计算机的思维，按照人的思维一般想的是如何找最优的那个数，但是计算机的话就直接枚举就行了，这道题一个是这个枚举的思路，一个是如何判断一个数能不能被k和k+1分成多个组，合理的判断思路是先判断能不能分成k+1组，然后判断能不能分成k组。对于k+1组，判断余下的数加上分好的大小为k+1的组是不是大于k的，对于k组，判断余下的数能不能分配到分好的k组里面</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/10/22/leetcode%E7%AC%AC368%E5%9C%BA%E5%91%A8%E8%B5%9B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode第115场双周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -764,68 +833,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/09/17/leetcode363%E5%91%A8%E8%B5%9B%E6%80%BB%E7%BB%93/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-计算器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/09/04/%E8%AE%A1%E7%AE%97%E5%99%A8/">计算器</a>
-    </h1>
-  
-
-        
-        <a href="/2023/09/04/%E8%AE%A1%E7%AE%97%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2023-09-04T14:10:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">class Solution&#123;</span><br><span class="line"></span><br><span class="line">    private int i = 0; // s的下标索引</span><br><span class="line"></span><br><span class="line">    public int calculate(String s)&#123;</span><br><span class="line">        return helper(s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int helper(String s)&#123;</span><br><span class="line">        int num = 0; // 记录当前数的大小</span><br><span class="line">        char sign = &#x27;+&#x27;; // 记录当前数的符号</span><br><span class="line">        Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">        for (;i &lt; s.length();i++)&#123;</span><br><span class="line">            char c = s.charAt(i);</span><br><span class="line">            if (c == &#x27;(&#x27;)&#123;</span><br><span class="line">                i++;</span><br><span class="line">                num = helper(s); // 计算这个括号内的数值并返回</span><br><span class="line">            &#125;</span><br><span class="line">            if (Character.isDigit(c))&#123;</span><br><span class="line">                num = num * 10 + (c - &#x27;0&#x27;); // 如果是数字就加到num中</span><br><span class="line">            &#125;</span><br><span class="line">            if ((!Character.isDigit(c) &amp;&amp; c != &#x27; &#x27;) || i == s.length() - 1)&#123;</span><br><span class="line">                if (sign == &#x27;+&#x27;)&#123;</span><br><span class="line">                    stack.push(num);</span><br><span class="line">                &#125; else if (sign == &#x27;-&#x27;)&#123;</span><br><span class="line">                    stack.push(-num);</span><br><span class="line">                &#125; else if (sign == &#x27;*&#x27;)&#123;</span><br><span class="line">                    stack.push(stack.pop() * num);</span><br><span class="line">                &#125; else if (sign == &#x27;/&#x27;)&#123;</span><br><span class="line">                    stack.push(stack.pop() / num);</span><br><span class="line">                &#125;</span><br><span class="line">                sign = c;</span><br><span class="line">                num = 0;</span><br><span class="line">            &#125;</span><br><span class="line">            if (c == &#x27;)&#x27;)&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        while(!stack.isEmpty())&#123;</span><br><span class="line">            sum += stack.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/09/04/%E8%AE%A1%E7%AE%97%E5%99%A8/">展开全文 >></a>
         </p>
       
 
