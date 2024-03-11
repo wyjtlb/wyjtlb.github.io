@@ -6,15 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2024/3 | Hexo</title>
+  <title>回溯剪枝核心思想探究 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2024/03/index.html">
+  <meta name="description" content="本篇灵感来源于leetcode的794. 有效的井字游戏题，经过一下午的不断试错，总算是解决了这道题，在此做一个思考的复盘。  我们先看这道题的题目描述： 给你一个字符串数组 board 表示井字游戏的棋盘。当且仅当在井字游戏过程中，棋盘有可能达到 board 所显示的状态时，才返回 true 。 井字游戏的棋盘是一个 3 x 3 数组，由字符 &#39; &#39;，&#39;X&#39; 和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回溯剪枝核心思想探究">
+<meta property="og:url" content="http://example.com/2024/03/11/%E5%9B%9E%E6%BA%AF%E5%89%AA%E6%9E%9D%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%E6%8E%A2%E7%A9%B6/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本篇灵感来源于leetcode的794. 有效的井字游戏题，经过一下午的不断试错，总算是解决了这道题，在此做一个思考的复盘。  我们先看这道题的题目描述： 给你一个字符串数组 board 表示井字游戏的棋盘。当且仅当在井字游戏过程中，棋盘有可能达到 board 所显示的状态时，才返回 true 。 井字游戏的棋盘是一个 3 x 3 数组，由字符 &#39; &#39;，&#39;X&#39; 和">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/05/15/tictactoe1-grid.jpg">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/05/15/tictactoe2-grid.jpg">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/05/15/tictactoe4-grid.jpg">
+<meta property="article:published_time" content="2024-03-11T08:49:36.000Z">
+<meta property="article:modified_time" content="2024-03-11T09:23:25.392Z">
 <meta property="article:author" content="neja">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.leetcode.com/uploads/2021/05/15/tictactoe1-grid.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -160,76 +168,210 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-回溯剪枝核心思想探究" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      回溯剪枝核心思想探究
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/03/11/%E5%9B%9E%E6%BA%AF%E5%89%AA%E6%9E%9D%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%E6%8E%A2%E7%A9%B6/" class="archive-article-date">
+
+        
+        <a href="/2024/03/11/%E5%9B%9E%E6%BA%AF%E5%89%AA%E6%9E%9D%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%E6%8E%A2%E7%A9%B6/" class="archive-article-date">
   	<time datetime="2024-03-11T08:49:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-11</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/03/11/%E5%9B%9E%E6%BA%AF%E5%89%AA%E6%9E%9D%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%E6%8E%A2%E7%A9%B6/">回溯剪枝核心思想探究</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本篇灵感来源于leetcode的<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-tic-tac-toe-state/">794. 有效的井字游戏</a>题，经过一下午的不断试错，总算是解决了这道题，在此做一个思考的复盘。</p>
+<p> 我们先看这道题的题目描述：</p>
+<p>给你一个字符串数组 <code>board</code> 表示井字游戏的棋盘。当且仅当在井字游戏过程中，棋盘有可能达到 <code>board</code> 所显示的状态时，才返回 <code>true</code> 。</p>
+<p>井字游戏的棋盘是一个 <code>3 x 3</code> 数组，由字符 <code>&#39; &#39;</code>，<code>&#39;X&#39;</code> 和 <code>&#39;O&#39;</code> 组成。字符 <code>&#39; &#39;</code> 代表一个空位。</p>
+<p>以下是井字游戏的规则：</p>
+<ul>
+<li>玩家轮流将字符放入空位（<code>&#39; &#39;</code>）中。</li>
+<li>玩家 1 总是放字符 <code>&#39;X&#39;</code> ，而玩家 2 总是放字符 <code>&#39;O&#39;</code> 。</li>
+<li><code>&#39;X&#39;</code> 和 <code>&#39;O&#39;</code> 只允许放置在空位中，不允许对已放有字符的位置进行填充。</li>
+<li>当有 3 个相同（且非空）的字符填充任何行、列或对角线时，游戏结束。</li>
+<li>当所有位置非空时，也算为游戏结束。</li>
+<li>如果游戏结束，玩家不允许再放置字符。</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/05/15/tictactoe1-grid.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：board = [&quot;O  &quot;,&quot;   &quot;,&quot;   &quot;]</span><br><span class="line">输出：false</span><br><span class="line">解释：玩家 1 总是放字符 &quot;X&quot; 。</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/05/15/tictactoe2-grid.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：board = [&quot;XOX&quot;,&quot; X &quot;,&quot;   &quot;]</span><br><span class="line">输出：false</span><br><span class="line">解释：玩家应该轮流放字符。</span><br></pre></td></tr></table></figure>
 
+<p><strong>示例 3:</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/05/15/tictactoe4-grid.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：board = [&quot;XOX&quot;,&quot;O O&quot;,&quot;XOX&quot;]</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>board.length == 3</code></li>
+<li><code>board[i].length == 3</code></li>
+<li><code>board[i][j]</code> 为 <code>&#39;X&#39;</code>、<code>&#39;O&#39;</code> 或 <code>&#39; &#39;</code></li>
+</ul>
+<p>题目本身的意思很好理解，简单的说就是给你一个井字棋的棋盘，让你判断井字棋上棋子的位置是否符合井字棋的规则，这里需要注意的一个点是空棋盘是符合规则的，其次就是如果一个人已经赢得了游戏，那么另外一个人将无法继续落子。</p>
+<p>弄清楚题目的意思后，我们该怎么思考这道题呢，一个顺水推舟的思路就是直接暴力枚举出所有可能的情况，然后判断给出的棋盘是否符合这些情况。但是很可惜，我一开始就是这么做的，然后错了，原因就在于你无法正确枚举出所有可能的情况，你只能枚举出所有棋子在棋盘上可能的分布。</p>
+<p>那么正确的思考路径是什么呢，实际上我们可以发现，如果随便给一张棋盘的分布图，我们依靠自己的肉眼是可以很快算出答案的。为什么会这样？我们的判断依据是什么，就是从头模拟，从而判断出给出的棋盘是否符合条件。因此我们的代码思路其实就是模拟我们人类通过肉眼判断棋盘的模式。</p>
+<p>代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def validTicTacToe(self, board: List[str]) -&gt; bool:</span><br><span class="line">        if board[0] == &quot;   &quot; and board[1] == &quot;   &quot; and board[2] == &quot;   &quot;:</span><br><span class="line">            return True</span><br><span class="line">        visited = [[0 for _ in range(3)] for _ in range(3)]</span><br><span class="line"></span><br><span class="line">        def isvalid(): # 检查游戏是否已经结束</span><br><span class="line">            if visited[0][0] == visited[0][1] and visited[0][1] == visited[0][2] and visited[0][0] != 0:</span><br><span class="line">                return True</span><br><span class="line">            if visited[1][0] == visited[1][1] and visited[1][1] == visited[1][2] and visited[1][0] != 0:</span><br><span class="line">                return True</span><br><span class="line">            if visited[2][0] == visited[2][1] and visited[2][1] == visited[2][2] and visited[2][0] != 0:</span><br><span class="line">                return True</span><br><span class="line">            if visited[0][0] == visited[1][0] and visited[1][0] == visited[2][0] and visited[0][0] != 0:</span><br><span class="line">                return True</span><br><span class="line">            if visited[0][1] == visited[1][1] and visited[2][1] == visited[1][1] and visited[0][1] != 0:</span><br><span class="line">                return True</span><br><span class="line">            if visited[0][2] == visited[1][2] and visited[1][2] == visited[2][2] and visited[0][2] != 0:</span><br><span class="line">                return True</span><br><span class="line">            if visited[0][0] == visited[1][1] and visited[0][0] == visited[2][2] and visited[0][0] != 0:</span><br><span class="line">                return True</span><br><span class="line">            if visited[0][2] == visited[1][1] and visited[0][2] == visited[2][0] and visited[0][2] != 0:</span><br><span class="line">                return True</span><br><span class="line">            return False</span><br><span class="line">        def compare(): # 比较给出的棋盘和正在下的棋盘</span><br><span class="line">            for i in range(3):</span><br><span class="line">                for j in range(3):</span><br><span class="line">                    if board[i][j] != &quot; &quot;:</span><br><span class="line">                        if board[i][j] == &quot;X&quot; and visited[i][j] != 1:</span><br><span class="line">                            return False</span><br><span class="line">                        if board[i][j] == &quot;O&quot; and visited[i][j] != -1:</span><br><span class="line">                            return False</span><br><span class="line">                    if visited[i][j] != 0:</span><br><span class="line">                        if visited[i][j] == 1 and board[i][j] != &quot;X&quot;:</span><br><span class="line">                            return False</span><br><span class="line">                        if visited[i][j] == -1 and board[i][j] != &quot;O&quot;:</span><br><span class="line">                            return False</span><br><span class="line">            return True</span><br><span class="line">        def dfs(s: str) -&gt; bool:</span><br><span class="line">            ans = False</span><br><span class="line">            for i in range(3):</span><br><span class="line">                for j in range(3):</span><br><span class="line">                    if board[i][j] == s and visited[i][j] == 0:</span><br><span class="line">                        visited[i][j] = 1 if s == &quot;X&quot; else -1</span><br><span class="line">                        if isvalid(): # 如果已经决出胜负</span><br><span class="line">                            if compare(): # 判断此时两个棋盘是否相等</span><br><span class="line">                                visited[i][j] = 0</span><br><span class="line">                                ans = True</span><br><span class="line">                            visited[i][j] = 0</span><br><span class="line">                            continue # 核心代码：对于不相等的情况，直接跳过当前递归，去后面寻找是否有相等的情况</span><br><span class="line">                        else: # 未决出胜负</span><br><span class="line">                            if compare(): # 判断两个棋盘是否相等</span><br><span class="line">                                visited[i][j] = 0</span><br><span class="line">                                ans = True</span><br><span class="line">                                continue # 核心代码：剪枝操作</span><br><span class="line">                        ans |= dfs(&quot;X&quot; if s == &quot;O&quot; else &quot;O&quot;)</span><br><span class="line">                        visited[i][j] = 0</span><br><span class="line">            return ans</span><br><span class="line">        return dfs(&quot;X&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>这里面有一个非常核心的地方，就是<code>continue</code>的使用，这里为什么要加<code>continue</code>，听我慢慢给你分析。</p>
+<p>直接<code>return</code>会怎样：</p>
+<p>我们仔细想想，如果这里改成<code>return</code>，那么我们的代码一碰到正确的情况就会直接返回，这看似没有问题，但是对于已经决出胜负的情况，如果此时棋盘不相等我们能够返回吗？显然是不能，因为我们遍历是按照从左往右、从上到下的顺序去遍历的，此时返回意味着我们认为这时候不相等代表后面也不可能相等，这会导致某些问题，也是因为这题的特殊性，例如<code>XXX OOX OOX</code>这个例子就是很好证明，如果我们直接返回，那么这个示例就会返回<code>False</code>，但是实际上是<code>True</code>。但是如果我们用<code>continue</code>的话就可以避免这个问题，<code>continue</code>使得递归函数能够继续去后面找可能的结果。</p>
+<p>在完成这道题之后，不由得触发了我对递归树剪枝的思考，实际上遍历递归树的时候，剪枝操作往往是发生在先序遍历递归树的时候，通过剪掉递归树遍历过程中的结点，我们可以避免访问这个节点的所有子节点从而极大的降低时间复杂度，但是这个题是需要你完完全全遍历整个递归树的，因此我们一定要注意这一点。</p>
+<p>因此总结下来就是，剪枝用<code>return</code>或者<code>break</code>而完全遍历用<code>continue</code>，这也算是我学习算法的过程中的一个新发现。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wyjtlb.github.io/024/03/11/%E5%9B%9E%E6%BA%AF%E5%89%AA%E6%9E%9D%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%E6%8E%A2%E7%A9%B6/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/03/01/Sybase%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  	<time datetime="2024-03-01T07:54:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-01</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2024/03/01/Sybase%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Sybase安装问题记录</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/03/01/Sybase%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">Sybase安装问题记录</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -254,8 +396,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

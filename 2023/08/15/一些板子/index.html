@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>一些板子 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC]">
+  <meta name="description" content="求质因数的个数12345678int MX &#x3D; 100001;for (int i &#x3D; 2;i &lt; MX;i++)&amp;#123;    if (omega[i] &#x3D;&#x3D; 0)&amp;#123;        for (int j &#x3D; i;j &lt; MX;j +&#x3D; i)&amp;#123;            omega[j]++;        &amp;#125;    &amp;#125;&amp;#125; 快速幂123">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一些板子">
 <meta property="og:url" content="http://example.com/2023/08/15/%E4%B8%80%E4%BA%9B%E6%9D%BF%E5%AD%90/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="[TOC]">
+<meta property="og:description" content="求质因数的个数12345678int MX &#x3D; 100001;for (int i &#x3D; 2;i &lt; MX;i++)&amp;#123;    if (omega[i] &#x3D;&#x3D; 0)&amp;#123;        for (int j &#x3D; i;j &lt; MX;j +&#x3D; i)&amp;#123;            omega[j]++;        &amp;#125;    &amp;#125;&amp;#125; 快速幂123">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-08-15T13:23:48.000Z">
-<meta property="article:modified_time" content="2024-03-03T05:25:14.663Z">
+<meta property="article:modified_time" content="2024-03-09T05:52:14.947Z">
 <meta property="article:author" content="neja">
 <meta name="twitter:card" content="summary">
   
@@ -184,10 +184,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[TOC]</p>
-<span id="more"></span>
-
-<h2 id="求质因数的个数"><a href="#求质因数的个数" class="headerlink" title="求质因数的个数"></a>求质因数的个数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int MX = 100001;</span><br><span class="line">for (int i = 2;i &lt; MX;i++)&#123;</span><br><span class="line">    if (omega[i] == 0)&#123;</span><br><span class="line">        for (int j = i;j &lt; MX;j += i)&#123;</span><br><span class="line">            omega[j]++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="求质因数的个数"><a href="#求质因数的个数" class="headerlink" title="求质因数的个数"></a>求质因数的个数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int MX = 100001;</span><br><span class="line">for (int i = 2;i &lt; MX;i++)&#123;</span><br><span class="line">    if (omega[i] == 0)&#123;</span><br><span class="line">        for (int j = i;j &lt; MX;j += i)&#123;</span><br><span class="line">            omega[j]++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">long pow(long x,int n)&#123;</span><br><span class="line">    long res = 1;</span><br><span class="line">    for (;n &gt; 0;n /= 2)&#123;</span><br><span class="line">        if (n % 2 &gt; 0) &#123;</span><br><span class="line">            res = res * x % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        x = x * x % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="列表转数组，数组转列表"><a href="#列表转数组，数组转列表" class="headerlink" title="列表转数组，数组转列表"></a>列表转数组，数组转列表</h2><p><code>int[] a = l.stream().mapToInt(i -&gt; i).toArray();</code><br><code>List&lt;Integer&gt; l = Arrays.stream(slices).boxed().collect(Collectors.toList());</code></p>
 <h2 id="单调栈求递增"><a href="#单调栈求递增" class="headerlink" title="单调栈求递增"></a>单调栈求递增</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int[] left = new int[n];</span><br><span class="line">int[] right = new int[n];</span><br><span class="line">Arrays.fill(right,n);</span><br><span class="line">Deque&lt;Integer&gt; st = new ArrayDeque&lt;&gt;();</span><br><span class="line">st.push(-1);</span><br><span class="line">for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">    while(st.size() &gt; 1 &amp;&amp; omega[a[st.peek()]] &lt; omega[a[i]])&#123;</span><br><span class="line">        right[st.pop()] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    left[i] = st.peek();</span><br><span class="line">    st.push(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
