@@ -182,7 +182,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="求质因数的个数"><a href="#求质因数的个数" class="headerlink" title="求质因数的个数"></a>求质因数的个数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int MX = 100001;</span><br><span class="line">for (int i = 2;i &lt; MX;i++)&#123;</span><br><span class="line">    if (omega[i] == 0)&#123;</span><br><span class="line">        for (int j = i;j &lt; MX;j += i)&#123;</span><br><span class="line">            omega[j]++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <span id="more"></span>
+
+<h2 id="求质因数的个数"><a href="#求质因数的个数" class="headerlink" title="求质因数的个数"></a>求质因数的个数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int MX = 100001;</span><br><span class="line">for (int i = 2;i &lt; MX;i++)&#123;</span><br><span class="line">    if (omega[i] == 0)&#123;</span><br><span class="line">        for (int j = i;j &lt; MX;j += i)&#123;</span><br><span class="line">            omega[j]++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">long pow(long x,int n)&#123;</span><br><span class="line">    long res = 1;</span><br><span class="line">    for (;n &gt; 0;n /= 2)&#123;</span><br><span class="line">        if (n % 2 &gt; 0) &#123;</span><br><span class="line">            res = res * x % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        x = x * x % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="列表转数组，数组转列表"><a href="#列表转数组，数组转列表" class="headerlink" title="列表转数组，数组转列表"></a>列表转数组，数组转列表</h2><p><code>int[] a = l.stream().mapToInt(i -&gt; i).toArray();</code><br><code>List&lt;Integer&gt; l = Arrays.stream(slices).boxed().collect(Collectors.toList());</code></p>
 <h2 id="单调栈求递增"><a href="#单调栈求递增" class="headerlink" title="单调栈求递增"></a>单调栈求递增</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int[] left = new int[n];</span><br><span class="line">int[] right = new int[n];</span><br><span class="line">Arrays.fill(right,n);</span><br><span class="line">Deque&lt;Integer&gt; st = new ArrayDeque&lt;&gt;();</span><br><span class="line">st.push(-1);</span><br><span class="line">for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">    while(st.size() &gt; 1 &amp;&amp; omega[a[st.peek()]] &lt; omega[a[i]])&#123;</span><br><span class="line">        right[st.pop()] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    left[i] = st.peek();</span><br><span class="line">    st.push(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -193,6 +195,16 @@
 <h2 id="kmp字符串匹配算法"><a href="#kmp字符串匹配算法" class="headerlink" title="kmp字符串匹配算法"></a>kmp字符串匹配算法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line"></span><br><span class="line">    def kmp(self, text: str, pattern: str) -&gt; List[int]:</span><br><span class="line">        m = len(pattern)</span><br><span class="line">        pi = [0] * m</span><br><span class="line">        c = 0</span><br><span class="line">        for i in range(1, m):</span><br><span class="line">            v = pattern[i]</span><br><span class="line">            while c and pattern[c] != v:</span><br><span class="line">                c = pi[c - 1]</span><br><span class="line">            if pattern[c] == v:</span><br><span class="line">                c += 1</span><br><span class="line">            pi[i] = c</span><br><span class="line"></span><br><span class="line">        res = []</span><br><span class="line">        c = 0</span><br><span class="line">        for i, v in enumerate(text):</span><br><span class="line">            v = text[i]</span><br><span class="line">            while c and pattern[c] != v:</span><br><span class="line">                c = pi[c - 1]</span><br><span class="line">            if pattern[c] == v:</span><br><span class="line">                c += 1</span><br><span class="line">            if c == len(pattern):</span><br><span class="line">                res.append(i - m + 1)</span><br><span class="line">                c = pi[c - 1]</span><br><span class="line">        return res</span><br></pre></td></tr></table></figure>
 
 <h2 id="数位dp模板"><a href="#数位dp模板" class="headerlink" title="数位dp模板"></a>数位dp模板</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def count(self, num1: str, num2: str, min_sum: int, max_sum: int) -&gt; int:</span><br><span class="line">        def calc(high: str) -&gt; int:</span><br><span class="line">            @cache</span><br><span class="line">            def dfs(i: int, s: int, is_limit: bool) -&gt; int:</span><br><span class="line">                if s &gt; max_sum:  # 非法</span><br><span class="line">                    return 0</span><br><span class="line">                if i == len(high):</span><br><span class="line">                    return s &gt;= min_sum</span><br><span class="line">                res = 0</span><br><span class="line">                up = int(high[i]) if is_limit else 9</span><br><span class="line">                for d in range(up + 1):  # 枚举当前数位填 d</span><br><span class="line">                    res += dfs(i + 1, s + d, is_limit and d == up)</span><br><span class="line">                return res</span><br><span class="line">            return dfs(0, 0, True)</span><br><span class="line"></span><br><span class="line">        is_num1_good = min_sum &lt;= sum(map(int, num1)) &lt;= max_sum</span><br><span class="line">        return (calc(num2) - calc(num1) + is_num1_good) % 1_000_000_007</span><br></pre></td></tr></table></figure>
+
+<h2 id="最短路算法"><a href="#最短路算法" class="headerlink" title="最短路算法"></a>最短路算法</h2><p><strong>floyd：</strong>o(n**3)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">f = [[inf] * self.n for _  in range(self.n)]</span><br><span class="line">for i in range(self.n):</span><br><span class="line">	f[i][i] = 0</span><br><span class="line">for i in range(self.n):</span><br><span class="line">	for j in range(self.n):</span><br><span class="line">		if self.g[i][j] != 0:</span><br><span class="line">			f[i][j] = self.g[i][j]</span><br><span class="line">for k in range(self.n):</span><br><span class="line">	for i in range(self.n):</span><br><span class="line">		for j in range(self.n):</span><br><span class="line">			f[i][j] = min(f[i][j],f[i][k] + f[k][j])</span><br><span class="line">return f[node1][node2] if f[node1][node2] &lt; inf else -1</span><br></pre></td></tr></table></figure>
+
+<p><strong>dijkstra:</strong></p>
+<p>o(n**2)，暴力查找最小权值的点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">dis = [inf] * self.n</span><br><span class="line">vis = [False] * self.n</span><br><span class="line">def dijkstra(n, s):</span><br><span class="line">    dis[s] = 0</span><br><span class="line">    for i in range(n):</span><br><span class="line">        u = 0</span><br><span class="line">    mind = inf</span><br><span class="line">    for j in range(n):</span><br><span class="line">    	if vis[j] == False and dis[j] &lt; mind:</span><br><span class="line">            u = j</span><br><span class="line">            mind = dis[j]</span><br><span class="line">    vis[u] = True</span><br><span class="line">    for v in range(len(self.g[u])):</span><br><span class="line">    	w = self.g[u][v]</span><br><span class="line">    	if w != 0 and dis[v] &gt; dis[u] + w:</span><br><span class="line">    		dis[v] = dis[u] + w</span><br></pre></td></tr></table></figure>
+
+<p>o(mlogm),优先队列查找权值最小的点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def dijkstra(e, s):</span><br><span class="line">	dis = defaultdict(lambda: inf)</span><br><span class="line">    dis[s] = 0</span><br><span class="line">    q = [(0, s)]</span><br><span class="line">    vis = set()</span><br><span class="line">    while q:</span><br><span class="line">    	_, u = heapq.heappop(q)</span><br><span class="line">        if u in vis: continue</span><br><span class="line">        vis.add(u)</span><br><span class="line">        for v in range(len(e[u])):</span><br><span class="line">        	w = e[u][v]</span><br><span class="line">            if w != 0 and dis[v] &gt; dis[u] + w:</span><br><span class="line">            	dis[v] = dis[u] + w</span><br><span class="line">                heapq.heappush(q, (dis[v], v))</span><br><span class="line">	return dis</span><br></pre></td></tr></table></figure>
 
 
       
@@ -212,6 +224,83 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/08/15/%E4%B8%80%E4%BA%9B%E6%9D%BF%E5%AD%90/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-leetcode第127场双周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/03/31/leetcode%E7%AC%AC127%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">第127场双周赛</a>
+    </h1>
+  
+
+        
+        <a href="/2024/03/31/leetcode%E7%AC%AC127%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
+  	<time datetime="2024-03-31T13:13:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>本场总结：</strong></p>
+<p>总的来说还是比较简单的，前三题考查滑动窗口加前缀和，第四题说实话有点奇怪，一开始考虑是算两个数组成的差值对于答案的贡献，结果算到后面发现比较复杂，随后选择直接暴力模拟，然后惊奇的发现居然可以记忆化搜索，完全归功于这题给的数据量比较小，这场打完按照插件的计算应该是来到2100分了，距离瓜牌越来越近了！</p>
+<h1 id="t1-或值至少K的最短子数组I"><a href="#t1-或值至少K的最短子数组I" class="headerlink" title="t1.或值至少K的最短子数组I"></a>t1.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shortest-subarray-with-or-at-least-k-i/description/">或值至少K的最短子数组I</a></h1><p>和t3是一个题，见t3</p>
+<h1 id="t2-得到更多分数的最少关卡数目"><a href="#t2-得到更多分数的最少关卡数目" class="headerlink" title="t2.得到更多分数的最少关卡数目"></a>t2.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-levels-to-gain-more-points/">得到更多分数的最少关卡数目</a></h1><p><strong>做法：</strong>前缀和，开两个从前往后和从后往前的数组，然后比较找到前面部分大于后面部分的位置即可。</p>
+<p><strong>参考代码：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">from typing import List</span><br><span class="line">class Solution:</span><br><span class="line">    def minimumLevels(self, possible: List[int]) -&gt; int:</span><br><span class="line">        n = len(possible)</span><br><span class="line">        f = [0] * (n + 1)</span><br><span class="line">        for i in range(n):</span><br><span class="line">            if possible[i] == 0:</span><br><span class="line">                possible[i] = -1</span><br><span class="line">        for i in range(n):</span><br><span class="line">            f[i + 1] = possible[i] + f[i]</span><br><span class="line">        f1 = [0] * (n + 1)</span><br><span class="line">        for i in range(n - 1,-1,-1):</span><br><span class="line">            f1[i] = f1[i + 1] + possible[i]</span><br><span class="line">        ans = -1</span><br><span class="line">        for i in range(n - 1):</span><br><span class="line">            if f[i + 1] &gt; f1[i + 1]:</span><br><span class="line">                return i + 1</span><br><span class="line">        return -1</span><br></pre></td></tr></table></figure>
+
+<h1 id="t3-或值至少为-K-的最短子数组-II"><a href="#t3-或值至少为-K-的最短子数组-II" class="headerlink" title="t3.或值至少为 K 的最短子数组 II"></a>t3.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shortest-subarray-with-or-at-least-k-ii/">或值至少为 K 的最短子数组 II</a></h1><p><strong>做法：</strong>经典滑动窗口题，扩大窗口找到满足条件的区间，然后缩小窗口直到条件无法满足</p>
+<p><strong>参考代码：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">from typing import List</span><br><span class="line">from math import inf</span><br><span class="line">class Solution:</span><br><span class="line">    def minimumSubarrayLength(self, nums: List[int], k: int) -&gt; int:</span><br><span class="line">        if k == 0:</span><br><span class="line">            return 1</span><br><span class="line">        i = 0</span><br><span class="line">        j = 0</span><br><span class="line">        n = len(nums)</span><br><span class="line">        ans = inf</span><br><span class="line">        tmp = [0] * 32</span><br><span class="line">        def check(f1,f2) -&gt; bool:</span><br><span class="line">            tmp = 0</span><br><span class="line">            for i in range(32):</span><br><span class="line">                if f1[i] &gt; 0:</span><br><span class="line">                    tmp += 1 &lt;&lt; i</span><br><span class="line">            return tmp &gt;= f2</span><br><span class="line">        while j &lt; n:</span><br><span class="line">            if nums[j] &gt;= k:</span><br><span class="line">                return 1</span><br><span class="line">            tmp1 = bin(nums[j])[2:]</span><br><span class="line">            z = 0</span><br><span class="line">            for x in range(len(tmp1) - 1,-1,-1):</span><br><span class="line">                if tmp1[x] == &#x27;1&#x27;:</span><br><span class="line">                    tmp[z] += 1</span><br><span class="line">                z += 1</span><br><span class="line">            if check(tmp,k):</span><br><span class="line">                ans = min(ans,j - i + 1)</span><br><span class="line">            while i &lt;= j and check(tmp,k):</span><br><span class="line">                tmp1 = bin(nums[i])[2:]</span><br><span class="line">                z = 0</span><br><span class="line">                for x in range(len(tmp1) - 1,-1,-1):</span><br><span class="line">                    if tmp1[x] == &#x27;1&#x27;:</span><br><span class="line">                        tmp[z] -= 1</span><br><span class="line">                    z += 1</span><br><span class="line">                ans = min(ans,j - i + 1)</span><br><span class="line">                i += 1</span><br><span class="line">            j += 1</span><br><span class="line">        return ans if ans &lt; inf else -1</span><br></pre></td></tr></table></figure>
+
+<h1 id="t4-求出所有子序列的能量和"><a href="#t4-求出所有子序列的能量和" class="headerlink" title="t4.求出所有子序列的能量和"></a>t4.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-sum-of-subsequence-powers/">求出所有子序列的能量和</a></h1><p><strong>做法：</strong>记忆化搜索，t4给的数据量非常的小，因此直接dfs暴力模拟，然后配上记忆化搜索即可通过。</p>
+<p><strong>参考代码：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import math</span><br><span class="line">from typing import List</span><br><span class="line">from math import inf</span><br><span class="line">class Solution:</span><br><span class="line">    def sumOfPowers(self, nums: List[int], k: int) -&gt; int:</span><br><span class="line">        mod = int(1e9 + 7)</span><br><span class="line">        nums.sort()</span><br><span class="line">        ans = 0</span><br><span class="line">        n = len(nums)</span><br><span class="line">        if k == 2:</span><br><span class="line">            for i in range(n):</span><br><span class="line">                for j in range(i + 1,n):</span><br><span class="line">                    ans += nums[j] - nums[i]</span><br><span class="line">                    ans %= mod</span><br><span class="line">            return ans</span><br><span class="line">        @cache</span><br><span class="line">        def dfs(i: int,k: int,_min: int) -&gt; int:</span><br><span class="line">            nonlocal n,mod</span><br><span class="line">            if i &gt;= n:</span><br><span class="line">                return 0</span><br><span class="line">            if k == 0:</span><br><span class="line">                return _min</span><br><span class="line">            cnt = 0</span><br><span class="line">            for j in range(i + 1,n):</span><br><span class="line">                cnt = (cnt + dfs(j,k - 1,min(_min,nums[j] - nums[i]))) % mod</span><br><span class="line">            return cnt</span><br><span class="line">        ans = 0</span><br><span class="line">        for i in range(n):</span><br><span class="line">            ans = (ans + dfs(i,k - 1,inf)) % mod</span><br><span class="line">        return ans</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/03/31/leetcode%E7%AC%AC127%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">展开全文 >></a>
         </p>
       
 
@@ -1112,85 +1201,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2024/01/23/centos7%E4%B8%ADzookeeper%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode第381场周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/01/21/leetcode%E7%AC%AC381%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第381场周赛</a>
-    </h1>
-  
-
-        
-        <a href="/2024/01/21/leetcode%E7%AC%AC381%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2024-01-21T06:32:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>总结：</strong></p>
-<ol>
-<li>floyed算法需要防止走回头路，否则每次遍历的表会越来越大影响时间复杂度</li>
-</ol>
-<h2 id="t1-输入单词需要的最小按键次数I"><a href="#t1-输入单词需要的最小按键次数I" class="headerlink" title="t1. 输入单词需要的最小按键次数I"></a>t1. 输入单词需要的最小按键次数I</h2><p><strong>做法：</strong>见t3</p>
-<h2 id="t2-按距离统计房屋对数目I"><a href="#t2-按距离统计房屋对数目I" class="headerlink" title="t2. 按距离统计房屋对数目I"></a>t2. 按距离统计房屋对数目I</h2><p><strong>做法：</strong>统计每个点对的最小距离即可，方法用floyed</p>
-<p><strong>时间复杂度：</strong>n**3</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">from typing import List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Solution:</span><br><span class="line">    def countOfPairs(self, n: int, x: int, y: int) -&gt; List[int]:</span><br><span class="line">        res = [0] * n</span><br><span class="line">        graph = &#123;&#125;</span><br><span class="line">        for i in range(n):</span><br><span class="line">            if i not in graph:</span><br><span class="line">                graph[i] = []</span><br><span class="line">            if i &lt; n - 1:</span><br><span class="line">                graph[i].append(i + 1)</span><br><span class="line">            if i + 1 &lt; n and i + 1 not in graph:</span><br><span class="line">                graph[i + 1] = []</span><br><span class="line">            if i + 1 &lt; n:</span><br><span class="line">                graph[i + 1].append(i)</span><br><span class="line">        graph[x - 1].append(y - 1)</span><br><span class="line">        graph[y - 1].append(x - 1)</span><br><span class="line">        f = &#123;&#125;</span><br><span class="line">        for i in range(n):</span><br><span class="line">            # i + 1,i -&gt; j</span><br><span class="line">            for j in range(i + 1,n):</span><br><span class="line">                tmp = 0</span><br><span class="line">                q = [i]</span><br><span class="line">                l = set()</span><br><span class="line">                l.add(i)</span><br><span class="line">                while q:</span><br><span class="line">                    sz = len(q)</span><br><span class="line">                    for z in range(sz):</span><br><span class="line">                        x = q.pop(0)</span><br><span class="line">                        if x == j:</span><br><span class="line">                            f[tmp - 1] = f.get(tmp - 1,0) + 2</span><br><span class="line">                            q.clear()</span><br><span class="line">                            break</span><br><span class="line">                        for y in graph.get(x,[]):</span><br><span class="line">                            if y not in l:</span><br><span class="line">                                l.add(y)</span><br><span class="line">                                q.append(y)</span><br><span class="line">                    tmp += 1</span><br><span class="line">        for x in f:</span><br><span class="line">            res[x] = f[x]</span><br><span class="line">        return res</span><br></pre></td></tr></table></figure>
-
-<h2 id="t3-输入单词需要的最小按键次数II"><a href="#t3-输入单词需要的最小按键次数II" class="headerlink" title="t3. 输入单词需要的最小按键次数II"></a>t3. 输入单词需要的最小按键次数II</h2><p><strong>做法：</strong>统计每个字母的数目，然后每8个计一次数</p>
-<p><strong>时间复杂度：</strong>n</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def minimumPushes(self, word: str) -&gt; int:</span><br><span class="line">        f = [0] * 26</span><br><span class="line">        for i in word:</span><br><span class="line">            f[ord(i) - ord(&#x27;a&#x27;)] += 1</span><br><span class="line">        f.sort()</span><br><span class="line">        cnt = 0</span><br><span class="line">        for i in range(25,25 - 8,-1):</span><br><span class="line">            cnt += f[i]</span><br><span class="line">        for i in range(17,9,-1):</span><br><span class="line">            cnt += 2 * f[i]</span><br><span class="line">        for i in range(9,1,-1):</span><br><span class="line">            cnt += 3 * f[i]</span><br><span class="line">        return cnt + f[1] * 4 + f[0] * 4</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/01/21/leetcode%E7%AC%AC381%E5%9C%BA%E5%91%A8%E8%B5%9B/">展开全文 >></a>
         </p>
       
 

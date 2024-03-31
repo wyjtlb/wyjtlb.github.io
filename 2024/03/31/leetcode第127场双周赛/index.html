@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives: 2024/3 | Hexo</title>
+  <title>第127场双周赛 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2024/03/index.html">
+  <meta name="description" content="本场总结： 总的来说还是比较简单的，前三题考查滑动窗口加前缀和，第四题说实话有点奇怪，一开始考虑是算两个数组成的差值对于答案的贡献，结果算到后面发现比较复杂，随后选择直接暴力模拟，然后惊奇的发现居然可以记忆化搜索，完全归功于这题给的数据量比较小，这场打完按照插件的计算应该是来到2100分了，距离瓜牌越来越近了！ t1.或值至少K的最短子数组I和t3是一个题，见t3 t2.得到更多分数的最少关卡数目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第127场双周赛">
+<meta property="og:url" content="http://example.com/2024/03/31/leetcode%E7%AC%AC127%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="本场总结： 总的来说还是比较简单的，前三题考查滑动窗口加前缀和，第四题说实话有点奇怪，一开始考虑是算两个数组成的差值对于答案的贡献，结果算到后面发现比较复杂，随后选择直接暴力模拟，然后惊奇的发现居然可以记忆化搜索，完全归功于这题给的数据量比较小，这场打完按照插件的计算应该是来到2100分了，距离瓜牌越来越近了！ t1.或值至少K的最短子数组I和t3是一个题，见t3 t2.得到更多分数的最少关卡数目">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-31T13:13:27.000Z">
+<meta property="article:modified_time" content="2024-03-31T13:36:59.467Z">
 <meta property="article:author" content="neja">
 <meta name="twitter:card" content="summary">
   
@@ -160,103 +164,183 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-leetcode第127场双周赛" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      第127场双周赛
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/03/31/leetcode%E7%AC%AC127%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
+
+        
+        <a href="/2024/03/31/leetcode%E7%AC%AC127%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
   	<time datetime="2024-03-31T13:13:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-31</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/03/31/leetcode%E7%AC%AC127%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">第127场双周赛</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>本场总结：</strong></p>
+<p>总的来说还是比较简单的，前三题考查滑动窗口加前缀和，第四题说实话有点奇怪，一开始考虑是算两个数组成的差值对于答案的贡献，结果算到后面发现比较复杂，随后选择直接暴力模拟，然后惊奇的发现居然可以记忆化搜索，完全归功于这题给的数据量比较小，这场打完按照插件的计算应该是来到2100分了，距离瓜牌越来越近了！</p>
+<h1 id="t1-或值至少K的最短子数组I"><a href="#t1-或值至少K的最短子数组I" class="headerlink" title="t1.或值至少K的最短子数组I"></a>t1.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shortest-subarray-with-or-at-least-k-i/description/">或值至少K的最短子数组I</a></h1><p>和t3是一个题，见t3</p>
+<h1 id="t2-得到更多分数的最少关卡数目"><a href="#t2-得到更多分数的最少关卡数目" class="headerlink" title="t2.得到更多分数的最少关卡数目"></a>t2.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-levels-to-gain-more-points/">得到更多分数的最少关卡数目</a></h1><p><strong>做法：</strong>前缀和，开两个从前往后和从后往前的数组，然后比较找到前面部分大于后面部分的位置即可。</p>
+<p><strong>参考代码：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">from typing import List</span><br><span class="line">class Solution:</span><br><span class="line">    def minimumLevels(self, possible: List[int]) -&gt; int:</span><br><span class="line">        n = len(possible)</span><br><span class="line">        f = [0] * (n + 1)</span><br><span class="line">        for i in range(n):</span><br><span class="line">            if possible[i] == 0:</span><br><span class="line">                possible[i] = -1</span><br><span class="line">        for i in range(n):</span><br><span class="line">            f[i + 1] = possible[i] + f[i]</span><br><span class="line">        f1 = [0] * (n + 1)</span><br><span class="line">        for i in range(n - 1,-1,-1):</span><br><span class="line">            f1[i] = f1[i + 1] + possible[i]</span><br><span class="line">        ans = -1</span><br><span class="line">        for i in range(n - 1):</span><br><span class="line">            if f[i + 1] &gt; f1[i + 1]:</span><br><span class="line">                return i + 1</span><br><span class="line">        return -1</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+<h1 id="t3-或值至少为-K-的最短子数组-II"><a href="#t3-或值至少为-K-的最短子数组-II" class="headerlink" title="t3.或值至少为 K 的最短子数组 II"></a>t3.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/shortest-subarray-with-or-at-least-k-ii/">或值至少为 K 的最短子数组 II</a></h1><p><strong>做法：</strong>经典滑动窗口题，扩大窗口找到满足条件的区间，然后缩小窗口直到条件无法满足</p>
+<p><strong>参考代码：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">from typing import List</span><br><span class="line">from math import inf</span><br><span class="line">class Solution:</span><br><span class="line">    def minimumSubarrayLength(self, nums: List[int], k: int) -&gt; int:</span><br><span class="line">        if k == 0:</span><br><span class="line">            return 1</span><br><span class="line">        i = 0</span><br><span class="line">        j = 0</span><br><span class="line">        n = len(nums)</span><br><span class="line">        ans = inf</span><br><span class="line">        tmp = [0] * 32</span><br><span class="line">        def check(f1,f2) -&gt; bool:</span><br><span class="line">            tmp = 0</span><br><span class="line">            for i in range(32):</span><br><span class="line">                if f1[i] &gt; 0:</span><br><span class="line">                    tmp += 1 &lt;&lt; i</span><br><span class="line">            return tmp &gt;= f2</span><br><span class="line">        while j &lt; n:</span><br><span class="line">            if nums[j] &gt;= k:</span><br><span class="line">                return 1</span><br><span class="line">            tmp1 = bin(nums[j])[2:]</span><br><span class="line">            z = 0</span><br><span class="line">            for x in range(len(tmp1) - 1,-1,-1):</span><br><span class="line">                if tmp1[x] == &#x27;1&#x27;:</span><br><span class="line">                    tmp[z] += 1</span><br><span class="line">                z += 1</span><br><span class="line">            if check(tmp,k):</span><br><span class="line">                ans = min(ans,j - i + 1)</span><br><span class="line">            while i &lt;= j and check(tmp,k):</span><br><span class="line">                tmp1 = bin(nums[i])[2:]</span><br><span class="line">                z = 0</span><br><span class="line">                for x in range(len(tmp1) - 1,-1,-1):</span><br><span class="line">                    if tmp1[x] == &#x27;1&#x27;:</span><br><span class="line">                        tmp[z] -= 1</span><br><span class="line">                    z += 1</span><br><span class="line">                ans = min(ans,j - i + 1)</span><br><span class="line">                i += 1</span><br><span class="line">            j += 1</span><br><span class="line">        return ans if ans &lt; inf else -1</span><br></pre></td></tr></table></figure>
 
+<h1 id="t4-求出所有子序列的能量和"><a href="#t4-求出所有子序列的能量和" class="headerlink" title="t4.求出所有子序列的能量和"></a>t4.<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-sum-of-subsequence-powers/">求出所有子序列的能量和</a></h1><p><strong>做法：</strong>记忆化搜索，t4给的数据量非常的小，因此直接dfs暴力模拟，然后配上记忆化搜索即可通过。</p>
+<p><strong>参考代码：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">import math</span><br><span class="line">from typing import List</span><br><span class="line">from math import inf</span><br><span class="line">class Solution:</span><br><span class="line">    def sumOfPowers(self, nums: List[int], k: int) -&gt; int:</span><br><span class="line">        mod = int(1e9 + 7)</span><br><span class="line">        nums.sort()</span><br><span class="line">        ans = 0</span><br><span class="line">        n = len(nums)</span><br><span class="line">        if k == 2:</span><br><span class="line">            for i in range(n):</span><br><span class="line">                for j in range(i + 1,n):</span><br><span class="line">                    ans += nums[j] - nums[i]</span><br><span class="line">                    ans %= mod</span><br><span class="line">            return ans</span><br><span class="line">        @cache</span><br><span class="line">        def dfs(i: int,k: int,_min: int) -&gt; int:</span><br><span class="line">            nonlocal n,mod</span><br><span class="line">            if i &gt;= n:</span><br><span class="line">                return 0</span><br><span class="line">            if k == 0:</span><br><span class="line">                return _min</span><br><span class="line">            cnt = 0</span><br><span class="line">            for j in range(i + 1,n):</span><br><span class="line">                cnt = (cnt + dfs(j,k - 1,min(_min,nums[j] - nums[i]))) % mod</span><br><span class="line">            return cnt</span><br><span class="line">        ans = 0</span><br><span class="line">        for i in range(n):</span><br><span class="line">            ans = (ans + dfs(i,k - 1,inf)) % mod</span><br><span class="line">        return ans</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wyjtlb.github.io/024/03/31/leetcode%E7%AC%AC127%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/03/11/%E5%9B%9E%E6%BA%AF%E5%89%AA%E6%9E%9D%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%E6%8E%A2%E7%A9%B6/" class="archive-article-date">
-  	<time datetime="2024-03-11T08:49:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-11</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2024/03/11/%E5%9B%9E%E6%BA%AF%E5%89%AA%E6%9E%9D%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%E6%8E%A2%E7%A9%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">回溯剪枝核心思想探究</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/03/11/%E5%9B%9E%E6%BA%AF%E5%89%AA%E6%9E%9D%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3%E6%8E%A2%E7%A9%B6/">回溯剪枝核心思想探究</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#t1-%E6%88%96%E5%80%BC%E8%87%B3%E5%B0%91K%E7%9A%84%E6%9C%80%E7%9F%AD%E5%AD%90%E6%95%B0%E7%BB%84I"><span class="toc-number">1.</span> <span class="toc-text">t1.或值至少K的最短子数组I</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#t2-%E5%BE%97%E5%88%B0%E6%9B%B4%E5%A4%9A%E5%88%86%E6%95%B0%E7%9A%84%E6%9C%80%E5%B0%91%E5%85%B3%E5%8D%A1%E6%95%B0%E7%9B%AE"><span class="toc-number">2.</span> <span class="toc-text">t2.得到更多分数的最少关卡数目</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#t3-%E6%88%96%E5%80%BC%E8%87%B3%E5%B0%91%E4%B8%BA-K-%E7%9A%84%E6%9C%80%E7%9F%AD%E5%AD%90%E6%95%B0%E7%BB%84-II"><span class="toc-number">3.</span> <span class="toc-text">t3.或值至少为 K 的最短子数组 II</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#t4-%E6%B1%82%E5%87%BA%E6%89%80%E6%9C%89%E5%AD%90%E5%BA%8F%E5%88%97%E7%9A%84%E8%83%BD%E9%87%8F%E5%92%8C"><span class="toc-number">4.</span> <span class="toc-text">t4.求出所有子序列的能量和</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/03/01/Sybase%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  	<time datetime="2024-03-01T07:54:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-01</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/03/01/Sybase%E5%AE%89%E8%A3%85%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">Sybase安装问题记录</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -281,8 +365,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
