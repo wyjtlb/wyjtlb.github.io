@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | Hexo</title>
+  <title>leetcode第128场双周赛 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/page/2/index.html">
+  <meta name="description" content="总结： 本场还是非常简单的，没有什么思维题，后两题一个最短路算法，一个单调栈算法，都是非常经典的算法，但是这场很可惜掉分了，总结原因就是对于经典算法仍旧不够熟练，即使知道思路，但是在实现上非常的不熟练，其次就是思路有点混乱，还是做少了。 100270. 字符串的分数 做法： 简单题，遍历一遍字符串求和 123456class Solution:    def scoreOfString(self,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode第128场双周赛">
+<meta property="og:url" content="http://example.com/2024/04/14/leetcode%E7%AC%AC128%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="总结： 本场还是非常简单的，没有什么思维题，后两题一个最短路算法，一个单调栈算法，都是非常经典的算法，但是这场很可惜掉分了，总结原因就是对于经典算法仍旧不够熟练，即使知道思路，但是在实现上非常的不熟练，其次就是思路有点混乱，还是做少了。 100270. 字符串的分数 做法： 简单题，遍历一遍字符串求和 123456class Solution:    def scoreOfString(self,">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-04-13T16:22:26.000Z">
+<meta property="article:modified_time" content="2024-04-13T16:35:42.080Z">
 <meta property="article:author" content="neja">
 <meta name="twitter:card" content="summary">
   
@@ -160,305 +164,189 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-leetcode第128场双周赛" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      leetcode第128场双周赛
+    </h1>
+  
+
+        
+        <a href="/2024/04/14/leetcode%E7%AC%AC128%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
+  	<time datetime="2024-04-13T16:22:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-14</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>总结</strong>：</p>
+<p>本场还是非常简单的，没有什么思维题，后两题一个最短路算法，一个单调栈算法，都是非常经典的算法，但是这场很可惜掉分了，总结原因就是对于经典算法仍旧不够熟练，即使知道思路，但是在实现上非常的不熟练，其次就是思路有点混乱，还是做少了。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/score-of-a-string/">100270. 字符串的分数</a></p>
+<p><strong>做法</strong>：</p>
+<p>简单题，遍历一遍字符串求和</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def scoreOfString(self, s: str) -&gt; int:</span><br><span class="line">        ans = 0</span><br><span class="line">        for i in range(len(s) - 1):</span><br><span class="line">            ans += abs(ord(s[i]) - ord(s[i + 1]))</span><br><span class="line">        return ans</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-rectangles-to-cover-points/">100280. 覆盖所有点的最少矩形数目</a></p>
+<p><strong>做法</strong>；</p>
+<p>先排序，然后滑动窗口计算在w范围内的坐标数即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def minRectanglesToCoverPoints(self, points: List[List[int]], w: int) -&gt; int:</span><br><span class="line">        points.sort(key=lambda x : x[0])</span><br><span class="line">        ans = 0</span><br><span class="line">        n = len(points)</span><br><span class="line">        i = 0</span><br><span class="line">        while i &lt; n:</span><br><span class="line">            t = False</span><br><span class="line">            j = i + 1</span><br><span class="line">            while j &lt; n:</span><br><span class="line">                if points[j][0] - points[i][0] &gt; w:</span><br><span class="line">                    ans += 1</span><br><span class="line">                    t = True</span><br><span class="line">                    i = j</span><br><span class="line">                    break</span><br><span class="line">                j += 1</span><br><span class="line">            if not t:</span><br><span class="line">                return ans + 1</span><br><span class="line">        return ans</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-time-to-visit-disappearing-nodes/">100279. 访问消失节点的最少时间</a></p>
+<p><strong>做法</strong>：</p>
+<p>经典最短路算法，求单源路径最短，注意使用优先队列来更快获取最小距离的点，然后就是 <code>python</code> 中建带权值的表，在数组中存入元组。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">import heapq</span><br><span class="line">from typing import List</span><br><span class="line">from math import inf</span><br><span class="line"></span><br><span class="line">class Solution:</span><br><span class="line">    def minimumTime(self, n: int, edges: List[List[int]], disappear: List[int]) -&gt; List[int]:</span><br><span class="line">        g = [[] for _ in range(n)]</span><br><span class="line">        for a,b,c in edges:</span><br><span class="line">            g[a].append((b,c))</span><br><span class="line">            g[b].append((a,c))</span><br><span class="line">        q = [(0,0)] # 时刻，当前点</span><br><span class="line">        ans = [inf] * n</span><br><span class="line">        seen = set()</span><br><span class="line">        ans[0] = 0</span><br><span class="line">        while q:</span><br><span class="line">            a,b = heapq.heappop(q)</span><br><span class="line">            if b in seen:</span><br><span class="line">                continue</span><br><span class="line">            seen.add(b)</span><br><span class="line">            for x,y in g[b]:</span><br><span class="line">                    if y + a &lt; disappear[x]:</span><br><span class="line">                        ans[x] = min(y + a,ans[x])</span><br><span class="line">                        heapq.heappush(q,(y + a,x))</span><br><span class="line">        for i in range(n):</span><br><span class="line">            if ans[i] == inf:</span><br><span class="line">                ans[i] = -1</span><br><span class="line">        return ans</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-number-of-subarrays-where-boundary-elements-are-maximum/">100273. 边界元素是最大值的子数组数目</a></p>
+<p><strong>做法：</strong></p>
+<p>单调栈，这道题做的时候不知道为啥，老是在想枚举左端点然后找右端点的数目，这样做明显会超时，实际上做到后面发现这是一个单调栈的题目了，但是时间上来不及了，赛后几分钟就过了，还是非常可惜的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">from typing import List</span><br><span class="line">class Solution:</span><br><span class="line">    def numberOfSubarrays(self, nums: List[int]) -&gt; int:</span><br><span class="line">        n = len(nums)</span><br><span class="line">        cnt = 0</span><br><span class="line">        f = &#123;&#125;</span><br><span class="line">        i = 0</span><br><span class="line">        q = []</span><br><span class="line">        while i &lt; n:</span><br><span class="line">            if not q:</span><br><span class="line">                q.append(nums[i])</span><br><span class="line">                f[nums[i]] = 1</span><br><span class="line">                cnt += 1</span><br><span class="line">            else:</span><br><span class="line">                if q[-1] &gt;= nums[i]:</span><br><span class="line">                    q.append(nums[i])</span><br><span class="line">                    f[nums[i]] = f.get(nums[i],0) + 1</span><br><span class="line">                    cnt += f[nums[i]]</span><br><span class="line">                else:</span><br><span class="line">                    while q and q[-1] &lt; nums[i]:</span><br><span class="line">                        f[q.pop()] -= 1</span><br><span class="line">                    q.append(nums[i])</span><br><span class="line">                    f[nums[i]] = f.get(nums[i],0) + 1</span><br><span class="line">                    cnt += f[nums[i]]</span><br><span class="line">            i += 1</span><br><span class="line">        return cnt</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/01/21/leetcode%E7%AC%AC381%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2024-01-21T06:32:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/01/21/leetcode%E7%AC%AC381%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第381场周赛</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/01/21/leetcode%E7%AC%AC122%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2024-01-21T06:02:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/01/21/leetcode%E7%AC%AC122%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">leetcode第122场双周赛</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/10/22/leetcode%E7%AC%AC368%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-22T09:09:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/10/22/leetcode%E7%AC%AC368%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第368场周赛</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-          
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wyjtlb.github.io/024/04/14/leetcode%E7%AC%AC128%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" alt="微信分享二维码">
+    </div>
+</div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/10/15/leetcode%E7%AC%AC115%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-15T07:21:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-15</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2024/03/31/leetcode%E7%AC%AC127%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">第127场双周赛</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/10/15/leetcode%E7%AC%AC115%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">leetcode第115场双周赛</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/10/15/leetcode%E7%AC%AC367%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-15T07:09:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-15</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/10/15/leetcode%E7%AC%AC367%E5%9C%BA%E5%91%A8%E8%B5%9B/">第367场周赛</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/10/08/leetcode%E7%AC%AC366%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-08T14:31:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/10/08/leetcode%E7%AC%AC366%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第366场周赛</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/10/01/leetcode%E7%AC%AC365%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-01T06:25:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/10/01/leetcode%E7%AC%AC365%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第365场周赛</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/10/01/leetcode%E7%AC%AC114%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-01T05:57:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/10/01/leetcode%E7%AC%AC114%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">leetcode第114场双周赛</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/09/24/leetcode%E7%AC%AC364%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-09-24T09:05:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/09/24/leetcode%E7%AC%AC364%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第364场周赛</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/09/22/codeforces-Round-898-div4/" class="archive-article-date">
-  	<time datetime="2023-09-22T01:58:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/09/22/codeforces-Round-898-div4/">codeforces Round 898(div4)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&amp;laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/3/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -484,8 +372,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

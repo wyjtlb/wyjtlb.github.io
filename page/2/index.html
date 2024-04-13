@@ -162,6 +162,79 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-centos7中zookeeper的安装及配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/01/23/centos7%E4%B8%ADzookeeper%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/">centos7中zookeeper的安装及配置</a>
+    </h1>
+  
+
+        
+        <a href="/2024/01/23/centos7%E4%B8%ADzookeeper%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+  	<time datetime="2024-01-23T14:32:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="虚拟机安装jdk8"><a href="#虚拟机安装jdk8" class="headerlink" title="虚拟机安装jdk8"></a>虚拟机安装jdk8</h2><p><strong>注：</strong>jdk8以上版本需要自行安装jre，因此这里选择安装jdk8.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 从华为云镜像网站下载jdk8</span><br><span class="line">cd /opt/soft</span><br><span class="line">wget https://repo.huaweicloud.com/java/jdk/8u151-b12/jdk-8u151-linux-x64.tar.gz</span><br><span class="line">mkdir -p /usr/java</span><br><span class="line">tar -xvf jdk-8u151-linux-x64.tar.gz -C /usr/java</span><br><span class="line"># 配置环境变量</span><br><span class="line">vi /etc/bashrc</span><br><span class="line"># 将以下内容添加到配置文件中</span><br><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_151</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line"># 加载环境变量</span><br><span class="line">source /etc/bashrc</span><br><span class="line"># 替换修改默认jdk(centos系统文件自带了jdk)</span><br><span class="line">update-alternatives --install /usr/bin/java java /usr/java/jdk1.8.0_151/bin/java 300</span><br><span class="line">update-alternatives --install /usr/bin/javac javac /usr/java/jdk1.8.0_151/bin/javac 300 </span><br><span class="line">update-alternatives --install /usr/bin/jar jar /usr/java/jdk1.8.0_151/bin/jar 300</span><br><span class="line"># 查看当前java版本</span><br><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+<h2 id="zookeeper"><a href="#zookeeper" class="headerlink" title="zookeeper"></a>zookeeper</h2><p><strong>提供的功能</strong></p>
+<ol>
+<li>配置中心，使用一个专门放配置中心的组件，将相同的配置信息放在配置中心，需要的时候直接拉取，大大节约维护的成本。</li>
+<li>分布式锁，分布式锁是从所有主机中抽出来的一把锁，会对所有主机有效。</li>
+<li>集群管理，zookeeper作为注册中心，管理服务端提供的ip地址和端口号，并在客户端需要时发送给客户端。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /opt/soft/zookeeper</span><br><span class="line">cd /opt/soft/zookeeper</span><br><span class="line"># --no-check-certificate表示不检测网站许可，某些情况可能需要这个参数</span><br><span class="line">wget https://downloads.apache.org/zookeeper/zookeeper-3.8.3/apache-zookeeper-3.8.3-bin.tar.gz</span><br><span class="line">tar zxvf apache-zookeeper-3.8.3-bin.tar.gz</span><br><span class="line">mv apache-zookeeper-3.8.3-bin/* /usr/local/zookeeper/</span><br><span class="line">cd /usr/local/zookeeper/</span><br><span class="line">cp conf/zoo_sample.cfg  conf/zoo.cfg</span><br><span class="line"></span><br><span class="line"># 设置zookeeper环境变量</span><br><span class="line">vi /etc/bashrc</span><br><span class="line"># 将以下内容添加至环境变量</span><br><span class="line">export ZOOKEEPER_HOME=/usr/local/zookeeper</span><br><span class="line">export PATH=$ZOOKEEPER_HOME/bin:$ZOOKEEPER_HOME/conf:$PATH</span><br><span class="line"># 加载环境变量</span><br><span class="line">source /etc/bashrc</span><br><span class="line">mkdir -p /data01/zookeeper/&#123;data,log&#125;</span><br><span class="line"></span><br><span class="line"># 修改zookeeper配置文件</span><br><span class="line">vi /usr/local/zookeeper/conf/zoo.cfg</span><br><span class="line">#将以下内容添加至zookeeper环境变量</span><br><span class="line">tickTime=2000</span><br><span class="line">initLimit=10</span><br><span class="line">syncLimit=5</span><br><span class="line">dataDir=/data01/zookeeper/data</span><br><span class="line">dataLogDir=/data01/zookeeper/log</span><br><span class="line">clientPort=2181</span><br><span class="line">autopurge.snapRetainCount=500</span><br><span class="line">autopurge.purgeInterval=24</span><br><span class="line"></span><br><span class="line"># 节点一的ip地址和端口</span><br><span class="line">server.1= 192.168.11.135:2888:3888</span><br><span class="line"># 节点二的ip地址和端口</span><br><span class="line">server.2= 192.168.11.136:2888:3888</span><br><span class="line"># 节点三的ip地址和端口</span><br><span class="line">server.3= 192.168.11.137:2888:3888</span><br><span class="line"></span><br><span class="line">#在每个节点处创建myid文件并将每个节点对应的id写入文件中</span><br><span class="line"># 节点一处</span><br><span class="line">echo &quot;1&quot; &gt; /data01/zookeeper/data/myid</span><br><span class="line"># 节点二处</span><br><span class="line">echo &quot;2&quot; &gt; /data01/zookeeper/data/myid</span><br><span class="line"># 节点三处</span><br><span class="line">echo &quot;3&quot; &gt; /data01/zookeeper/data/myid</span><br><span class="line"></span><br><span class="line"># 在每个节点处设置hosts文件，加快域名解析</span><br><span class="line"># 查询节点主机名，使用hostname命令</span><br><span class="line">vim /etc/hosts</span><br><span class="line"># 将以下内容填入配置文件</span><br><span class="line">192.168.11.135 localhost.localdomain</span><br><span class="line">192.168.11.136 localhost.localdomain</span><br><span class="line">192.168.11.137 localhost.localdomain</span><br><span class="line"></span><br><span class="line"># 启动zookeeper集群</span><br><span class="line">/usr/local/zookeeper/bin/zkServer.sh start</span><br><span class="line"></span><br><span class="line"># 查看集群状态</span><br><span class="line">/usr/local/zookeeper/bin/zkServer.sh status</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/01/23/centos7%E4%B8%ADzookeeper%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode第381场周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -787,71 +860,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/09/24/leetcode%E7%AC%AC364%E5%9C%BA%E5%91%A8%E8%B5%9B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-codeforces-Round-898-div4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/09/22/codeforces-Round-898-div4/">codeforces Round 898(div4)</a>
-    </h1>
-  
-
-        
-        <a href="/2023/09/22/codeforces-Round-898-div4/" class="archive-article-date">
-  	<time datetime="2023-09-22T01:58:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>总结：非常值得练习的一场，涉及非常多经典的算法。虽然最后一题看错条件没搞出来，但复盘了一下感觉问题不大。</p>
-        
-          <a class="article-more-a" href="/2023/09/22/codeforces-Round-898-div4/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/09/22/codeforces-Round-898-div4/">展开全文 >></a>
         </p>
       
 
