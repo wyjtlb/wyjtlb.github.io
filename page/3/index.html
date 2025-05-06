@@ -162,6 +162,77 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode第364场周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/09/24/leetcode%E7%AC%AC364%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第364场周赛</a>
+    </h1>
+  
+
+        
+        <a href="/2023/09/24/leetcode%E7%AC%AC364%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
+  	<time datetime="2023-09-24T09:05:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>t1.最大二进制奇数<br>做法：贪心，计算1的个数然后留一个1放在最后其它的1全部放前面<br>时间复杂度：nlogn + n</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String maximumOddBinaryNumber(String s) &#123;</span><br><span class="line">        char[] f = s.toCharArray();</span><br><span class="line">        Arrays.sort(f);</span><br><span class="line">        int count = 0;</span><br><span class="line">        for (int i = 0;i &lt; f.length;i++)&#123;</span><br><span class="line">            if (f[i] == &#x27;1&#x27;)&#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 0;i &lt; count - 1;i++)&#123;</span><br><span class="line">            f[i] = &#x27;1&#x27;;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = count - 1;i &lt; f.length - 1;i++)&#123;</span><br><span class="line">            f[i] = &#x27;0&#x27;;</span><br><span class="line">        &#125;</span><br><span class="line">        return new String(f);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：比较简单，尽快实现即可<br>t2.美丽塔I<br>做法：暴力，枚举每个点然后按照题意计算即可<br>时间复杂度：n**2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public long maximumSumOfHeights(List&lt;Integer&gt; maxHeights) &#123;</span><br><span class="line">        int[] f = maxHeights.stream().mapToInt(i -&gt; i).toArray();</span><br><span class="line">        long max = 0;</span><br><span class="line">        int n = f.length;</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            max = Math.max(max,dfs(f,i));</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    long dfs(int[] f,int i)&#123;</span><br><span class="line">        long ans = f[i];</span><br><span class="line">        int n = f.length;</span><br><span class="line">        long tmp = ans;</span><br><span class="line">        for (int j = i - 1;j &gt; -1;j--)&#123;</span><br><span class="line">            ans += Math.min(f[j],tmp);</span><br><span class="line">            tmp = Math.min(f[j],tmp);</span><br><span class="line">        &#125;</span><br><span class="line">        tmp = f[i];</span><br><span class="line">        for (int j = i + 1;j &lt; n;j++)&#123;</span><br><span class="line">            ans += Math.min(f[j],tmp);</span><br><span class="line">            tmp = Math.min(f[j],tmp);</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：这题wa了三次，能暴力的情况下别急着做优化，可以等到赛后优化<br>t3.美丽塔II<br>做法：单调栈，经典单调栈了，计算出每个点左边递增的最大值和右边递增的最大值<br>时间复杂度：n</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public long maximumSumOfHeights(List&lt;Integer&gt; maxHeights) &#123;</span><br><span class="line">        int[] a = maxHeights.stream().mapToInt(i -&gt; i).toArray();</span><br><span class="line">        int n = a.length;</span><br><span class="line">        if (n == 1)&#123;</span><br><span class="line">            return a[0];</span><br><span class="line">        &#125;</span><br><span class="line">        long[] left = new long[n];</span><br><span class="line">        long[] right = new long[n];</span><br><span class="line">        Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            while(stack.size() &gt; 0 &amp;&amp; a[stack.peek()] &gt; a[i])&#123;</span><br><span class="line">                stack.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            if ((stack.size() == 1 &amp;&amp; a[stack.peek()] == a[i]) || stack.isEmpty())&#123;</span><br><span class="line">                left[i] = (long) (i + 1) * a[i];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                left[i] = left[stack.peek()] + (long) (i - stack.peek()) * a[i];</span><br><span class="line">            &#125;</span><br><span class="line">            stack.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        stack.clear();</span><br><span class="line">        for (int i = n - 1;i &gt; -1;i--)&#123;</span><br><span class="line">            while(stack.size() &gt; 0 &amp;&amp; a[stack.peek()] &gt; a[i])&#123;</span><br><span class="line">                stack.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            if ((stack.size() == 1 &amp;&amp; a[stack.peek()] == a[i]) || stack.isEmpty())&#123;</span><br><span class="line">                right[i] = (long) (n - i) * a[i];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                right[i] = right[stack.peek()] + (long) (stack.peek() - i) * a[i];</span><br><span class="line">            &#125;</span><br><span class="line">            stack.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        long max = 0;</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            max = Math.max(left[i] + right[i] - a[i],max);</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：比赛时想到了单调栈，但是没考虑到可以计算出左边递增的值然后保存，对于单调栈的题目还是得多加练习<br>t4.统计树中的合法路径数目<br>做法：贪心，先统计n中哪些数是质数，然后从这些质数点出发，统计这些点可以构成多少条路径然后加起来即可<br>时间复杂度：nloglogn + n</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line"></span><br><span class="line">    private static boolean[] f;</span><br><span class="line"></span><br><span class="line">    static Map&lt;Integer, Set&lt;Integer&gt;&gt; map;</span><br><span class="line"></span><br><span class="line">    public long countPaths(int n, int[][] edges) &#123;</span><br><span class="line">        </span><br><span class="line">        f = countPrime(n + 1);</span><br><span class="line">        f[1] = false;</span><br><span class="line">        map = new HashMap&lt;&gt;();</span><br><span class="line">        for (int[] edge : edges)&#123;</span><br><span class="line">            map.computeIfAbsent(edge[0],t -&gt; new HashSet&lt;&gt;()).add(edge[1]);</span><br><span class="line">            map.computeIfAbsent(edge[1],t -&gt; new HashSet&lt;&gt;()).add(edge[0]);</span><br><span class="line">        &#125;</span><br><span class="line">        long count = 0;</span><br><span class="line">        for (int i = 2;i &lt;= n;i++)&#123;</span><br><span class="line">            if(f[i])&#123; // 从质数往算一下不同方向的路劲数，然后相乘</span><br><span class="line">                long tmp = 0;</span><br><span class="line">                for (int x : map.getOrDefault(i,new HashSet&lt;&gt;()))&#123;</span><br><span class="line">                    if(f[x])&#123;</span><br><span class="line">                        continue;</span><br><span class="line">                    &#125;</span><br><span class="line">                    Set&lt;Integer&gt; seen = new HashSet&lt;&gt;();</span><br><span class="line">                    seen.add(i);</span><br><span class="line">                    seen.add(x);</span><br><span class="line">                    long cnt = dfs(x,seen) + 1; // 这里加1表示x这个点</span><br><span class="line">                    count += tmp * cnt + cnt; // +cnt表示这个分支上的每个点可以与i形成一条路径，tmp*cnt表示这条路径的点与其它路径的点两两组合可以形成的路径数目</span><br><span class="line">                    tmp += cnt;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    boolean[] countPrime(int n)&#123;</span><br><span class="line">        boolean[] isPrime = new boolean[n];</span><br><span class="line">        Arrays.fill(isPrime,true);</span><br><span class="line">        for (int i = 2;i * i &lt; n;i++)&#123;</span><br><span class="line">            if (isPrime[i])&#123;</span><br><span class="line">                for (int j = i * i;j &lt; n;j+=i)&#123;</span><br><span class="line">                    isPrime[j] = false;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return isPrime;</span><br><span class="line">    &#125;</span><br><span class="line">    // 统计从j这个树上的所有符合条件的点有多少个</span><br><span class="line">    long dfs(int j,Set&lt;Integer&gt; seen)&#123; // i -&gt; j这个方向</span><br><span class="line">        long tmp = 0;</span><br><span class="line">        for (int x : map.getOrDefault(j,new HashSet&lt;&gt;()))&#123;</span><br><span class="line">            if (seen.add(x) &amp;&amp; !f[x])&#123;</span><br><span class="line">                tmp += dfs(x,seen) + 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：这道题非常可惜，比赛时被leetcode的显示bug给搞晕了，导致没有按时做出来，不过对于细节的处理还是需要练习，比如dfs这个函数写了半天才写对，没有弄清楚函数的退出条件，以及统计一个点上不同分支所形成的路径数，只需要统计点的个数即可，不用在意之前的路径数是多少</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/09/24/leetcode%E7%AC%AC364%E5%9C%BA%E5%91%A8%E8%B5%9B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-codeforces-Round-898-div4" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -777,72 +848,9 @@
 
 
   
-    <article id="post-求乘积最大子数组和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/24/%E6%B1%82%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/">求乘积最大子数组和</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/24/%E6%B1%82%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/" class="archive-article-date">
-  	<time datetime="2023-07-24T14:27:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>非常有意思的题目,有点类似于环形数组求最大子数组和，这里需要注意的就是对于负数将max和min交换来更新max和min</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxProduct(int[] nums) &#123;</span><br><span class="line">        int min = 1,max = 1;</span><br><span class="line">        int ans = Integer.MIN_VALUE;</span><br><span class="line">        for (int num : nums)&#123;</span><br><span class="line">            if (num &lt; 0)&#123;</span><br><span class="line">                int tmp = max;</span><br><span class="line">                max = Math.max(min * num,num);</span><br><span class="line">                min = Math.min(tmp * num,num);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                max = Math.max(max * num,num);</span><br><span class="line">                min = Math.min(min * num,num);</span><br><span class="line">            &#125;</span><br><span class="line">            ans = Math.max(ans,max);</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/24/%E6%B1%82%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -854,7 +862,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2024 neja
+    		&copy; 2025 neja
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

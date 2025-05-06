@@ -162,6 +162,102 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-倍增算法求LCA-最近公共祖先" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/01/26/%E5%80%8D%E5%A2%9E%E7%AE%97%E6%B3%95%E6%B1%82LCA-%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/">倍增算法求LCA(最近公共祖先)</a>
+    </h1>
+  
+
+        
+        <a href="/2024/01/26/%E5%80%8D%E5%A2%9E%E7%AE%97%E6%B3%95%E6%B1%82LCA-%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/" class="archive-article-date">
+  	<time datetime="2024-01-26T14:58:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-edge-weight-equilibrium-queries-in-a-tree/">2846. 边权重均等查询</a></p>
+<p>现有一棵由 <code>n</code> 个节点组成的无向树，节点按从 <code>0</code> 到 <code>n - 1</code> 编号。给你一个整数 <code>n</code> 和一个长度为 <code>n - 1</code> 的二维整数数组 <code>edges</code> ，其中 <code>edges[i] = [ui, vi, wi]</code> 表示树中存在一条位于节点 <code>ui</code> 和节点 <code>vi</code> 之间、权重为 <code>wi</code> 的边。</p>
+<p>另给你一个长度为 <code>m</code> 的二维整数数组 <code>queries</code> ，其中 <code>queries[i] = [ai, bi]</code> 。对于每条查询，请你找出使从 <code>ai</code> 到 <code>bi</code> 路径上每条边的权重相等所需的 <strong>最小操作次数</strong> 。在一次操作中，你可以选择树上的任意一条边，并将其权重更改为任意值。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>查询之间 <strong>相互独立</strong> 的，这意味着每条新的查询时，树都会回到 <strong>初始状态</strong> 。</li>
+<li>从 <code>ai</code> 到 <code>bi</code>的路径是一个由 <strong>不同</strong> 节点组成的序列，从节点 <code>ai</code> 开始，到节点 <code>bi</code> 结束，且序列中相邻的两个节点在树中共享一条边。</li>
+</ul>
+<p>返回一个长度为 <code>m</code> 的数组 <code>answer</code> ，其中 <code>answer[i]</code> 是第 <code>i</code> 条查询的答案。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2023/08/11/graph-6-1.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 7, edges = [[0,1,1],[1,2,1],[2,3,1],[3,4,2],[4,5,2],[5,6,2]], queries = [[0,3],[3,6],[2,6],[0,6]]</span><br><span class="line">输出：[0,0,1,3]</span><br><span class="line">解释：第 1 条查询，从节点 0 到节点 3 的路径中的所有边的权重都是 1 。因此，答案为 0 。</span><br><span class="line">第 2 条查询，从节点 3 到节点 6 的路径中的所有边的权重都是 2 。因此，答案为 0 。</span><br><span class="line">第 3 条查询，将边 [2,3] 的权重变更为 2 。在这次操作之后，从节点 2 到节点 6 的路径中的所有边的权重都是 2 。因此，答案为 1 。</span><br><span class="line">第 4 条查询，将边 [0,1]、[1,2]、[2,3] 的权重变更为 2 。在这次操作之后，从节点 0 到节点 6 的路径中的所有边的权重都是 2 。因此，答案为 3 。</span><br><span class="line">对于每条查询 queries[i] ，可以证明 answer[i] 是使从 ai 到 bi 的路径中的所有边的权重相等的最小操作次数。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2023/08/11/graph-9-1.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 8, edges = [[1,2,6],[1,3,4],[2,4,6],[2,5,3],[3,6,6],[3,0,8],[7,0,2]], queries = [[4,6],[0,4],[6,5],[7,4]]</span><br><span class="line">输出：[1,2,2,3]</span><br><span class="line">解释：第 1 条查询，将边 [1,3] 的权重变更为 6 。在这次操作之后，从节点 4 到节点 6 的路径中的所有边的权重都是 6 。因此，答案为 1 。</span><br><span class="line">第 2 条查询，将边 [0,3]、[3,1] 的权重变更为 6 。在这次操作之后，从节点 0 到节点 4 的路径中的所有边的权重都是 6 。因此，答案为 2 。</span><br><span class="line">第 3 条查询，将边 [1,3]、[5,2] 的权重变更为 6 。在这次操作之后，从节点 6 到节点 5 的路径中的所有边的权重都是 6 。因此，答案为 2 。</span><br><span class="line">第 4 条查询，将边 [0,7]、[0,3]、[1,3] 的权重变更为 6 。在这次操作之后，从节点 7 到节点 4 的路径中的所有边的权重都是 6 。因此，答案为 3 。</span><br><span class="line">对于每条查询 queries[i] ，可以证明 answer[i] 是使从 ai 到 bi 的路径中的所有边的权重相等的最小操作次数。 </span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 104</code></li>
+<li><code>edges.length == n - 1</code></li>
+<li><code>edges[i].length == 3</code></li>
+<li><code>0 &lt;= ui, vi &lt; n</code></li>
+<li><code>1 &lt;= wi &lt;= 26</code></li>
+<li>生成的输入满足 <code>edges</code> 表示一棵有效的树</li>
+<li><code>1 &lt;= queries.length == m &lt;= 2 * 104</code></li>
+<li><code>queries[i].length == 2</code></li>
+<li><code>0 &lt;= ai, bi &lt; n</code></li>
+</ul>
+<p>​		这篇博客来源于leetcode的<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-edge-weight-equilibrium-queries-in-a-tree/description/">2846. 边权重均等查询</a>,里面涉及到树的倍增算法求LCA(最近公共祖先)的问题，这个算法思路不难，但是预处理表的过程确实值得分享，对于这个算法想有更深入了解的，可以参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/wjh2622075127/article/details/81060586">倍增法求Lca(最近公共祖先)</a>这个博客，笔者看完后算是彻底弄懂了倍增的处理过程，这里主要是对于灵神的代码进行了逐行注释，方便理解，看懂后当然可以尝试手敲。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def minOperationsQueries(self, n: int, edges: List[List[int]], queries: List[List[int]]) -&gt; List[int]:</span><br><span class="line">        g = [[] for _ in range(n)]</span><br><span class="line">        for x, y, w in edges: # 建图</span><br><span class="line">            g[x].append((y, w - 1))</span><br><span class="line">            g[y].append((x, w - 1))</span><br><span class="line"></span><br><span class="line">        m = n.bit_length() # 获取树的高度</span><br><span class="line">        pa = [[-1] * m for _ in range(n)] # 每个结点最多具有m个祖先结点，即树的高度，根节点的祖先结点是-1</span><br><span class="line">        cnt = [[[0] * 26 for _ in range(m)] for _ in range(n)] # 类似于上面的创建方式，这里记录每个结点的祖先结点具有多少个权的值</span><br><span class="line">        depth = [0] * n # 存每个结点的深度</span><br><span class="line"></span><br><span class="line">        def dfs(x: int, fa: int) -&gt; None: # 求结点的深度，fa表示当前结点的父节点</span><br><span class="line">            pa[x][0] = fa # [x,0]即x的2的0次方的祖先结点是哪个结点，这里显然就是父节点</span><br><span class="line">            for y, w in g[x]:</span><br><span class="line">                if y != fa: # 防止回头</span><br><span class="line">                    cnt[y][0][w] = 1 # 将y到的2的0次方的祖先结点(父节点)的权保存下来</span><br><span class="line">                    depth[y] = depth[x] + 1 # 存储当前y结点的深度</span><br><span class="line">                    dfs(y, x)</span><br><span class="line"></span><br><span class="line">        dfs(0, -1) # 假设0是根节点，它的祖先结点是-1</span><br><span class="line"></span><br><span class="line">        # 倍增模板(核心代码)，保存每个结点的2的i次方处的祖先结点的是哪个结点</span><br><span class="line">        for i in range(m - 1): # 遍历</span><br><span class="line">            for x in range(n):</span><br><span class="line">                p = pa[x][i]</span><br><span class="line">                if p != -1: # 说明还没到根节点或者祖先结点超过了根节点</span><br><span class="line">                    pp = pa[p][i]</span><br><span class="line">                    pa[x][i + 1] = pp # x的2的i+1次方的祖先结点，即2的i次方结点的2的i次方的祖先结点，2**(i + 1) = 2**i * 2**i</span><br><span class="line">                    for j, (c1, c2) in enumerate(zip(cnt[x][i], cnt[p][i])):</span><br><span class="line">                        cnt[x][i + 1][j] = c1 + c2 # 仔细理解这两行代码，本质是把x到x的2的i+1次方的祖先结点之间的权进行了统计</span><br><span class="line">        # 到这里统计就做完了，可以回顾一下存了哪些数据，一个是x的2的倍数次方的父节点是谁，一个是x到2的倍数次方的父节点之间权的统计</span><br><span class="line">        # 还有就是每个结点的深度的表，统计完成后可以通过二分的方式找到两个目标节点的lca(最近公共祖先)了</span><br><span class="line">        ans = []</span><br><span class="line">        for x, y in queries:</span><br><span class="line">            path_len = depth[x] + depth[y]  # 最后减去 depth[lca] * 2</span><br><span class="line">            cw = [0] * 26</span><br><span class="line">            if depth[x] &gt; depth[y]:</span><br><span class="line">                x, y = y, x # 深度小的点放到x</span><br><span class="line"></span><br><span class="line">            # 使 y 和 x 在同一深度</span><br><span class="line">            k = depth[y] - depth[x]</span><br><span class="line">            # 这个位运算和巧妙，深度差值的二进制的位置上有1，代表可以去找到y的2的i次方的祖先结点，从而可以去表里查出当前位置存了多少个权的值</span><br><span class="line">            for i in range(k.bit_length()):</span><br><span class="line">                if (k &gt;&gt; i) &amp; 1:  # k 二进制从低到高第 i 位是 1</span><br><span class="line">                    p = pa[y][i]</span><br><span class="line">                    for j, c in enumerate(cnt[y][i]):</span><br><span class="line">                        cw[j] += c</span><br><span class="line">                    y = p</span><br><span class="line">            # 下面寻找lca的过程有点像二分，当前2的i次方的祖先结点相不相等，不相等往上移，相等就不移，下次往上移动的距离会小于上一次</span><br><span class="line">            if y != x: # 代表需要求lca</span><br><span class="line">                for i in range(m - 1, -1, -1):</span><br><span class="line">                    px, py = pa[x][i], pa[y][i]</span><br><span class="line">                    if px != py:</span><br><span class="line">                        for j, (c1, c2) in enumerate(zip(cnt[x][i], cnt[y][i])):</span><br><span class="line">                            cw[j] += c1 + c2</span><br><span class="line">                        x, y = px, py  # 同时上跳 2^i 步</span><br><span class="line">                for j, (c1, c2) in enumerate(zip(cnt[x][0], cnt[y][0])):</span><br><span class="line">                    cw[j] += c1 + c2</span><br><span class="line">                x = pa[x][0]</span><br><span class="line"></span><br><span class="line">            lca = x</span><br><span class="line">            path_len -= depth[lca] * 2</span><br><span class="line">            ans.append(path_len - max(cw))</span><br><span class="line">        return ans</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/01/26/%E5%80%8D%E5%A2%9E%E7%AE%97%E6%B3%95%E6%B1%82LCA-%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-centos7中zookeeper的安装及配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -818,80 +914,9 @@
 
 
   
-    <article id="post-leetcode第364场周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/09/24/leetcode%E7%AC%AC364%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第364场周赛</a>
-    </h1>
-  
-
-        
-        <a href="/2023/09/24/leetcode%E7%AC%AC364%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-09-24T09:05:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-09-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>t1.最大二进制奇数<br>做法：贪心，计算1的个数然后留一个1放在最后其它的1全部放前面<br>时间复杂度：nlogn + n</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String maximumOddBinaryNumber(String s) &#123;</span><br><span class="line">        char[] f = s.toCharArray();</span><br><span class="line">        Arrays.sort(f);</span><br><span class="line">        int count = 0;</span><br><span class="line">        for (int i = 0;i &lt; f.length;i++)&#123;</span><br><span class="line">            if (f[i] == &#x27;1&#x27;)&#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 0;i &lt; count - 1;i++)&#123;</span><br><span class="line">            f[i] = &#x27;1&#x27;;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = count - 1;i &lt; f.length - 1;i++)&#123;</span><br><span class="line">            f[i] = &#x27;0&#x27;;</span><br><span class="line">        &#125;</span><br><span class="line">        return new String(f);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>总结：比较简单，尽快实现即可<br>t2.美丽塔I<br>做法：暴力，枚举每个点然后按照题意计算即可<br>时间复杂度：n**2</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public long maximumSumOfHeights(List&lt;Integer&gt; maxHeights) &#123;</span><br><span class="line">        int[] f = maxHeights.stream().mapToInt(i -&gt; i).toArray();</span><br><span class="line">        long max = 0;</span><br><span class="line">        int n = f.length;</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            max = Math.max(max,dfs(f,i));</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    long dfs(int[] f,int i)&#123;</span><br><span class="line">        long ans = f[i];</span><br><span class="line">        int n = f.length;</span><br><span class="line">        long tmp = ans;</span><br><span class="line">        for (int j = i - 1;j &gt; -1;j--)&#123;</span><br><span class="line">            ans += Math.min(f[j],tmp);</span><br><span class="line">            tmp = Math.min(f[j],tmp);</span><br><span class="line">        &#125;</span><br><span class="line">        tmp = f[i];</span><br><span class="line">        for (int j = i + 1;j &lt; n;j++)&#123;</span><br><span class="line">            ans += Math.min(f[j],tmp);</span><br><span class="line">            tmp = Math.min(f[j],tmp);</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>总结：这题wa了三次，能暴力的情况下别急着做优化，可以等到赛后优化<br>t3.美丽塔II<br>做法：单调栈，经典单调栈了，计算出每个点左边递增的最大值和右边递增的最大值<br>时间复杂度：n</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public long maximumSumOfHeights(List&lt;Integer&gt; maxHeights) &#123;</span><br><span class="line">        int[] a = maxHeights.stream().mapToInt(i -&gt; i).toArray();</span><br><span class="line">        int n = a.length;</span><br><span class="line">        if (n == 1)&#123;</span><br><span class="line">            return a[0];</span><br><span class="line">        &#125;</span><br><span class="line">        long[] left = new long[n];</span><br><span class="line">        long[] right = new long[n];</span><br><span class="line">        Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            while(stack.size() &gt; 0 &amp;&amp; a[stack.peek()] &gt; a[i])&#123;</span><br><span class="line">                stack.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            if ((stack.size() == 1 &amp;&amp; a[stack.peek()] == a[i]) || stack.isEmpty())&#123;</span><br><span class="line">                left[i] = (long) (i + 1) * a[i];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                left[i] = left[stack.peek()] + (long) (i - stack.peek()) * a[i];</span><br><span class="line">            &#125;</span><br><span class="line">            stack.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        stack.clear();</span><br><span class="line">        for (int i = n - 1;i &gt; -1;i--)&#123;</span><br><span class="line">            while(stack.size() &gt; 0 &amp;&amp; a[stack.peek()] &gt; a[i])&#123;</span><br><span class="line">                stack.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            if ((stack.size() == 1 &amp;&amp; a[stack.peek()] == a[i]) || stack.isEmpty())&#123;</span><br><span class="line">                right[i] = (long) (n - i) * a[i];</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                right[i] = right[stack.peek()] + (long) (stack.peek() - i) * a[i];</span><br><span class="line">            &#125;</span><br><span class="line">            stack.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        long max = 0;</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            max = Math.max(left[i] + right[i] - a[i],max);</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>总结：比赛时想到了单调栈，但是没考虑到可以计算出左边递增的值然后保存，对于单调栈的题目还是得多加练习<br>t4.统计树中的合法路径数目<br>做法：贪心，先统计n中哪些数是质数，然后从这些质数点出发，统计这些点可以构成多少条路径然后加起来即可<br>时间复杂度：nloglogn + n</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line"></span><br><span class="line">    private static boolean[] f;</span><br><span class="line"></span><br><span class="line">    static Map&lt;Integer, Set&lt;Integer&gt;&gt; map;</span><br><span class="line"></span><br><span class="line">    public long countPaths(int n, int[][] edges) &#123;</span><br><span class="line">        </span><br><span class="line">        f = countPrime(n + 1);</span><br><span class="line">        f[1] = false;</span><br><span class="line">        map = new HashMap&lt;&gt;();</span><br><span class="line">        for (int[] edge : edges)&#123;</span><br><span class="line">            map.computeIfAbsent(edge[0],t -&gt; new HashSet&lt;&gt;()).add(edge[1]);</span><br><span class="line">            map.computeIfAbsent(edge[1],t -&gt; new HashSet&lt;&gt;()).add(edge[0]);</span><br><span class="line">        &#125;</span><br><span class="line">        long count = 0;</span><br><span class="line">        for (int i = 2;i &lt;= n;i++)&#123;</span><br><span class="line">            if(f[i])&#123; // 从质数往算一下不同方向的路劲数，然后相乘</span><br><span class="line">                long tmp = 0;</span><br><span class="line">                for (int x : map.getOrDefault(i,new HashSet&lt;&gt;()))&#123;</span><br><span class="line">                    if(f[x])&#123;</span><br><span class="line">                        continue;</span><br><span class="line">                    &#125;</span><br><span class="line">                    Set&lt;Integer&gt; seen = new HashSet&lt;&gt;();</span><br><span class="line">                    seen.add(i);</span><br><span class="line">                    seen.add(x);</span><br><span class="line">                    long cnt = dfs(x,seen) + 1; // 这里加1表示x这个点</span><br><span class="line">                    count += tmp * cnt + cnt; // +cnt表示这个分支上的每个点可以与i形成一条路径，tmp*cnt表示这条路径的点与其它路径的点两两组合可以形成的路径数目</span><br><span class="line">                    tmp += cnt;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    boolean[] countPrime(int n)&#123;</span><br><span class="line">        boolean[] isPrime = new boolean[n];</span><br><span class="line">        Arrays.fill(isPrime,true);</span><br><span class="line">        for (int i = 2;i * i &lt; n;i++)&#123;</span><br><span class="line">            if (isPrime[i])&#123;</span><br><span class="line">                for (int j = i * i;j &lt; n;j+=i)&#123;</span><br><span class="line">                    isPrime[j] = false;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return isPrime;</span><br><span class="line">    &#125;</span><br><span class="line">    // 统计从j这个树上的所有符合条件的点有多少个</span><br><span class="line">    long dfs(int j,Set&lt;Integer&gt; seen)&#123; // i -&gt; j这个方向</span><br><span class="line">        long tmp = 0;</span><br><span class="line">        for (int x : map.getOrDefault(j,new HashSet&lt;&gt;()))&#123;</span><br><span class="line">            if (seen.add(x) &amp;&amp; !f[x])&#123;</span><br><span class="line">                tmp += dfs(x,seen) + 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return tmp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>总结：这道题非常可惜，比赛时被leetcode的显示bug给搞晕了，导致没有按时做出来，不过对于细节的处理还是需要练习，比如dfs这个函数写了半天才写对，没有弄清楚函数的退出条件，以及统计一个点上不同分支所形成的路径数，只需要统计点的个数即可，不用在意之前的路径数是多少</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/09/24/leetcode%E7%AC%AC364%E5%9C%BA%E5%91%A8%E8%B5%9B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -903,7 +928,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2024 neja
+    		&copy; 2025 neja
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
