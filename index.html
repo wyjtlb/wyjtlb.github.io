@@ -162,110 +162,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-一些板子" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-深度学习笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2023/08/15/%E4%B8%80%E4%BA%9B%E6%9D%BF%E5%AD%90/">一些板子</a>
+      <a class="article-title" href="/2025/05/06/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">深度学习笔记</a>
     </h1>
   
 
         
-        <a href="/2023/08/15/%E4%B8%80%E4%BA%9B%E6%9D%BF%E5%AD%90/" class="archive-article-date">
-  	<time datetime="2023-08-15T13:23:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-08-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <span id="more"></span>
-
-<h2 id="求质因数的个数"><a href="#求质因数的个数" class="headerlink" title="求质因数的个数"></a>求质因数的个数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int MX = 100001;</span><br><span class="line">for (int i = 2;i &lt; MX;i++)&#123;</span><br><span class="line">    if (omega[i] == 0)&#123;</span><br><span class="line">        for (int j = i;j &lt; MX;j += i)&#123;</span><br><span class="line">            omega[j]++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">long pow(long x,int n)&#123;</span><br><span class="line">    long res = 1;</span><br><span class="line">    for (;n &gt; 0;n /= 2)&#123;</span><br><span class="line">        if (n % 2 &gt; 0) &#123;</span><br><span class="line">            res = res * x % mod;</span><br><span class="line">        &#125;</span><br><span class="line">        x = x * x % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="列表转数组，数组转列表"><a href="#列表转数组，数组转列表" class="headerlink" title="列表转数组，数组转列表"></a>列表转数组，数组转列表</h2><p><code>int[] a = l.stream().mapToInt(i -&gt; i).toArray();</code><br><code>List&lt;Integer&gt; l = Arrays.stream(slices).boxed().collect(Collectors.toList());</code></p>
-<h2 id="单调栈求递增"><a href="#单调栈求递增" class="headerlink" title="单调栈求递增"></a>单调栈求递增</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int[] left = new int[n];</span><br><span class="line">int[] right = new int[n];</span><br><span class="line">Arrays.fill(right,n);</span><br><span class="line">Deque&lt;Integer&gt; st = new ArrayDeque&lt;&gt;();</span><br><span class="line">st.push(-1);</span><br><span class="line">for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">    while(st.size() &gt; 1 &amp;&amp; omega[a[st.peek()]] &lt; omega[a[i]])&#123;</span><br><span class="line">        right[st.pop()] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    left[i] = st.peek();</span><br><span class="line">    st.push(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="拿到字符串中某个数的ASCII值"><a href="#拿到字符串中某个数的ASCII值" class="headerlink" title="拿到字符串中某个数的ASCII值"></a>拿到字符串中某个数的ASCII值</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s;</span><br><span class="line">s.codePointAt(1); // 拿到下标1处的字符的acsii值</span><br></pre></td></tr></table></figure>
-<h2 id="二维数组前缀和-根据具体情况进行适当地修改"><a href="#二维数组前缀和-根据具体情况进行适当地修改" class="headerlink" title="二维数组前缀和(根据具体情况进行适当地修改)"></a>二维数组前缀和(根据具体情况进行适当地修改)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">// java版本</span><br><span class="line">class MatrixSum &#123;</span><br><span class="line">    private final int[][] sum;</span><br><span class="line"></span><br><span class="line">    public MatrixSum(int[][] matrix) &#123;</span><br><span class="line">        int m = matrix.length, n = matrix[0].length;</span><br><span class="line">        sum = new int[m + 1][n + 1]; // 注意：如果 matrix[i][j] 范围很大，需要使用 long</span><br><span class="line">        for (int i = 0; i &lt; m; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; n; j++) &#123;</span><br><span class="line">                sum[i + 1][j + 1] = sum[i + 1][j] + sum[i][j + 1] - sum[i][j] + matrix[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 返回左上角在 (r1,c1) 右下角在 (r2-1,c2-1) 的子矩阵元素和（类似前缀和的左闭右开）</span><br><span class="line">    public int query(int r1, int c1, int r2, int c2) &#123;</span><br><span class="line">        return sum[r2][c2] - sum[r2][c1] - sum[r1][c2] + sum[r1][c1];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 如果你不习惯左闭右开，也可以这样写</span><br><span class="line">    // 返回左上角在 (r1,c1) 右下角在 (r2,c2) 的子矩阵元素和</span><br><span class="line">    public int query2(int r1, int c1, int r2, int c2) &#123;</span><br><span class="line">        return sum[r2 + 1][c2 + 1] - sum[r2 + 1][c1] - sum[r1][c2 + 1] + sum[r1][c1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// python版本</span><br><span class="line">class MatrixSum:</span><br><span class="line">    def __init__(self, matrix: List[List[int]]):</span><br><span class="line">        m, n = len(matrix), len(matrix[0])</span><br><span class="line">        s = [[0] * (n + 1) for _ in range(m + 1)]</span><br><span class="line">        for i, row in enumerate(matrix):</span><br><span class="line">            for j, x in enumerate(row):</span><br><span class="line">                s[i + 1][j + 1] = s[i + 1][j] + s[i][j + 1] - s[i][j] + x</span><br><span class="line">        self.s = s</span><br><span class="line"></span><br><span class="line">    # 返回左上角在 (r1,c1) 右下角在 (r2-1,c2-1) 的子矩阵元素和（类似前缀和的左闭右开）</span><br><span class="line">    def query(self, r1: int, c1: int, r2: int, c2: int) -&gt; int:</span><br><span class="line">        return self.s[r2][c2] - self.s[r2][c1] - self.s[r1][c2] + self.s[r1][c1]</span><br><span class="line"></span><br><span class="line">    # 如果你不习惯左闭右开，也可以这样写</span><br><span class="line">    # 返回左上角在 (r1,c1) 右下角在 (r2,c2) 的子矩阵元素和</span><br><span class="line">    def query2(self, r1: int, c1: int, r2: int, c2: int) -&gt; int:</span><br><span class="line">        return self.s[r2 + 1][c2 + 1] - self.s[r2 + 1][c1] - self.s[r1][c2 + 1] + self.s[r1][c1]</span><br></pre></td></tr></table></figure>
-<h2 id="计算组合数公式C-n-k"><a href="#计算组合数公式C-n-k" class="headerlink" title="计算组合数公式C(n,k)"></a>计算组合数公式C(n,k)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">long dfs(int n,int k)&#123;</span><br><span class="line">    if (k == 0 || n == k)&#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return dfs(n - 1,k - 1) + dfs(n - 1,k);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="给定字符串求去除重复字母并且字典序最小，贪心"><a href="#给定字符串求去除重复字母并且字典序最小，贪心" class="headerlink" title="给定字符串求去除重复字母并且字典序最小，贪心"></a>给定字符串求去除重复字母并且字典序最小，贪心</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public String removeDuplicateLetters(String s) &#123;</span><br><span class="line">        int[] f = new int[26];</span><br><span class="line">        for (char c : s.toCharArray())&#123;</span><br><span class="line">            f[c - &#x27;a&#x27;]++;</span><br><span class="line">        &#125;</span><br><span class="line">        Stack&lt;Character&gt; stack = new Stack&lt;&gt;();</span><br><span class="line">        boolean[] visited = new boolean[26];</span><br><span class="line">        for (char c : s.toCharArray())&#123;</span><br><span class="line">            if (visited[c - &#x27;a&#x27;])&#123;</span><br><span class="line">                f[c - &#x27;a&#x27;]--;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            if (stack.isEmpty())&#123;</span><br><span class="line">                stack.push(c);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                if (stack.peek() &lt; c)&#123;</span><br><span class="line">                    stack.push(c);</span><br><span class="line">                &#125; else if (stack.peek() == c)&#123;</span><br><span class="line">                    stack.pop();</span><br><span class="line">                    stack.push(c);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    while(!stack.isEmpty() &amp;&amp; f[stack.peek() - &#x27;a&#x27;] &gt; 0 &amp;&amp; stack.peek() &gt;= c)&#123;</span><br><span class="line">                        visited[stack.pop() - &#x27;a&#x27;] = false;</span><br><span class="line">                    &#125;</span><br><span class="line">                    stack.push(c);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            f[c - &#x27;a&#x27;]--;</span><br><span class="line">            visited[c - &#x27;a&#x27;] = true;</span><br><span class="line">        &#125;</span><br><span class="line">        StringBuilder sb = new StringBuilder();</span><br><span class="line">        while(!stack.isEmpty())&#123;</span><br><span class="line">            sb.append(stack.pop());</span><br><span class="line">        &#125;</span><br><span class="line">        return sb.reverse().toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="kmp字符串匹配算法"><a href="#kmp字符串匹配算法" class="headerlink" title="kmp字符串匹配算法"></a>kmp字符串匹配算法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line"></span><br><span class="line">    def kmp(self, text: str, pattern: str) -&gt; List[int]:</span><br><span class="line">        m = len(pattern)</span><br><span class="line">        pi = [0] * m</span><br><span class="line">        c = 0</span><br><span class="line">        for i in range(1, m):</span><br><span class="line">            v = pattern[i]</span><br><span class="line">            while c and pattern[c] != v:</span><br><span class="line">                c = pi[c - 1]</span><br><span class="line">            if pattern[c] == v:</span><br><span class="line">                c += 1</span><br><span class="line">            pi[i] = c</span><br><span class="line"></span><br><span class="line">        res = []</span><br><span class="line">        c = 0</span><br><span class="line">        for i, v in enumerate(text):</span><br><span class="line">            v = text[i]</span><br><span class="line">            while c and pattern[c] != v:</span><br><span class="line">                c = pi[c - 1]</span><br><span class="line">            if pattern[c] == v:</span><br><span class="line">                c += 1</span><br><span class="line">            if c == len(pattern):</span><br><span class="line">                res.append(i - m + 1)</span><br><span class="line">                c = pi[c - 1]</span><br><span class="line">        return res</span><br></pre></td></tr></table></figure>
-
-<h2 id="数位dp模板"><a href="#数位dp模板" class="headerlink" title="数位dp模板"></a>数位dp模板</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def count(self, num1: str, num2: str, min_sum: int, max_sum: int) -&gt; int:</span><br><span class="line">        def calc(high: str) -&gt; int:</span><br><span class="line">            @cache</span><br><span class="line">            def dfs(i: int, s: int, is_limit: bool) -&gt; int:</span><br><span class="line">                if s &gt; max_sum:  # 非法</span><br><span class="line">                    return 0</span><br><span class="line">                if i == len(high):</span><br><span class="line">                    return s &gt;= min_sum</span><br><span class="line">                res = 0</span><br><span class="line">                up = int(high[i]) if is_limit else 9</span><br><span class="line">                for d in range(up + 1):  # 枚举当前数位填 d</span><br><span class="line">                    res += dfs(i + 1, s + d, is_limit and d == up)</span><br><span class="line">                return res</span><br><span class="line">            return dfs(0, 0, True)</span><br><span class="line"></span><br><span class="line">        is_num1_good = min_sum &lt;= sum(map(int, num1)) &lt;= max_sum</span><br><span class="line">        return (calc(num2) - calc(num1) + is_num1_good) % 1_000_000_007</span><br></pre></td></tr></table></figure>
-
-<h2 id="最短路算法"><a href="#最短路算法" class="headerlink" title="最短路算法"></a>最短路算法</h2><p><strong>floyd：</strong>o(n**3)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">f = [[inf] * self.n for _  in range(self.n)]</span><br><span class="line">for i in range(self.n):</span><br><span class="line">	f[i][i] = 0</span><br><span class="line">for i in range(self.n):</span><br><span class="line">	for j in range(self.n):</span><br><span class="line">		if self.g[i][j] != 0:</span><br><span class="line">			f[i][j] = self.g[i][j]</span><br><span class="line">for k in range(self.n):</span><br><span class="line">	for i in range(self.n):</span><br><span class="line">		for j in range(self.n):</span><br><span class="line">			f[i][j] = min(f[i][j],f[i][k] + f[k][j])</span><br><span class="line">return f[node1][node2] if f[node1][node2] &lt; inf else -1</span><br></pre></td></tr></table></figure>
-
-<p><strong>dijkstra:</strong></p>
-<p>o(n**2)，暴力查找最小权值的点</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">dis = [inf] * self.n</span><br><span class="line">vis = [False] * self.n</span><br><span class="line">def dijkstra(n, s):</span><br><span class="line">    dis[s] = 0</span><br><span class="line">    for i in range(n):</span><br><span class="line">        u = 0</span><br><span class="line">    mind = inf</span><br><span class="line">    for j in range(n):</span><br><span class="line">    	if vis[j] == False and dis[j] &lt; mind:</span><br><span class="line">            u = j</span><br><span class="line">            mind = dis[j]</span><br><span class="line">    vis[u] = True</span><br><span class="line">    for v in range(len(self.g[u])):</span><br><span class="line">    	w = self.g[u][v]</span><br><span class="line">    	if w != 0 and dis[v] &gt; dis[u] + w:</span><br><span class="line">    		dis[v] = dis[u] + w</span><br></pre></td></tr></table></figure>
-
-<p>o(mlogm),优先队列查找权值最小的点</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def dijkstra(e, s):</span><br><span class="line">	dis = defaultdict(lambda: inf)</span><br><span class="line">    dis[s] = 0</span><br><span class="line">    q = [(0, s)]</span><br><span class="line">    vis = set()</span><br><span class="line">    while q:</span><br><span class="line">    	_, u = heapq.heappop(q)</span><br><span class="line">        if u in vis: continue</span><br><span class="line">        vis.add(u)</span><br><span class="line">        for v in range(len(e[u])):</span><br><span class="line">        	w = e[u][v]</span><br><span class="line">            if w != 0 and dis[v] &gt; dis[u] + w:</span><br><span class="line">            	dis[v] = dis[u] + w</span><br><span class="line">                heapq.heappush(q, (dis[v], v))</span><br><span class="line">	return dis</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-        <div class="article-pop-out tagcloud">
-          <i class="icon-tuding"></i>
-          <a class="article-tag-list-link color3">置顶</a>
-        </div>
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/08/15/%E4%B8%80%E4%BA%9B%E6%9D%BF%E5%AD%90/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-深度学习的一些问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/05/06/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">深度学习的一些问题</a>
-    </h1>
-  
-
-        
-        <a href="/2025/05/06/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" class="archive-article-date">
+        <a href="/2025/05/06/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
   	<time datetime="2025-05-06T15:12:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-05-06</time>
 </a>
         
@@ -333,29 +242,19 @@
 <td>中文用户、工业落地项目</td>
 </tr>
 </tbody></table>
-<h2 id="2、卷积神经网络"><a href="#2、卷积神经网络" class="headerlink" title="2、卷积神经网络"></a>2、卷积神经网络</h2><h3 id="2-1-卷积神经网络要怎么输入图像"><a href="#2-1-卷积神经网络要怎么输入图像" class="headerlink" title="2.1 卷积神经网络要怎么输入图像"></a>2.1 卷积神经网络要怎么输入图像</h3><p>CNN 模型通常要求输入的张量格式如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[batch_size, channels, height, width]  # PyTorch 格式</span><br><span class="line">[batch_size, height, width, channels]  # TensorFlow 格式</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>batch_size</code></td>
-<td>一次输入多少张图片（比如训练时是32张）</td>
-</tr>
-<tr>
-<td><code>channels</code></td>
-<td>通道数，灰度图是1，RGB图是3</td>
-</tr>
-<tr>
-<td><code>height</code> &#x2F; <code>width</code></td>
-<td>图像的高和宽</td>
-</tr>
-</tbody></table>
+<h2 id="2、计算机视觉"><a href="#2、计算机视觉" class="headerlink" title="2、计算机视觉"></a>2、计算机视觉</h2><p>计算机中的图像就是矩阵，一张图像被表示为三维数组的形式，每个像素的值从0~255，像素值越大则越亮，越小则越暗。</p>
+<p>计算机视觉面临的两个挑战：</p>
+<ol>
+<li>部分遮蔽：图像上主体部分存在遮挡，例如，一只猫在图像上只露出了脚和尾巴。</li>
+<li>背景混入：图像上主体部分能够融入背景，起到一个混淆视觉的现象。</li>
+</ol>
+<p>解决办法：提供大量存在遮蔽和背景混入的数据集来训练程序，这样在后续机器计算要识别图像和已经训练的数据集图像之间的相似程度时，能够尽可能的减小误差，从而提高结果的正确性。</p>
+<h2 id="3、神经网络基础"><a href="#3、神经网络基础" class="headerlink" title="3、神经网络基础"></a>3、神经网络基础</h2><h3 id="3-1-线性函数"><a href="#3-1-线性函数" class="headerlink" title="3.1 线性函数"></a>3.1 线性函数</h3><p><img src="https://gitee.com/wyjtlb/picture/raw/master/%E5%9B%BE%E7%89%87/3.png" alt="img"></p>
+<p><strong>计算方式</strong>：需要识别出的结果的权重矩阵*像素矩阵+偏重矩阵 &#x3D; 不同结果得分。</p>
+<p><strong>神经网络学习过程</strong>：通过大量图片数据集的和预期结果的之间的差距来调整权重矩阵和偏重矩阵，从而得到一个针对训练数据的合适的权重矩阵和偏重矩阵。</p>
+<h3 id="3-2-损失函数"><a href="#3-2-损失函数" class="headerlink" title="3.2 损失函数"></a>3.2 损失函数</h3><p><img src="https://gitee.com/wyjtlb/picture/raw/71ca55ca890b6c665ff605603e06ffd10198c4cf/%E5%9B%BE%E7%89%87/4.png" alt="图片/4.png"></p>
+<p><strong>计算方式</strong>：损失函数 &#x3D; 数据损失 + 正则化惩罚项。</p>
+<p>损失函数计算当前图像的不同结果得分和预期结果的得分之间的差距值，计算得到的结果越大，说明当前的结果得分越不可靠。</p>
 
       
 
@@ -368,7 +267,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2025/05/06/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/">展开全文 >></a>
+          <a class="article-more-a" href="/2025/05/06/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">展开全文 >></a>
         </p>
       
 
@@ -1261,6 +1160,102 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2024/02/08/%E9%83%A8%E7%BD%B2pg%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-倍增算法求LCA-最近公共祖先" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/01/26/%E5%80%8D%E5%A2%9E%E7%AE%97%E6%B3%95%E6%B1%82LCA-%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/">倍增算法求LCA(最近公共祖先)</a>
+    </h1>
+  
+
+        
+        <a href="/2024/01/26/%E5%80%8D%E5%A2%9E%E7%AE%97%E6%B3%95%E6%B1%82LCA-%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/" class="archive-article-date">
+  	<time datetime="2024-01-26T14:58:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-edge-weight-equilibrium-queries-in-a-tree/">2846. 边权重均等查询</a></p>
+<p>现有一棵由 <code>n</code> 个节点组成的无向树，节点按从 <code>0</code> 到 <code>n - 1</code> 编号。给你一个整数 <code>n</code> 和一个长度为 <code>n - 1</code> 的二维整数数组 <code>edges</code> ，其中 <code>edges[i] = [ui, vi, wi]</code> 表示树中存在一条位于节点 <code>ui</code> 和节点 <code>vi</code> 之间、权重为 <code>wi</code> 的边。</p>
+<p>另给你一个长度为 <code>m</code> 的二维整数数组 <code>queries</code> ，其中 <code>queries[i] = [ai, bi]</code> 。对于每条查询，请你找出使从 <code>ai</code> 到 <code>bi</code> 路径上每条边的权重相等所需的 <strong>最小操作次数</strong> 。在一次操作中，你可以选择树上的任意一条边，并将其权重更改为任意值。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>查询之间 <strong>相互独立</strong> 的，这意味着每条新的查询时，树都会回到 <strong>初始状态</strong> 。</li>
+<li>从 <code>ai</code> 到 <code>bi</code>的路径是一个由 <strong>不同</strong> 节点组成的序列，从节点 <code>ai</code> 开始，到节点 <code>bi</code> 结束，且序列中相邻的两个节点在树中共享一条边。</li>
+</ul>
+<p>返回一个长度为 <code>m</code> 的数组 <code>answer</code> ，其中 <code>answer[i]</code> 是第 <code>i</code> 条查询的答案。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2023/08/11/graph-6-1.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 7, edges = [[0,1,1],[1,2,1],[2,3,1],[3,4,2],[4,5,2],[5,6,2]], queries = [[0,3],[3,6],[2,6],[0,6]]</span><br><span class="line">输出：[0,0,1,3]</span><br><span class="line">解释：第 1 条查询，从节点 0 到节点 3 的路径中的所有边的权重都是 1 。因此，答案为 0 。</span><br><span class="line">第 2 条查询，从节点 3 到节点 6 的路径中的所有边的权重都是 2 。因此，答案为 0 。</span><br><span class="line">第 3 条查询，将边 [2,3] 的权重变更为 2 。在这次操作之后，从节点 2 到节点 6 的路径中的所有边的权重都是 2 。因此，答案为 1 。</span><br><span class="line">第 4 条查询，将边 [0,1]、[1,2]、[2,3] 的权重变更为 2 。在这次操作之后，从节点 0 到节点 6 的路径中的所有边的权重都是 2 。因此，答案为 3 。</span><br><span class="line">对于每条查询 queries[i] ，可以证明 answer[i] 是使从 ai 到 bi 的路径中的所有边的权重相等的最小操作次数。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2023/08/11/graph-9-1.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 8, edges = [[1,2,6],[1,3,4],[2,4,6],[2,5,3],[3,6,6],[3,0,8],[7,0,2]], queries = [[4,6],[0,4],[6,5],[7,4]]</span><br><span class="line">输出：[1,2,2,3]</span><br><span class="line">解释：第 1 条查询，将边 [1,3] 的权重变更为 6 。在这次操作之后，从节点 4 到节点 6 的路径中的所有边的权重都是 6 。因此，答案为 1 。</span><br><span class="line">第 2 条查询，将边 [0,3]、[3,1] 的权重变更为 6 。在这次操作之后，从节点 0 到节点 4 的路径中的所有边的权重都是 6 。因此，答案为 2 。</span><br><span class="line">第 3 条查询，将边 [1,3]、[5,2] 的权重变更为 6 。在这次操作之后，从节点 6 到节点 5 的路径中的所有边的权重都是 6 。因此，答案为 2 。</span><br><span class="line">第 4 条查询，将边 [0,7]、[0,3]、[1,3] 的权重变更为 6 。在这次操作之后，从节点 7 到节点 4 的路径中的所有边的权重都是 6 。因此，答案为 3 。</span><br><span class="line">对于每条查询 queries[i] ，可以证明 answer[i] 是使从 ai 到 bi 的路径中的所有边的权重相等的最小操作次数。 </span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 104</code></li>
+<li><code>edges.length == n - 1</code></li>
+<li><code>edges[i].length == 3</code></li>
+<li><code>0 &lt;= ui, vi &lt; n</code></li>
+<li><code>1 &lt;= wi &lt;= 26</code></li>
+<li>生成的输入满足 <code>edges</code> 表示一棵有效的树</li>
+<li><code>1 &lt;= queries.length == m &lt;= 2 * 104</code></li>
+<li><code>queries[i].length == 2</code></li>
+<li><code>0 &lt;= ai, bi &lt; n</code></li>
+</ul>
+<p>​		这篇博客来源于leetcode的<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-edge-weight-equilibrium-queries-in-a-tree/description/">2846. 边权重均等查询</a>,里面涉及到树的倍增算法求LCA(最近公共祖先)的问题，这个算法思路不难，但是预处理表的过程确实值得分享，对于这个算法想有更深入了解的，可以参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/wjh2622075127/article/details/81060586">倍增法求Lca(最近公共祖先)</a>这个博客，笔者看完后算是彻底弄懂了倍增的处理过程，这里主要是对于灵神的代码进行了逐行注释，方便理解，看懂后当然可以尝试手敲。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def minOperationsQueries(self, n: int, edges: List[List[int]], queries: List[List[int]]) -&gt; List[int]:</span><br><span class="line">        g = [[] for _ in range(n)]</span><br><span class="line">        for x, y, w in edges: # 建图</span><br><span class="line">            g[x].append((y, w - 1))</span><br><span class="line">            g[y].append((x, w - 1))</span><br><span class="line"></span><br><span class="line">        m = n.bit_length() # 获取树的高度</span><br><span class="line">        pa = [[-1] * m for _ in range(n)] # 每个结点最多具有m个祖先结点，即树的高度，根节点的祖先结点是-1</span><br><span class="line">        cnt = [[[0] * 26 for _ in range(m)] for _ in range(n)] # 类似于上面的创建方式，这里记录每个结点的祖先结点具有多少个权的值</span><br><span class="line">        depth = [0] * n # 存每个结点的深度</span><br><span class="line"></span><br><span class="line">        def dfs(x: int, fa: int) -&gt; None: # 求结点的深度，fa表示当前结点的父节点</span><br><span class="line">            pa[x][0] = fa # [x,0]即x的2的0次方的祖先结点是哪个结点，这里显然就是父节点</span><br><span class="line">            for y, w in g[x]:</span><br><span class="line">                if y != fa: # 防止回头</span><br><span class="line">                    cnt[y][0][w] = 1 # 将y到的2的0次方的祖先结点(父节点)的权保存下来</span><br><span class="line">                    depth[y] = depth[x] + 1 # 存储当前y结点的深度</span><br><span class="line">                    dfs(y, x)</span><br><span class="line"></span><br><span class="line">        dfs(0, -1) # 假设0是根节点，它的祖先结点是-1</span><br><span class="line"></span><br><span class="line">        # 倍增模板(核心代码)，保存每个结点的2的i次方处的祖先结点的是哪个结点</span><br><span class="line">        for i in range(m - 1): # 遍历</span><br><span class="line">            for x in range(n):</span><br><span class="line">                p = pa[x][i]</span><br><span class="line">                if p != -1: # 说明还没到根节点或者祖先结点超过了根节点</span><br><span class="line">                    pp = pa[p][i]</span><br><span class="line">                    pa[x][i + 1] = pp # x的2的i+1次方的祖先结点，即2的i次方结点的2的i次方的祖先结点，2**(i + 1) = 2**i * 2**i</span><br><span class="line">                    for j, (c1, c2) in enumerate(zip(cnt[x][i], cnt[p][i])):</span><br><span class="line">                        cnt[x][i + 1][j] = c1 + c2 # 仔细理解这两行代码，本质是把x到x的2的i+1次方的祖先结点之间的权进行了统计</span><br><span class="line">        # 到这里统计就做完了，可以回顾一下存了哪些数据，一个是x的2的倍数次方的父节点是谁，一个是x到2的倍数次方的父节点之间权的统计</span><br><span class="line">        # 还有就是每个结点的深度的表，统计完成后可以通过二分的方式找到两个目标节点的lca(最近公共祖先)了</span><br><span class="line">        ans = []</span><br><span class="line">        for x, y in queries:</span><br><span class="line">            path_len = depth[x] + depth[y]  # 最后减去 depth[lca] * 2</span><br><span class="line">            cw = [0] * 26</span><br><span class="line">            if depth[x] &gt; depth[y]:</span><br><span class="line">                x, y = y, x # 深度小的点放到x</span><br><span class="line"></span><br><span class="line">            # 使 y 和 x 在同一深度</span><br><span class="line">            k = depth[y] - depth[x]</span><br><span class="line">            # 这个位运算和巧妙，深度差值的二进制的位置上有1，代表可以去找到y的2的i次方的祖先结点，从而可以去表里查出当前位置存了多少个权的值</span><br><span class="line">            for i in range(k.bit_length()):</span><br><span class="line">                if (k &gt;&gt; i) &amp; 1:  # k 二进制从低到高第 i 位是 1</span><br><span class="line">                    p = pa[y][i]</span><br><span class="line">                    for j, c in enumerate(cnt[y][i]):</span><br><span class="line">                        cw[j] += c</span><br><span class="line">                    y = p</span><br><span class="line">            # 下面寻找lca的过程有点像二分，当前2的i次方的祖先结点相不相等，不相等往上移，相等就不移，下次往上移动的距离会小于上一次</span><br><span class="line">            if y != x: # 代表需要求lca</span><br><span class="line">                for i in range(m - 1, -1, -1):</span><br><span class="line">                    px, py = pa[x][i], pa[y][i]</span><br><span class="line">                    if px != py:</span><br><span class="line">                        for j, (c1, c2) in enumerate(zip(cnt[x][i], cnt[y][i])):</span><br><span class="line">                            cw[j] += c1 + c2</span><br><span class="line">                        x, y = px, py  # 同时上跳 2^i 步</span><br><span class="line">                for j, (c1, c2) in enumerate(zip(cnt[x][0], cnt[y][0])):</span><br><span class="line">                    cw[j] += c1 + c2</span><br><span class="line">                x = pa[x][0]</span><br><span class="line"></span><br><span class="line">            lca = x</span><br><span class="line">            path_len -= depth[lca] * 2</span><br><span class="line">            ans.append(path_len - max(cw))</span><br><span class="line">        return ans</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/01/26/%E5%80%8D%E5%A2%9E%E7%AE%97%E6%B3%95%E6%B1%82LCA-%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/">展开全文 >></a>
         </p>
       
 
