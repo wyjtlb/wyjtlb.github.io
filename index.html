@@ -214,6 +214,21 @@
 <p><strong>调用模型</strong>：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">from torch import nn</span><br><span class="line">from d2l import torch as d2l</span><br><span class="line"></span><br><span class="line"># 模型</span><br><span class="line">net = nn.Sequential(nn.Flatten(),</span><br><span class="line">                    nn.Linear(784, 256),</span><br><span class="line">                    nn.ReLU(),</span><br><span class="line">                    nn.Linear(256, 10))</span><br><span class="line"></span><br><span class="line">def init_weights(m):</span><br><span class="line">    if type(m) == nn.Linear:</span><br><span class="line">        nn.init.normal_(m.weight, std=0.01)</span><br><span class="line"></span><br><span class="line">net.apply(init_weights);</span><br><span class="line"></span><br><span class="line">batch_size, lr, num_epochs = 256, 0.2, 10</span><br><span class="line">loss = nn.CrossEntropyLoss(reduction=&#x27;none&#x27;)</span><br><span class="line">trainer = torch.optim.SGD(net.parameters(), lr=lr)</span><br><span class="line"></span><br><span class="line">train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)</span><br><span class="line">d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)</span><br></pre></td></tr></table></figure>
 
+<h2 id="3、过拟合和欠拟合"><a href="#3、过拟合和欠拟合" class="headerlink" title="3、过拟合和欠拟合"></a>3、过拟合和欠拟合</h2><p><strong>欠拟合</strong>：训练数据和验证数据的误差都很严重，那么这个时候考虑是模型的复杂度不够，需要选择更加复杂的模型来进行训练。</p>
+<p><strong>过拟合</strong>：训练数据的误差很小，但是验证数据的误差缺明显大于训练数据，这个时候考虑就是模型过于复杂，需要选择更加简单的模型来进行训练。</p>
+<p><strong>模型复杂度对欠拟合和过拟合的影响</strong>：</p>
+<p><img src="https://zh-v2.d2l.ai/_images/capacity-vs-error.svg" alt="../_images/capacity-vs-error.svg"></p>
+<p>为了避免训练的结果出现过拟合和欠拟合，我们需要大量地对多种模型进行调试，使得模型的训练结果达到最优的泛化程度。</p>
+<h2 id="4、权重衰退"><a href="#4、权重衰退" class="headerlink" title="4、权重衰退"></a>4、权重衰退</h2><p>由前面的线性神经网络的学习我们可以知道，在每次学习的过程中，损失程度会逐渐减小，得到的权重也会主键接近真实权重，这种逐渐接近最优解的效果其实在现实生活中是不太可能的，用在实际生活中的问题往往会出现过拟合的问题，使得模型的泛化性降低，为了解决这一点，就要用到权重衰退：</p>
+<p><strong>线性神经网络的梯度下降</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w2 = w1 + 学习率*梯度</span><br></pre></td></tr></table></figure>
+
+<p><strong>引入权重衰退</strong>：</p>
+<p><img src="/images/%E6%9D%83%E9%87%8D%E8%A1%B0%E9%80%80%E5%85%AC%E5%BC%8F.png" alt="image-20250518213737829"></p>
+<p><code>w</code> 的平方可以理解为范数，用这个来作为惩罚项，并乘以一个拉姆达来平衡惩罚的程度，从几何上看就是将整个梯度函数上的点往原点的位置拉上一小部分，从而调整了最优点，让其与真实的最优点之间发生偏移。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w2 = (1 - p*学习率)w1 + 学习率*梯度</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，相较于之前的梯度下降的公式，在调整权重之前，我们先将输入权重调小一点点，从而使得梯度函数无法靠近最优解，也就避免了过拟合的情况。</p>
 
       
 
