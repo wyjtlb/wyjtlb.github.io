@@ -229,6 +229,14 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">w2 = (1 - p*学习率)w1 + 学习率*梯度</span><br></pre></td></tr></table></figure>
 
 <p>可以看到，相较于之前的梯度下降的公式，在调整权重之前，我们先将输入权重调小一点点，从而使得梯度函数无法靠近最优解，也就避免了过拟合的情况。</p>
+<p><strong>代码实现</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def l2_penalty(w):</span><br><span class="line">    return torch.sum(w.pow(2)) / 2</span><br><span class="line">    </span><br><span class="line">l = loss(net(X), y) + lambd * l2_penalty(w)</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、Dropout"><a href="#5、Dropout" class="headerlink" title="5、Dropout"></a>5、Dropout</h2><p><code>Dropout</code> 也是一种预防过拟合的一种常用方法，相较于权重衰退，<code>Dropout</code> 会更加容易地使用，毕竟权重衰退的 <code>lamda</code> 比较难调整，<code>Dropout</code>  的原理是在多层感知机中的隐藏层中，随机丢掉一些神经元，从而降低模型的复杂度的策略，这个丢失的概率我们一般选择 <code>0.1</code>、<code>0.5</code>、<code>0.9</code> 这三个数，例如，如果模型的某个隐藏层有非常多的神经元，几百个，那就可以选择 <code>0.9</code> ，随机丢掉百分之90个神经元，仅将百分之10的神经元的结果扩大到 x &#x2F; (1 - p) 倍，之所以要将剩余的结果扩大是为了保证这一隐藏层的期望不变，从而不影响到模型的学习率，加入 <code>Dropout</code> 这个正则化方式之后，则可能会一定程度上避免训练结果的过拟合。</p>
+<p><strong>代码实现</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def dropout_layer(X, dropout):</span><br><span class="line">    assert 0 &lt;= dropout &lt;= 1</span><br><span class="line">    if dropout == 1:</span><br><span class="line">        return torch.zeros_like(X)</span><br><span class="line">    if dropout == 0:</span><br><span class="line">        return X</span><br><span class="line">    mask = (torch.Tensor(X.shape).uniform_(0, 1) &gt; dropout).float()</span><br><span class="line">    return mask * X / (1.0 - dropout)</span><br></pre></td></tr></table></figure>
+
+<p>从代码中可以看到，产生的随机数大于了我们设置 <code>dropout</code> ，则保留这个神经元并扩大，否则，就设置为0。</p>
 
       
 
