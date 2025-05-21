@@ -237,6 +237,18 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def dropout_layer(X, dropout):</span><br><span class="line">    assert 0 &lt;= dropout &lt;= 1</span><br><span class="line">    if dropout == 1:</span><br><span class="line">        return torch.zeros_like(X)</span><br><span class="line">    if dropout == 0:</span><br><span class="line">        return X</span><br><span class="line">    mask = (torch.Tensor(X.shape).uniform_(0, 1) &gt; dropout).float()</span><br><span class="line">    return mask * X / (1.0 - dropout)</span><br></pre></td></tr></table></figure>
 
 <p>从代码中可以看到，产生的随机数大于了我们设置 <code>dropout</code> ，则保留这个神经元并扩大，否则，就设置为0。</p>
+<h2 id="6、数值稳定性"><a href="#6、数值稳定性" class="headerlink" title="6、数值稳定性"></a>6、数值稳定性</h2><p>在多层神经网络中，损失函数是受到所有权重的影响的，因此如果权重没有初始化好的话，可能会出现以下两种现象：</p>
+<ul>
+<li><strong>梯度爆炸</strong>：损失函数的结果为一个非常大的数，超过了计算的精度，可以看成是无穷大，这种往往是在神经网络的某一层中，通过激活函数和学习率得到了一个非常大的权重，这个非常大的权重又乘上输入，得到一个非常大的输出，然后传到了下一层，结果越来越大直到梯度爆炸，可以想象成一座非常陡峭的山峰。</li>
+<li><strong>梯度消失</strong>：损失函数的结果为一个非常小的数，也超过了计算的精度，可以看成是无穷小，这种就是权重变得非常的小，然后进入到下一层越乘越小，最终导致梯度直接消失了，可以想象成两座大山之间的谷底。</li>
+</ul>
+<p>在之前的学习中，我们学习了过拟合和欠拟合会导致训练结果不具有泛化性，而数值稳定性是直接影响训练过程的，如果出现了梯度爆炸和梯度消失，可能直接导致训练失败，究其原因是因为损失函数图像的不确定性，我们没办法知道对应训练数据输入的损失函数图像，因此在这个未知的图像上，可能存在一些区域，在这个区域内，图像极为得不规则，梯度跳动剧烈，因此就难免导致我们的梯度优化算法失败，从而可能造成越优化，反而适得其反，为此我们必须选择好的权重初始化值，来尽量事先避免那些梯度剧烈抖动的区域。</p>
+<p>梯度初始化的几个比较好的方法:</p>
+<ul>
+<li>每一层的方差是一个常数。</li>
+<li>将乘法变加法。</li>
+<li>Xavier 初始。</li>
+</ul>
 
       
 
