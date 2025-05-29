@@ -304,6 +304,30 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(8 + 0 * 2 - 3 + 1) // 3 = 2 高为2</span><br><span class="line">(8 + 1 * 2 - 5 + 1) // 4 = 2 宽为2</span><br></pre></td></tr></table></figure>
 
 <p>因此这个 <code>8X8</code> 的输入通过步幅直接就压缩成了一个 <code>2X2</code> 的输出。</p>
+<h2 id="11、卷积层的多输入多输出通道"><a href="#11、卷积层的多输入多输出通道" class="headerlink" title="11、卷积层的多输入多输出通道"></a>11、卷积层的多输入多输出通道</h2><p>多输入通道指的是输入的图像数据不止一层，具有多层，例如最常见的 <code>rgb</code> 图片，就是一个具有三层输入的彩色图片，既然输入都有三层了，那相应的，与之对应的卷积核也增加为多层，层数也称为输入通道数，如下是多输入通道的计算过程，可以看到，每一层分别做计算之后，然后相加即可得到一个输出。</p>
+<p><img src="https://zh-v2.d2l.ai/_images/conv-multi-in.svg" alt="../_images/conv-multi-in.svg"></p>
+<p><strong>代码实现</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">from d2l import torch as d2l</span><br><span class="line"></span><br><span class="line">def corr2d_multi_in(X, K):</span><br><span class="line">    # 先遍历“X”和“K”的第0个维度（通道维度），再把它们加在一起</span><br><span class="line">    return sum(d2l.corr2d(x, k) for x, k in zip(X, K))</span><br></pre></td></tr></table></figure>
+
+<p>多输出通道值得是增加卷积核的数目来得到多个输出的数据，不同的卷积核可以针对不同的特征进行提取，最后将所有的输出再通过权重融合成一个输出，表示不同特征具有的不同的重要程度。需要注意的是，同一个卷积层中卷积核的大小必须相同，不然会得到不同大小的输出，那么融合地方可能就要做更多地卷积计算，从而使得计算过程更加地复杂。</p>
+<p><strong>代码实现</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def corr2d_multi_in_out(X, K):</span><br><span class="line">    # 迭代“K”的第0个维度，每次都对输入“X”执行互相关运算。</span><br><span class="line">    # 最后将所有结果都叠加在一起</span><br><span class="line">    return torch.stack([corr2d_multi_in(X, k) for k in K], 0)</span><br></pre></td></tr></table></figure>
+
+<p>最后是 <code>1X1</code> 卷积层，顾名思义，指的是卷积核大小为 <code>1X1</code> ，使用这样的卷积核进行计算，是不会对输入的数据进行压缩的，但是却能够对通道数进行压缩，例如，一个 <code>rgb</code> 图片，通过 <code>1X1</code> 卷积层的计算之后，能够随意输出自己想要的输出通道数，这样就能够在不影响数据位置信息的情况下去降低输入通道数，毕竟 <code>1X1</code> 的卷积计算起来快，又恰好只计算进行了单个像素点，可以说非常方便了。</p>
+<p><img src="https://zh-v2.d2l.ai/_images/conv-1x1.svg" alt="../_images/conv-1x1.svg"></p>
+<p><strong>代码实现</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def corr2d_multi_in_out_1x1(X, K):</span><br><span class="line">    c_i, h, w = X.shape</span><br><span class="line">    c_o = K.shape[0]</span><br><span class="line">    X = X.reshape((c_i, h * w))</span><br><span class="line">    K = K.reshape((c_o, c_i))</span><br><span class="line">    # 全连接层中的矩阵乘法</span><br><span class="line">    Y = torch.matmul(K, X)</span><br><span class="line">    return Y.reshape((c_o, h, w))</span><br></pre></td></tr></table></figure>
+
+<h2 id="12、池化层"><a href="#12、池化层" class="headerlink" title="12、池化层"></a>12、池化层</h2><p>池化层主要是为了应对输入图像数据的抖动问题，例如日常拍照时如果手不小心抖了一下，那么很可能会造成像素偏移，而卷积层对于位置是十分敏感的，对于偏移的像素很可能会检测不出相关特征，为此就需要池化层来应对抖动的像素。</p>
+<p>池化层主要包括最大池化层和平均池化层，顾名思义，最大池化层就是取卷积核中的最大值作为输出，而平均池化层则是取卷积核中的平均值来作为输出，</p>
+<p><img src="https://zh-v2.d2l.ai/_images/pooling.svg" alt="../_images/pooling.svg"></p>
+<p>数据经过一次池化层的操作之后，能够将可能出现抖动的像素给保留下来，从而有效防止了特征的丢失。</p>
+<p><strong>代码实现</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import torch</span><br><span class="line">from torch import nn</span><br><span class="line">from d2l import torch as d2l</span><br><span class="line"></span><br><span class="line">def pool2d(X, pool_size, mode=&#x27;max&#x27;):</span><br><span class="line">    p_h, p_w = pool_size</span><br><span class="line">    Y = torch.zeros((X.shape[0] - p_h + 1, X.shape[1] - p_w + 1))</span><br><span class="line">    for i in range(Y.shape[0]):</span><br><span class="line">        for j in range(Y.shape[1]):</span><br><span class="line">            if mode == &#x27;max&#x27;:</span><br><span class="line">                Y[i, j] = X[i: i + p_h, j: j + p_w].max()</span><br><span class="line">            elif mode == &#x27;avg&#x27;:</span><br><span class="line">                Y[i, j] = X[i: i + p_h, j: j + p_w].mean()</span><br><span class="line">    return Y</span><br></pre></td></tr></table></figure>
+
+<p>平均池化层就不举例了，取平均值即可。</p>
+<p>需要注意的是，如果池化层没有设置填充和步幅，则默认不填充，默认的步幅就是卷积核的大小，由此可见，池化层的计算会比卷积层快的多。</p>
+<p>在最新的卷积神经网络的使用中，实际上池化层的使用并不多，比起在模型中使用池化层，更多的人选择对于数据本身进行处理。</p>
 
       
 
