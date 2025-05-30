@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>深度学习笔记2025-5-13~2025-5-30 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、部署 gpu 环境下的深度学习框架由于本人电脑刚好有一个独显 MX250 ，因此尝试更换到 gpu 版本的深度学习框架，这样后续使用模型训练的速度也会比 CPU 的快。 安装过程： 1、安装 cuda10.0：搜索引擎搜索 cuda download ，然后选择自己的 gpu 适和的版本下载即可。 2、安装cudnn：下载 cudnn ，到官网的历史版本中选择适合 cuda 的版本，下载解压后">
+  <meta name="description" content="右键点击另存为保存这篇博客的 md 文档： 1、部署 gpu 环境下的深度学习框架由于本人电脑刚好有一个独显 MX250 ，因此尝试更换到 gpu 版本的深度学习框架，这样后续使用模型训练的速度也会比 CPU 的快。 安装过程： 1、安装 cuda10.0：搜索引擎搜索 cuda download ，然后选择自己的 gpu 适和的版本下载即可。 2、安装cudnn：下载 cudnn ，到官网的历史">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习笔记2025-5-13~2025-5-30">
 <meta property="og:url" content="http://example.com/2025/05/13/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02025-5-13-2025-5-30/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1、部署 gpu 环境下的深度学习框架由于本人电脑刚好有一个独显 MX250 ，因此尝试更换到 gpu 版本的深度学习框架，这样后续使用模型训练的速度也会比 CPU 的快。 安装过程： 1、安装 cuda10.0：搜索引擎搜索 cuda download ，然后选择自己的 gpu 适和的版本下载即可。 2、安装cudnn：下载 cudnn ，到官网的历史版本中选择适合 cuda 的版本，下载解压后">
+<meta property="og:description" content="右键点击另存为保存这篇博客的 md 文档： 1、部署 gpu 环境下的深度学习框架由于本人电脑刚好有一个独显 MX250 ，因此尝试更换到 gpu 版本的深度学习框架，这样后续使用模型训练的速度也会比 CPU 的快。 安装过程： 1、安装 cuda10.0：搜索引擎搜索 cuda download ，然后选择自己的 gpu 适和的版本下载即可。 2、安装cudnn：下载 cudnn ，到官网的历史">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://zh-v2.d2l.ai/_images/capacity-vs-error.svg">
 <meta property="og:image" content="http://example.com/images/%E6%9D%83%E9%87%8D%E8%A1%B0%E9%80%80%E5%85%AC%E5%BC%8F.png">
@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://zh-v2.d2l.ai/_images/conv-1x1.svg">
 <meta property="og:image" content="https://zh-v2.d2l.ai/_images/pooling.svg">
 <meta property="article:published_time" content="2025-05-13T14:16:29.000Z">
-<meta property="article:modified_time" content="2025-05-29T16:49:11.633Z">
+<meta property="article:modified_time" content="2025-05-30T13:07:19.588Z">
 <meta property="article:author" content="neja">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://zh-v2.d2l.ai/_images/capacity-vs-error.svg">
@@ -191,7 +191,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1、部署-gpu-环境下的深度学习框架"><a href="#1、部署-gpu-环境下的深度学习框架" class="headerlink" title="1、部署 gpu 环境下的深度学习框架"></a>1、部署 gpu 环境下的深度学习框架</h2><p>由于本人电脑刚好有一个独显 <code>MX250</code> ，因此尝试更换到 <code>gpu</code> 版本的深度学习框架，这样后续使用模型训练的速度也会比 <code>CPU</code> 的快。</p>
+        <p>右键点击另存为保存这篇博客的 <code>md</code> 文档：</p>
+<h2 id="1、部署-gpu-环境下的深度学习框架"><a href="#1、部署-gpu-环境下的深度学习框架" class="headerlink" title="1、部署 gpu 环境下的深度学习框架"></a>1、部署 gpu 环境下的深度学习框架</h2><p>由于本人电脑刚好有一个独显 <code>MX250</code> ，因此尝试更换到 <code>gpu</code> 版本的深度学习框架，这样后续使用模型训练的速度也会比 <code>CPU</code> 的快。</p>
 <p>安装过程：</p>
 <p>1、安装 cuda10.0：搜索引擎搜索 <code>cuda download</code> ，然后选择自己的 <code>gpu</code> 适和的版本下载即可。</p>
 <p>2、安装cudnn：下载 <code>cudnn</code> ，到官网的历史版本中选择适合 <code>cuda</code> 的版本，下载解压后复制到 <code>cuda</code> 的安装路径下，默认是在：</p>
@@ -337,6 +338,28 @@
 <p>平均池化层就不举例了，取平均值即可。</p>
 <p>需要注意的是，如果池化层没有设置填充和步幅，则默认不填充，默认的步幅就是卷积核的大小，由此可见，池化层的计算会比卷积层快的多。</p>
 <p>在最新的卷积神经网络的使用中，实际上池化层的使用并不多，比起在模型中使用池化层，更多的人选择对于数据本身进行处理。</p>
+<h2 id="13、阶段小结"><a href="#13、阶段小结" class="headerlink" title="13、阶段小结"></a>13、阶段小结</h2><p><strong>当前阶段学习内容</strong>：</p>
+<ol>
+<li>部署 GPU 的 <code>pytorch</code> 版本。</li>
+<li>学习多层感知机的原理和相应的代码实现。</li>
+<li>学习欠拟合和过拟合的相关概念。</li>
+<li>学习权重衰减的相关概念和代码实现。</li>
+<li>学习梯度消失和梯度爆炸的相关概念以及如何提高模型的泛化程度。</li>
+<li>学习使用 <code>MLP</code> 来进行房价预测，通过调整超参数来得到更小的损失度。</li>
+<li>学习深度学习计算相关的内容，包括自定义模型、参数管理和读写文件等操作。</li>
+<li>学习卷积核的相关概念，并使用卷积核实现卷积层的相关代码。</li>
+<li>学习卷积层的填充和步幅，并能够根据输入的填充和步幅的大小计算出输出的大小。</li>
+<li>学习卷积层的多输入和多输出通道，并了解设置了多输入和多输出通道的卷积层得到输出的计算过程以及 <code>1X1</code> 卷积层的作用。</li>
+<li>学习卷积层的池化层，了解最大池化层和平均池化层的计算过程。</li>
+</ol>
+<p><strong>下一阶段学习内容</strong>：</p>
+<ol>
+<li>学习深度卷积神经网络(AlexNet)、使用块的网络(VCG)、网络中的网络(NiN)、含并行连结的网络(GoogLeNet)的设计理念和原理。</li>
+<li>学习批量归一化和残差网络的相关概念和代码实现。</li>
+<li>完成图片分类的模型训练。</li>
+<li>学习多 GPU 训练的实现和分布式实现。</li>
+<li>学习了解图像增广和微调的相关理论。</li>
+</ol>
 
       
 
@@ -459,7 +482,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E9%83%A8%E7%BD%B2-gpu-%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6"><span class="toc-number">1.</span> <span class="toc-text">1、部署 gpu 环境下的深度学习框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA-MLP"><span class="toc-number">2.</span> <span class="toc-text">2、多层感知机(MLP)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88"><span class="toc-number">3.</span> <span class="toc-text">3、过拟合和欠拟合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E6%9D%83%E9%87%8D%E8%A1%B0%E9%80%80"><span class="toc-number">4.</span> <span class="toc-text">4、权重衰退</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81Dropout"><span class="toc-number">5.</span> <span class="toc-text">5、Dropout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E6%95%B0%E5%80%BC%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="toc-number">6.</span> <span class="toc-text">6、数值稳定性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E3%80%81%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B"><span class="toc-number">7.</span> <span class="toc-text">7、房价预测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E3%80%81%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97"><span class="toc-number">8.</span> <span class="toc-text">8、深度学习计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9%E3%80%81%E5%8D%B7%E7%A7%AF%E5%B1%82"><span class="toc-number">9.</span> <span class="toc-text">9、卷积层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10%E3%80%81%E5%8D%B7%E7%A7%AF%E5%B1%82%E7%9A%84%E5%A1%AB%E5%85%85%E5%92%8C%E6%AD%A5%E5%B9%85"><span class="toc-number">10.</span> <span class="toc-text">10、卷积层的填充和步幅</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11%E3%80%81%E5%8D%B7%E7%A7%AF%E5%B1%82%E7%9A%84%E5%A4%9A%E8%BE%93%E5%85%A5%E5%A4%9A%E8%BE%93%E5%87%BA%E9%80%9A%E9%81%93"><span class="toc-number">11.</span> <span class="toc-text">11、卷积层的多输入多输出通道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12%E3%80%81%E6%B1%A0%E5%8C%96%E5%B1%82"><span class="toc-number">12.</span> <span class="toc-text">12、池化层</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E9%83%A8%E7%BD%B2-gpu-%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6"><span class="toc-number">1.</span> <span class="toc-text">1、部署 gpu 环境下的深度学习框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA-MLP"><span class="toc-number">2.</span> <span class="toc-text">2、多层感知机(MLP)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88"><span class="toc-number">3.</span> <span class="toc-text">3、过拟合和欠拟合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E6%9D%83%E9%87%8D%E8%A1%B0%E9%80%80"><span class="toc-number">4.</span> <span class="toc-text">4、权重衰退</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81Dropout"><span class="toc-number">5.</span> <span class="toc-text">5、Dropout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E6%95%B0%E5%80%BC%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="toc-number">6.</span> <span class="toc-text">6、数值稳定性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E3%80%81%E6%88%BF%E4%BB%B7%E9%A2%84%E6%B5%8B"><span class="toc-number">7.</span> <span class="toc-text">7、房价预测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E3%80%81%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%A1%E7%AE%97"><span class="toc-number">8.</span> <span class="toc-text">8、深度学习计算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9%E3%80%81%E5%8D%B7%E7%A7%AF%E5%B1%82"><span class="toc-number">9.</span> <span class="toc-text">9、卷积层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10%E3%80%81%E5%8D%B7%E7%A7%AF%E5%B1%82%E7%9A%84%E5%A1%AB%E5%85%85%E5%92%8C%E6%AD%A5%E5%B9%85"><span class="toc-number">10.</span> <span class="toc-text">10、卷积层的填充和步幅</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11%E3%80%81%E5%8D%B7%E7%A7%AF%E5%B1%82%E7%9A%84%E5%A4%9A%E8%BE%93%E5%85%A5%E5%A4%9A%E8%BE%93%E5%87%BA%E9%80%9A%E9%81%93"><span class="toc-number">11.</span> <span class="toc-text">11、卷积层的多输入多输出通道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12%E3%80%81%E6%B1%A0%E5%8C%96%E5%B1%82"><span class="toc-number">12.</span> <span class="toc-text">12、池化层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13%E3%80%81%E9%98%B6%E6%AE%B5%E5%B0%8F%E7%BB%93"><span class="toc-number">13.</span> <span class="toc-text">13、阶段小结</span></a></li></ol>
                     </div>
                 </span>
             </div>
