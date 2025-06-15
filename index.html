@@ -162,6 +162,329 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-深度学习笔记2025-5-31-2025-6-15" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/06/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02025-5-31-2025-6-15/">深度学习笔记2025-5-31~2025-6-15</a>
+    </h1>
+  
+
+        
+        <a href="/2025/06/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02025-5-31-2025-6-15/" class="archive-article-date">
+  	<time datetime="2025-06-05T15:36:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-06-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 右键点击另存为保存这篇文档：<a target="_blank" rel="noopener" href="https://gitee.com/wyjtlb/deep_study/blob/master/%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02025-5-31-2025-6-15.md">深度学习笔记2025-5-31-2025-6-15.md</a></p>
+<p> 接下来学习的一些经典神经网络模型，基本架构都是卷积层+池化层+全连接层，性能和精度各有不同，本人由于设备的限制，很多模型得删掉一些层和降低参数量才能勉强跑动，因此可以感受到深度学习的计算量是非常庞大的。对于这些经典神经网络模型，在此只做基本了解， 不做深入解释（实际上解释不了），大部分模型的由来都是基于大量实验得来的，其中的设计思想和搭配思路还是值得我们学习的。</p>
+<h2 id="1、LeNet"><a href="#1、LeNet" class="headerlink" title="1、LeNet"></a>1、LeNet</h2><p><code>LeNet</code> 是最早的卷积神经网络模型了，使用了卷积层和池化层交叉，参数的数量远远小于 <code>MLP</code>，非常适合做图像处理，也是后面一些经典神经网络模型的基础。</p>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>输入层</td>
+<td>图像输入</td>
+<td>通常是 32×32 的灰度图</td>
+</tr>
+<tr>
+<td>C1</td>
+<td>卷积层</td>
+<td>6 个 5×5 卷积核，输出 6 个 28×28 特征图</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>子采样（池化）层</td>
+<td>6 个 2×2 平均池化，输出 6 个 14×14 特征图</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>卷积层</td>
+<td>16 个 5×5 卷积核，输出 16 个 10×10 特征图（与上一层部分连接）</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>子采样（池化）层</td>
+<td>16 个 2×2 平均池化，输出 16 个 5×5 特征图</td>
+</tr>
+<tr>
+<td>C5</td>
+<td>卷积层</td>
+<td>120 个 5×5 卷积核，输出 120 个 1×1 特征图（全连接卷积）</td>
+</tr>
+<tr>
+<td>F6</td>
+<td>全连接层</td>
+<td>84 个神经元</td>
+</tr>
+<tr>
+<td>输出层</td>
+<td>全连接层</td>
+<td>10 个神经元，对应 10 个数字分类</td>
+</tr>
+</tbody></table>
+<h2 id="2、AlexNet"><a href="#2、AlexNet" class="headerlink" title="2、AlexNet"></a>2、AlexNet</h2><p>在 <code>LeNet</code> 的基础上增加了 <code>relu</code> 激活函数，加速训练的同时避免了梯度消失（神经元死亡），使得整个神经网络的深度能够变得更深，同时加入了 <code>dropout</code> （权重衰退）防止过拟合，并且还包含了数据增加和支持多 <code>GPU</code> 训练，首次证明了机器自己学习到的特征可以超越手工设计的特征。</p>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>类型</th>
+<th>参数</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>输入</td>
+<td>图像</td>
+<td>224×224×3</td>
+<td>彩色图片输入</td>
+</tr>
+<tr>
+<td>Conv1</td>
+<td>卷积层</td>
+<td>11×11 卷积核，步长 4，输出 96 个特征图</td>
+<td>大卷积核，快速降低尺寸</td>
+</tr>
+<tr>
+<td>MaxPool1</td>
+<td>最大池化</td>
+<td>3×3 池化核，步长 2</td>
+<td>下采样</td>
+</tr>
+<tr>
+<td>Conv2</td>
+<td>卷积层</td>
+<td>5×5 卷积核，输出 256 个特征图</td>
+<td>分组卷积处理</td>
+</tr>
+<tr>
+<td>MaxPool2</td>
+<td>最大池化</td>
+<td>3×3 池化核，步长 2</td>
+<td>下采样</td>
+</tr>
+<tr>
+<td>Conv3</td>
+<td>卷积层</td>
+<td>3×3 卷积核，输出 384 个特征图</td>
+<td>提取深层特征</td>
+</tr>
+<tr>
+<td>Conv4</td>
+<td>卷积层</td>
+<td>3×3 卷积核，输出 384 个特征图</td>
+<td>深层特征</td>
+</tr>
+<tr>
+<td>Conv5</td>
+<td>卷积层</td>
+<td>3×3 卷积核，输出 256 个特征图</td>
+<td></td>
+</tr>
+<tr>
+<td>MaxPool3</td>
+<td>最大池化</td>
+<td>3×3 池化核，步长 2</td>
+<td>下采样</td>
+</tr>
+<tr>
+<td>FC6</td>
+<td>全连接层</td>
+<td>4096 神经元</td>
+<td>大型全连接层</td>
+</tr>
+<tr>
+<td>FC7</td>
+<td>全连接层</td>
+<td>4096 神经元</td>
+<td></td>
+</tr>
+<tr>
+<td>FC8</td>
+<td>全连接层</td>
+<td>1000 神经元</td>
+<td>对应 1000 个 ImageNet 类别</td>
+</tr>
+<tr>
+<td>Softmax</td>
+<td>分类输出</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="3、VGG"><a href="#3、VGG" class="headerlink" title="3、VGG"></a>3、VGG</h2><p><code>VGG</code> 是一种使用块的网络，设计思想就是将多个带小的卷积核(3X3)的卷积层封装成一个块，然后重复这个块来模拟更大的感受野（比如两个连续的 3×3 等效于一个 5×5），这样的好处是减少的模型的参数量，两个 3X3 的参数量是 18，比 25 小一些，并且能够加深模型，同时在每个 3X3 的卷积层中都使用了 <code>ReLu</code> 激活函数，因此也提高了模型的非线性化，训练的效果也会更好，不过可以看到这么深的一个网络模型，训练的时间可以说是非常长的。</p>
+<table>
+<thead>
+<tr>
+<th>层数</th>
+<th>层类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1-2</td>
+<td>Conv (3×3)</td>
+<td>64 个卷积核，激活后</td>
+</tr>
+<tr>
+<td>3</td>
+<td>MaxPool</td>
+<td>2×2 池化，步长 2</td>
+</tr>
+<tr>
+<td>4-5</td>
+<td>Conv (3×3)</td>
+<td>128 个卷积核</td>
+</tr>
+<tr>
+<td>6</td>
+<td>MaxPool</td>
+<td>池化</td>
+</tr>
+<tr>
+<td>7-9</td>
+<td>Conv (3×3)</td>
+<td>256 个卷积核</td>
+</tr>
+<tr>
+<td>10</td>
+<td>MaxPool</td>
+<td>池化</td>
+</tr>
+<tr>
+<td>11-13</td>
+<td>Conv (3×3)</td>
+<td>512 个卷积核</td>
+</tr>
+<tr>
+<td>14</td>
+<td>MaxPool</td>
+<td>池化</td>
+</tr>
+<tr>
+<td>15-16</td>
+<td>Conv (3×3)</td>
+<td>512 个卷积核</td>
+</tr>
+<tr>
+<td>17</td>
+<td>MaxPool</td>
+<td>池化</td>
+</tr>
+<tr>
+<td>18-20</td>
+<td>全连接层</td>
+<td>4096 神经元 × 2</td>
+</tr>
+<tr>
+<td>21</td>
+<td>全连接层</td>
+<td>1000 类输出</td>
+</tr>
+</tbody></table>
+<h2 id="4、NiN"><a href="#4、NiN" class="headerlink" title="4、NiN"></a>4、NiN</h2><p>设计思路是在卷积层内部引入小型的神经网络结构，增强特征提取能力。可以看到每个 <code>NiN</code> 块里面使用了几个 1X1 的卷积层，由全面的介绍可知， 1X1 的卷积层可以调整通道数，本质就是一个单层的感知机，通过中间间隔的激活函数持续提高特征的非线性，因此能让模型学习到更加复杂的非线性特征组合，这个很好理解，每一个通道都是一个图片特征，通过这些 1X1 的卷积层将每个特征之间的非线性关系计算出来。</p>
+<p><img src="https://zh-v2.d2l.ai/_images/nin.svg" alt="../_images/nin.svg"></p>
+<h2 id="5、GoogleNet"><a href="#5、GoogleNet" class="headerlink" title="5、GoogleNet"></a>5、GoogleNet</h2><p>设计思路是说组合使用不同大小的卷积核会比使用单个大小的卷积核更为有效，同时又吸收了 VGG 的重复块的思想和 NiN 的 1X1 卷积核的思想，从而设计出了这个多卷积核并行的网络，值得注意的是，四条不同卷积核的路径是一起跑的，计算出来结果之后再将结果拼接起来从而得到下一层的输入，给我的感觉就是将本来是多个层干的事弄到了一个层上，这样就能实现一层达到几层的效果，从实验结果上来看，GoogleNet的精度确实会更好。</p>
+<p><img src="https://zh-v2.d2l.ai/_images/inception-full.svg" alt="../_images/inception-full.svg"></p>
+<h2 id="6、批量规范化"><a href="#6、批量规范化" class="headerlink" title="6、批量规范化"></a>6、批量规范化</h2><p>BN 是一种在训练过程中对激活值做标准化的操作，使网络训练更稳定、收敛更快，并能支持更深的网络结构。实际操作就是在每个卷积层的输出将结果进行标准化（均值为0，方差为1），前面介绍过数值稳定性，这样标准化之后一个是加速收敛，一个是防止梯度爆炸和梯度消失，从而提高训练的稳定性。</p>
+<p><strong>代码实现</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">from mxnet import autograd, init, np, npx</span><br><span class="line">from mxnet.gluon import nn</span><br><span class="line">from d2l import mxnet as d2l</span><br><span class="line"></span><br><span class="line">npx.set_np()</span><br><span class="line"></span><br><span class="line">def batch_norm(X, gamma, beta, moving_mean, moving_var, eps, momentum):</span><br><span class="line">    # 通过autograd来判断当前模式是训练模式还是预测模式</span><br><span class="line">    if not autograd.is_training():</span><br><span class="line">        # 如果是在预测模式下，直接使用传入的移动平均所得的均值和方差</span><br><span class="line">        X_hat = (X - moving_mean) / np.sqrt(moving_var + eps)</span><br><span class="line">    else:</span><br><span class="line">        assert len(X.shape) in (2, 4)</span><br><span class="line">        if len(X.shape) == 2:</span><br><span class="line">            # 使用全连接层的情况，计算特征维上的均值和方差</span><br><span class="line">            mean = X.mean(axis=0)</span><br><span class="line">            var = ((X - mean) ** 2).mean(axis=0)</span><br><span class="line">        else:</span><br><span class="line">            # 使用二维卷积层的情况，计算通道维上（axis=1）的均值和方差。</span><br><span class="line">            # 这里我们需要保持X的形状以便后面可以做广播运算</span><br><span class="line">            mean = X.mean(axis=(0, 2, 3), keepdims=True)</span><br><span class="line">            var = ((X - mean) ** 2).mean(axis=(0, 2, 3), keepdims=True)</span><br><span class="line">        # 训练模式下，用当前的均值和方差做标准化</span><br><span class="line">        X_hat = (X - mean) / np.sqrt(var + eps)</span><br><span class="line">        # 更新移动平均的均值和方差</span><br><span class="line">        moving_mean = momentum * moving_mean + (1.0 - momentum) * mean</span><br><span class="line">        moving_var = momentum * moving_var + (1.0 - momentum) * var</span><br><span class="line">    Y = gamma * X_hat + beta  # 缩放和移位</span><br><span class="line">    return Y, moving_mean, moving_var</span><br></pre></td></tr></table></figure>
+
+<h2 id="7、ResNet"><a href="#7、ResNet" class="headerlink" title="7、ResNet"></a>7、ResNet</h2><p>设计思路主要是给每个块加一个通道，这样能够在梯度下降的时候走这个通道来到达模型的底层，从而解决模型过深带来的梯度消失的问题，由于梯度计算用的是乘法，因此只要模型够深，梯度乘着乘着肯定没了，这样就导致神经元死亡，也就没法训练了，而使用这样一个快速通道，这样就能在这个残差块梯度计算时加上这个快速通道的梯度，从而避免了梯度消失，也就能够使得神经网络的层次能够加到很深很深，从这个加法的计算来看，可以看到 <code>GoogleNet</code> 的设计思想，不过 <code>GoogleNet</code> 是拼接输出，这里是直接把输入加到输出上。</p>
+<p><img src="https://zh-v2.d2l.ai/_images/resnet-block.svg" alt="../_images/resnet-block.svg"></p>
+<p><strong>ResNet 架构</strong>：</p>
+<p><img src="https://zh-v2.d2l.ai/_images/resnet18.svg" alt="../_images/resnet18.svg"></p>
+<h2 id="8、多GPU训练"><a href="#8、多GPU训练" class="headerlink" title="8、多GPU训练"></a>8、多GPU训练</h2><p>顾名思义，一个模型放到多个 <code>GPU</code> 上跑，从而提高模型训练的速度，例如，一个 <code>GPU</code> 上我要跑 30 分钟，那我用两个 <code>GPU</code> 不就只要花 15 分钟就行了，不过一般效果也不是特别明显，除非你的训练数据特别大才能提速非常明显，一般能提高个 30% 左右的速度就已经非常好了，代码上一般是将我们的样本复制到不同的 <code>GPU</code> 上去进行训练，然后将结果求和算个平均值，之后梯度更新的时候，两个 <code>GPU</code> 上的模型各自下降，下降完了统一算个平均值再广播回去，从而保证每个 <code>GPU</code> 上的模型参数是一致的。</p>
+<p><strong>训练流程</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">def train(num_gpus, batch_size, lr):</span><br><span class="line">    train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)</span><br><span class="line">    devices = [d2l.try_gpu(i) for i in range(num_gpus)]</span><br><span class="line">    # 将模型参数复制到num_gpus个GPU</span><br><span class="line">    device_params = [get_params(params, d) for d in devices]</span><br><span class="line">    num_epochs = 10</span><br><span class="line">    animator = d2l.Animator(&#x27;epoch&#x27;, &#x27;test acc&#x27;, xlim=[1, num_epochs])</span><br><span class="line">    timer = d2l.Timer()</span><br><span class="line">    for epoch in range(num_epochs):</span><br><span class="line">        timer.start()</span><br><span class="line">        for X, y in train_iter:</span><br><span class="line">            # 为单个小批量执行多GPU训练</span><br><span class="line">            train_batch(X, y, device_params, devices, lr)</span><br><span class="line">            torch.cuda.synchronize()</span><br><span class="line">        timer.stop()</span><br><span class="line">        # 在GPU0上评估模型</span><br><span class="line">        animator.add(epoch + 1, (d2l.evaluate_accuracy_gpu(</span><br><span class="line">            lambda x: lenet(x, device_params[0]), test_iter, devices[0]),))</span><br><span class="line">    print(f&#x27;测试精度：&#123;animator.Y[0][-1]:.2f&#125;，&#123;timer.avg():.1f&#125;秒/轮，&#x27;</span><br><span class="line">          f&#x27;在&#123;str(devices)&#125;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="9、图像增广"><a href="#9、图像增广" class="headerlink" title="9、图像增广"></a>9、图像增广</h2><p>简而言之就是对图像进行一些几何变换，比如旋转、翻转、平移、缩放等等，也包括一些调颜色和亮度的操作，更高级一些的操作包括图像混合以及随机遮挡（打码），在此简单列举一些库函数，了解下有哪些操作即可。</p>
+<p><strong>翻转和裁剪</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shape_aug = torchvision.transforms.RandomResizedCrop(</span><br><span class="line">    (200, 200), scale=(0.1, 1), ratio=(0.5, 2))</span><br><span class="line">apply(img, shape_aug)</span><br></pre></td></tr></table></figure>
+
+<p><strong>改变颜色</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">color_aug = torchvision.transforms.ColorJitter(</span><br><span class="line">    brightness=0.5, contrast=0.5, saturation=0.5, hue=0.5)</span><br><span class="line">apply(img, color_aug)</span><br></pre></td></tr></table></figure>
+
+<p><strong>多种方法混用</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">augs = torchvision.transforms.Compose([</span><br><span class="line">    torchvision.transforms.RandomHorizontalFlip(), color_aug, shape_aug])</span><br><span class="line">apply(img, augs)</span><br></pre></td></tr></table></figure>
+
+<h2 id="10、微调"><a href="#10、微调" class="headerlink" title="10、微调"></a>10、微调</h2><p>在训练开始之前先用别人训练好的模型参数作为我们模型的一个初始化参数，从而使得我们自己的模型能够更快地收敛，一般我们会选择只在最后的全连接自己训练，其它的层都用别人训练好的参数进行初始化，或者，也可以后面几层都自己训练，视情况而定，可以都试试，选效果好的就行。</p>
+<p><img src="https://zh-v2.d2l.ai/_images/finetune.svg" alt="../_images/finetune.svg"></p>
+<h2 id="11、阶段小结"><a href="#11、阶段小结" class="headerlink" title="11、阶段小结"></a>11、阶段小结</h2><p><strong>当前阶段学习内容</strong>：</p>
+<ol>
+<li>学习卷积神经网络(<code>LeNet</code>)、深度卷积神经网络(<code>AlexNet</code>)、使用块的网络(<code>VGG</code>)、网络中的网络(<code>NiN</code>)、含并行连结的网络(<code>GoogLeNet</code>)的架构设计组成，以及它们的设计理念。</li>
+<li>学习批量规范化(<code>BatchNorm</code>)的概念和代码实现。</li>
+<li>学习残差网络(<code>ResNet</code>)的相关概念，了解残差块的结构和设计原理。</li>
+<li>学习了解 <code>CPU</code>、<code>GPU</code> 和 <code>TPU</code> 在深度学习中的用处和发展。</li>
+<li>学习多 <code>GPU</code> 训练的代码和训练的流程。</li>
+<li>学习数据增广的操作和 <code>torch</code> 中常用的库函数。</li>
+<li>学习微调的基本概念以及其在模型训练中的作用和使用。</li>
+</ol>
+<p><strong>下一阶段学习内容</strong>：</p>
+<ol>
+<li>学习物体检测和数据集相关的概念。</li>
+<li>学习锚框的相关概念和代码流程。</li>
+<li>学习了解物体检测算法：<code>R-CNN</code>，<code>SSD</code>，<code>YOLO</code>。</li>
+<li>学习语义分割和数据集相关的概念。</li>
+<li>学习转置卷积的相关内容。</li>
+<li>学习全连接卷积神经网络(<code>FCN</code>)的架构设计和实现。</li>
+<li>学习样式迁移的相关概念和操作。</li>
+<li>学习序列模型的相关概念。</li>
+<li>学习文本预处理的相关知识。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2025/06/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02025-5-31-2025-6-15/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-深度学习笔记2025-5-13-2025-5-30" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1369,129 +1692,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2024/02/08/leetcode%E7%AC%AC123%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-部署pg高可用问题记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/02/08/%E9%83%A8%E7%BD%B2pg%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">部署pg高可用问题记录</a>
-    </h1>
-  
-
-        
-        <a href="/2024/02/08/%E9%83%A8%E7%BD%B2pg%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  	<time datetime="2024-02-08T07:07:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1、安装redhat7-9版本系统"><a href="#1、安装redhat7-9版本系统" class="headerlink" title="1、安装redhat7.9版本系统"></a>1、安装redhat7.9版本系统</h2><h3 id="1-1-设置虚拟机基本配置"><a href="#1-1-设置虚拟机基本配置" class="headerlink" title="1.1 设置虚拟机基本配置"></a>1.1 设置虚拟机基本配置</h3><p>为了简化功能，虚拟机设置里面的声卡，打印机，显示器等等均可不进行连接，将右上角的的”启动时连接”、”加速3D图形等”前面的选项中的勾勾去掉。</p>
-<p><img src="https://gitee.com/wyjtlb/picture/raw/master/%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E5%9B%BE%E7%89%87/1.PNG" alt="1"></p>
-<h3 id="1-2-设置虚拟机网络模式"><a href="#1-2-设置虚拟机网络模式" class="headerlink" title="1.2 设置虚拟机网络模式"></a>1.2 设置虚拟机网络模式</h3><p>建议设置桥接模式或者NAT模式，桥接模式虚拟机的ip地址会和本地主机地址处于同一网段，NAT模式所有虚拟机会单独处于一个网段，在这两种模式下，所有虚拟机和主机均可进行通信，也可访问互联网。</p>
-<p><img src="https://gitee.com/wyjtlb/picture/raw/master/%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E5%9B%BE%E7%89%87/4.PNG" alt="4"></p>
-<h3 id="1-3-开启网卡"><a href="#1-3-开启网卡" class="headerlink" title="1.3 开启网卡"></a>1.3 开启网卡</h3><p>点击进入NETWORK &amp; HOST NAME选项</p>
-<p><img src="https://gitee.com/wyjtlb/picture/raw/master/%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E5%9B%BE%E7%89%87/2.PNG" alt="2"></p>
-<p>将网卡开启，此时会自动为网卡配置ip地址，配置的模式为前面所选择的网络模式，这里是NAT模式，如果设置为桥接模式，虚拟机会和本地主机设置在同一网段下。</p>
-<p><img src="https://gitee.com/wyjtlb/picture/raw/master/%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E5%9B%BE%E7%89%87/3.PNG" alt="3"></p>
-<h4 id="1-3-1-未配置网卡的情况"><a href="#1-3-1-未配置网卡的情况" class="headerlink" title="1.3.1 未配置网卡的情况"></a>1.3.1 未配置网卡的情况</h4><p>如果之前忘记配置网卡就进行了安装，那么可以使用以下命令启动网卡</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 记得切换到root用户下,ifcfg-ens33为虚拟机网卡的配置文件</span><br><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-ens33</span><br><span class="line"># 将配置文件中的ONBOOT属性改成yes</span><br><span class="line">ONBOOT=yes</span><br><span class="line"># 保存退出后重启网卡</span><br><span class="line">systemctl restart network</span><br></pre></td></tr></table></figure>
-
-<h3 id="1-4-配置yum的镜像源"><a href="#1-4-配置yum的镜像源" class="headerlink" title="1.4 配置yum的镜像源"></a>1.4 配置yum的镜像源</h3><p>虚拟机安装好之后，会出现yum无法使用的情况，首先禁用掉yum的订阅管理器，否则会让你一直登录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@Oradb1 pluginconf.d]# vi /etc/yum/pluginconf.d/subscription-manager.conf</span><br><span class="line">[main]</span><br><span class="line">enabled=0           #将它禁用掉</span><br></pre></td></tr></table></figure>
-
-<p>禁用之后依旧无法使用，此时没有配置yum的下载源，这里选择下载阿里云镜像源</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 去阿里云下载一个OS对应的仓库：http://mirrors.aliyun.com/repo/</span><br><span class="line"># 由于yum用不了，所以没法下载wget，建议本地下载上传至虚拟机</span><br><span class="line"># 将文件放到/etc/yum.repos.d/目录下</span><br><span class="line"># 这时还需要将全文中的$releasever字符串替换为7，这个7指的是系统版本号</span><br><span class="line">vi /etc/yum.repos.d/Centos-7.repo</span><br><span class="line"># 输入 &quot;:&quot; 进入末行模式</span><br><span class="line"># 然后输入%s/$releasever/7/g</span><br><span class="line"># 保存并退出</span><br><span class="line"># 最后清除yum缓存</span><br><span class="line">yum clean all</span><br></pre></td></tr></table></figure>
-
-<p>之后就可以正常使用yum命令了，wget无法使用的，此时可以执行yum install wget下载即可</p>
-<h3 id="1-5-键盘发出“滴”的声音"><a href="#1-5-键盘发出“滴”的声音" class="headerlink" title="1.5 键盘发出“滴”的声音"></a>1.5 键盘发出“滴”的声音</h3><p>装好虚拟机后，如果没有使用外部终端连接，直接再虚拟机的控制台上操作，有时按某些按键可能会发出”滴”的一声非常的响，推测原因可能是有些按键虚拟机不会识别所以发出警报？总之不影响操作。</p>
-<h2 id="2、安装python环境"><a href="#2、安装python环境" class="headerlink" title="2、安装python环境"></a>2、安装python环境</h2><p>此次安装选择python3.9.16版本，复制以下命令到控制台执行一下即可</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#==============================================================#</span><br><span class="line"># 此脚本用于python3.9.16版本的安装，虚拟环境等需自行创建</span><br><span class="line">#==============================================================#</span><br><span class="line">yum install -y gcc openssl-devel bzip2-devel libffi-devel</span><br><span class="line"></span><br><span class="line"># 下载python3.9.16包</span><br><span class="line">mkdir -p /opt/soft</span><br><span class="line">cd /opt/soft</span><br><span class="line">wget https://www.python.org/ftp/python/3.9.16/Python-3.9.16.tgz</span><br><span class="line"></span><br><span class="line"># 解压</span><br><span class="line">mkdir -m 755 -p /usr/local/python/3.9</span><br><span class="line">cd /opt/soft</span><br><span class="line">tar zxvf Python-3.9.16.tgz</span><br><span class="line">cd /opt/soft/Python-3.9.16</span><br><span class="line">./configure --prefix=/usr/local/python/3.9 --enable-optimizations --enable-shared</span><br><span class="line">make altinstall</span><br><span class="line"></span><br><span class="line">#复制软链接</span><br><span class="line">cp /usr/local/python/3.9/lib/libpython3.so /usr/lib64/</span><br><span class="line">cp /usr/local/python/3.9/lib/libpython3.9.so.1.0 /usr/lib64/</span><br><span class="line">cd /usr/lib64</span><br><span class="line">ln -s libpython3.9.so.1.0 libpython3.9.so</span><br><span class="line">ln -s /usr/local/python/3.9/bin/python3.9 /usr/bin/python3</span><br><span class="line">ln -s /usr/local/python/3.9/bin/pip3.9 /usr/bin/pip3</span><br></pre></td></tr></table></figure>
-
-<p>安装成功后检查python版本和pip版本</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost install]# python3 -V</span><br><span class="line">Python 3.9.16</span><br><span class="line">[root@localhost install]# pip3 -V</span><br><span class="line">pip 22.0.4 from /usr/local/python/3.9.16/lib/python3.9/site-packages/pip (python 3.9)</span><br></pre></td></tr></table></figure>
-
-<h2 id="3、安装等保数据库-FBase-SLP"><a href="#3、安装等保数据库-FBase-SLP" class="headerlink" title="3、安装等保数据库(FBase-SLP)"></a>3、安装等保数据库(FBase-SLP)</h2><p>上传等保数据库安装包至虚拟机，解压，执行&#x2F;extra_tools&#x2F;install目录下的install脚本，正常情况是不会报错的，这里主要记录笔者出错的一些情况</p>
-<h3 id="3-1-虚拟机卡顿"><a href="#3-1-虚拟机卡顿" class="headerlink" title="3.1 虚拟机卡顿"></a>3.1 虚拟机卡顿</h3><p>若安装过程虚拟机出现卡顿的情况，可能是由于虚拟机运行内存不够所致，检查虚拟机是否安装了桌面UI，如果虚拟机安装了桌面UI，建议将其卸载。参考来源：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhangzhide/p/15878296.html">CentOS删除桌面环境</a>。</p>
-<h4 id="3-1-1-卸载虚拟机桌面"><a href="#3-1-1-卸载虚拟机桌面" class="headerlink" title="3.1.1 卸载虚拟机桌面"></a>3.1.1 卸载虚拟机桌面</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 查找已安装的跟gnome相关的软件</span><br><span class="line">yum list installed |grep -Pi &#x27;(gnome)&#x27;</span><br><span class="line"># 卸载gnome-desktop桌面环境</span><br><span class="line">yum remove gnome-desktop3.x86_64 -y</span><br><span class="line"># 重启</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
-
-<p><strong>注：</strong>这里其实可以删除全部gnome相关的软件，但未经测试，感兴趣可自行测试。</p>
-<p>如果卸载虚拟机桌面虚拟机仍然非常卡，原因大概是虚拟机运行内存不够，这种情况建议修改虚拟机配置中运行内存的大小，设置为2G(默认是1G)，但某些虚拟机镜像文件貌似会自动安装图形化桌面，这样就还需要手动卸载，因此建议使用本次安装的系统版本rhel-server-7.9-x86_64-dvd.iso。</p>
-<h2 id="4、安装zookeeper"><a href="#4、安装zookeeper" class="headerlink" title="4、安装zookeeper"></a>4、安装zookeeper</h2><p>zookeeper的安装要先配置java环境，即下载安装jdk，这里并没有出现什么问题，具体的步骤参见<a target="_blank" rel="noopener" href="https://wyjtlb.github.io/2024/01/23/centos7%E4%B8%ADzookeeper%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/">个人博客</a>。</p>
-<h2 id="5、安装patroni"><a href="#5、安装patroni" class="headerlink" title="5、安装patroni"></a>5、安装patroni</h2><h3 id="5-1-patroni的配置文件需要对齐"><a href="#5-1-patroni的配置文件需要对齐" class="headerlink" title="5.1 patroni的配置文件需要对齐"></a>5.1 patroni的配置文件需要对齐</h3><p>由于patroni使用的是yml文件，因此需要严格对齐，每一层都要空两格。</p>
-<h3 id="5-2-高可用的理解"><a href="#5-2-高可用的理解" class="headerlink" title="5.2 高可用的理解"></a>5.2 高可用的理解</h3><ol>
-<li>高可用会帮你初始化数据库，因此你上传安装包后不需要自己去手动安装，没啥意义。</li>
-<li>高可用每个节点的名字需要设置不一样，最先进行初始化的节点作为主库，后面的作为备库。</li>
-<li>高可用每个节点的配置文件中的pg_hba配置项需要设置其他节点的流复制的地址。</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">比如，节点ip为192.168.9.1的配置文件需要设置另外两个节点ip的流复制地址</span><br><span class="line">- host replication all 192.168.0.44/32 md5</span><br><span class="line">- host replication all 192.168.0.45/32 md5</span><br><span class="line">如果未设置流复制地址，则备库进行高可用初始化时会失败</span><br></pre></td></tr></table></figure>
-
-<h3 id="5-3-目录权限不对"><a href="#5-3-目录权限不对" class="headerlink" title="5.3 目录权限不对"></a>5.3 目录权限不对</h3><p><strong>问题记录：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(venv-patroni-3.1.0) [fbase@localhost conf]$ patroni postgres0.yml </span><br><span class="line">localhost:5432 - no response</span><br><span class="line">2024-01-30 23:23:23.445 EST [2598] FATAL:  data directory &quot;/data/fbase/fbdata&quot; has wrong ownership</span><br><span class="line">2024-01-30 23:23:23.445 EST [2598] HINT:  The server must be started by the user that owns the data directory.</span><br></pre></td></tr></table></figure>
-
-<p>data目录的权限不对，修改目录权限至fbase用户下</p>
-<h3 id="5-4-多次初始化同一节点"><a href="#5-4-多次初始化同一节点" class="headerlink" title="5.4 多次初始化同一节点"></a>5.4 多次初始化同一节点</h3><p><strong>问题记录：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2024-01-30 21:57:58 CRITICAL: Can&#x27;t start; there is already a node named &#x27;postgresql0&#x27; running</span><br><span class="line">2024-01-30 21:58:00 INFO: Lock owner: None; I am postgresql0</span><br><span class="line">2024-01-30 21:58:00 INFO: waiting for leader to bootstrap</span><br></pre></td></tr></table></figure>
-
-<p>这个问题貌似patroni官网上有人提过，给出的解决方案是删除etcd中这个节点的信息，然后重新初始化，我们这里使用的是zookeeper，那么就进入zookeeper的客户端删除节点信息，下面给出相关命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 进入zookeeper客户端</span><br><span class="line">zkCli.sh</span><br><span class="line"># 查看zk下的节点信息</span><br><span class="line">ls /</span><br><span class="line"># 查看service节点下的子节点</span><br><span class="line">ls /service</span><br><span class="line"># 删除service节点的字节</span><br><span class="line">delete /service/...(填入对应节点名，若还存在子节点，先把子节点删完就行了)</span><br></pre></td></tr></table></figure>
-
-<h2 id="6、安装pgbouncer"><a href="#6、安装pgbouncer" class="headerlink" title="6、安装pgbouncer"></a>6、安装pgbouncer</h2><h3 id="6-1-设置环境变量未生效"><a href="#6-1-设置环境变量未生效" class="headerlink" title="6.1 设置环境变量未生效"></a>6.1 设置环境变量未生效</h3><p>这里必须先退出虚拟环境，然后source才会生效，否则pgbouncer的命令会找不到</p>
-<h3 id="6-2-admin-users的配置"><a href="#6-2-admin-users的配置" class="headerlink" title="6.2 admin_users的配置"></a>6.2 admin_users的配置</h3><p>pgbouncer里面的admin_users指的是数据库里的用户，不是系统用户！！！如果搞错了会出现下面这个错误</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(venv-patroni-3.1.0) [fbase@localhost log]$ psql -p 4432 -d pgbouncer</span><br><span class="line">psql: ERROR:  not allowed</span><br></pre></td></tr></table></figure>
-
-<p>这个错误谷歌都搜不到，只能仔细检查配置项哪里配错了。</p>
-<h3 id="6-3-pg-hba配置错误"><a href="#6-3-pg-hba配置错误" class="headerlink" title="6.3 pg_hba配置错误"></a>6.3 pg_hba配置错误</h3><p><strong>问题记录：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(venv-patroni-3.1.0) [fbase@localhost conf]$ patroni postgres0.yml </span><br><span class="line">pg_basebackup: error: connection to server at &quot;192.168.0.44&quot;, port 5432 failed: FATAL:  no pg_hba.conf entry for replication connection from host &quot;192.168.0.45&quot;, user &quot;postgres&quot;, no encryption</span><br></pre></td></tr></table></figure>
-
-<p><strong>解决方案：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 在每个数据库的pg_hba文件下添加</span><br><span class="line">host    replication     all             0.0.0.0/0               trust</span><br><span class="line"># 之后重新加载数据库文件</span><br><span class="line">pg_ctl reload</span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/02/08/%E9%83%A8%E7%BD%B2pg%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">展开全文 >></a>
         </p>
       
 

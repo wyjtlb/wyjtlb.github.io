@@ -162,6 +162,77 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode第114场双周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/10/01/leetcode%E7%AC%AC114%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">leetcode第114场双周赛</a>
+    </h1>
+  
+
+        
+        <a href="/2023/10/01/leetcode%E7%AC%AC114%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
+  	<time datetime="2023-10-01T05:57:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>总结：整体比较简单，但是最后一题想错了导致ak三道题，还得加强练习<br>t1.收集元素的最少操作次数<br>做法：直接模拟,o(n)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minOperations(List&lt;Integer&gt; nums, int k) &#123;</span><br><span class="line">        int n = nums.size();</span><br><span class="line">        Set&lt;Integer&gt; seen = new HashSet&lt;&gt;();</span><br><span class="line">        for (int i = 1;i &lt;= k;i++)&#123;</span><br><span class="line">            seen.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = n - 1;i &gt; -1;i--)&#123;</span><br><span class="line">            if (seen.contains(nums.get(i)))&#123;</span><br><span class="line">                seen.remove(nums.get(i));</span><br><span class="line">            &#125;</span><br><span class="line">            if (seen.size() == 0)&#123;</span><br><span class="line">                return n - i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t2.使数组为空的最少操作次数<br>做法：哈希表统计，然后分情况讨论，注意余数为1的情况，老套路了,o(n)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minOperations(int[] nums) &#123;</span><br><span class="line">        Map&lt;Integer,Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        for (int i : nums)&#123;</span><br><span class="line">            map.put(i,map.getOrDefault(i,0) + 1);</span><br><span class="line">        &#125;</span><br><span class="line">        int count = 0;</span><br><span class="line">        for (int x : map.values())&#123;</span><br><span class="line">            if (x % 3 == 0)&#123;</span><br><span class="line">                count += x / 3;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            if (x == 1)&#123;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125;</span><br><span class="line">            if (x == 2)&#123;</span><br><span class="line">                count++;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            int y = x % 3;</span><br><span class="line">            if (y == 2)&#123;</span><br><span class="line">                count += x / 3 + 1;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            if (y == 1)&#123;</span><br><span class="line">                count += x / 3 - 1 + 2;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t3.将数组分割成最多数目的子数组<br>做法：贪心，与运算越多结果越小，这里需要注意是子数组与运算的和，因此只统计与运算结果为0的情况,o(n)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxSubarrays(int[] nums) &#123;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        int x = nums[0];</span><br><span class="line">        for (int i : nums)&#123;</span><br><span class="line">            x &amp;= i; // 计算最小的与运算结果</span><br><span class="line">        &#125;</span><br><span class="line">        if(x != 0)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">        int count = 0;</span><br><span class="line">        int tmp = nums[0];</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            tmp &amp;= nums[i];</span><br><span class="line">            if (tmp == x)&#123; // 碰到结果等于最小值就切割，后面的子数组可以分到当前子数组</span><br><span class="line">                count++;</span><br><span class="line">                if (i + 1 &lt; n)&#123;</span><br><span class="line">                    tmp = nums[i + 1];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>t4.可以被K整除连通块的最大数目<br>做法：多叉树后续遍历，后续遍历返回每个结点值的总和就行了,o(n)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line"></span><br><span class="line">    private int count = 0;</span><br><span class="line"></span><br><span class="line">    public int maxKDivisibleComponents(int n, int[][] edges, int[] values, int k) &#123;</span><br><span class="line">        if (n == 1)&#123;</span><br><span class="line">            if (values[0] % k == 0)&#123;</span><br><span class="line">                return 1;</span><br><span class="line">            &#125;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        Map&lt;Integer, Set&lt;Integer&gt;&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        for (int[] f : edges)&#123;</span><br><span class="line">            map.computeIfAbsent(f[0],t -&gt; new HashSet&lt;&gt;()).add(f[1]);</span><br><span class="line">            map.computeIfAbsent(f[1],t -&gt; new HashSet&lt;&gt;()).add(f[0]);</span><br><span class="line">        &#125;</span><br><span class="line">        Set&lt;Integer&gt; seen = new HashSet&lt;&gt;();</span><br><span class="line">        seen.add(0);</span><br><span class="line">        dfs(values,k,map,0,seen);</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    long dfs(int[] values,int k,Map&lt;Integer,Set&lt;Integer&gt;&gt; map,int x,Set&lt;Integer&gt; seen)&#123;</span><br><span class="line">        long sum = 0;</span><br><span class="line">        for (int s : map.getOrDefault(x,new HashSet&lt;&gt;()))&#123;</span><br><span class="line">            if (seen.add(s))&#123;</span><br><span class="line">                sum += dfs(values,k,map,s,seen);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if ((sum + values[x]) % k == 0)&#123;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">        return sum + values[x];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>总结：这道题比赛时坐牢一小时没写出来，受到之前那道收金币的影响，想的是拓扑排序，感觉有点死脑筋了，碰到树优先考虑递归</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/10/01/leetcode%E7%AC%AC114%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode第364场周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -758,71 +829,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/07/26/java%E4%B8%ADBitSet%E7%B1%BB/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-codeforce888（div3）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/07/26/codeforce888%EF%BC%88div3%EF%BC%89/">codeforce888（div3）</a>
-    </h1>
-  
-
-        
-        <a href="/2023/07/26/codeforce888%EF%BC%88div3%EF%BC%89/" class="archive-article-date">
-  	<time datetime="2023-07-26T13:46:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-07-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>题目描述：给一个数组，判断数组是不是一个前缀和数组删除一个数后得到的。（数组元素1~n的整数，长度为n互不相同）</p>
-        
-          <a class="article-more-a" href="/2023/07/26/codeforce888%EF%BC%88div3%EF%BC%89/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/07/26/codeforce888%EF%BC%88div3%EF%BC%89/">展开全文 >></a>
         </p>
       
 

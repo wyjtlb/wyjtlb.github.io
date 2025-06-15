@@ -162,6 +162,129 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-部署pg高可用问题记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/02/08/%E9%83%A8%E7%BD%B2pg%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">部署pg高可用问题记录</a>
+    </h1>
+  
+
+        
+        <a href="/2024/02/08/%E9%83%A8%E7%BD%B2pg%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="archive-article-date">
+  	<time datetime="2024-02-08T07:07:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1、安装redhat7-9版本系统"><a href="#1、安装redhat7-9版本系统" class="headerlink" title="1、安装redhat7.9版本系统"></a>1、安装redhat7.9版本系统</h2><h3 id="1-1-设置虚拟机基本配置"><a href="#1-1-设置虚拟机基本配置" class="headerlink" title="1.1 设置虚拟机基本配置"></a>1.1 设置虚拟机基本配置</h3><p>为了简化功能，虚拟机设置里面的声卡，打印机，显示器等等均可不进行连接，将右上角的的”启动时连接”、”加速3D图形等”前面的选项中的勾勾去掉。</p>
+<p><img src="https://gitee.com/wyjtlb/picture/raw/master/%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E5%9B%BE%E7%89%87/1.PNG" alt="1"></p>
+<h3 id="1-2-设置虚拟机网络模式"><a href="#1-2-设置虚拟机网络模式" class="headerlink" title="1.2 设置虚拟机网络模式"></a>1.2 设置虚拟机网络模式</h3><p>建议设置桥接模式或者NAT模式，桥接模式虚拟机的ip地址会和本地主机地址处于同一网段，NAT模式所有虚拟机会单独处于一个网段，在这两种模式下，所有虚拟机和主机均可进行通信，也可访问互联网。</p>
+<p><img src="https://gitee.com/wyjtlb/picture/raw/master/%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E5%9B%BE%E7%89%87/4.PNG" alt="4"></p>
+<h3 id="1-3-开启网卡"><a href="#1-3-开启网卡" class="headerlink" title="1.3 开启网卡"></a>1.3 开启网卡</h3><p>点击进入NETWORK &amp; HOST NAME选项</p>
+<p><img src="https://gitee.com/wyjtlb/picture/raw/master/%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E5%9B%BE%E7%89%87/2.PNG" alt="2"></p>
+<p>将网卡开启，此时会自动为网卡配置ip地址，配置的模式为前面所选择的网络模式，这里是NAT模式，如果设置为桥接模式，虚拟机会和本地主机设置在同一网段下。</p>
+<p><img src="https://gitee.com/wyjtlb/picture/raw/master/%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95%E5%9B%BE%E7%89%87/3.PNG" alt="3"></p>
+<h4 id="1-3-1-未配置网卡的情况"><a href="#1-3-1-未配置网卡的情况" class="headerlink" title="1.3.1 未配置网卡的情况"></a>1.3.1 未配置网卡的情况</h4><p>如果之前忘记配置网卡就进行了安装，那么可以使用以下命令启动网卡</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 记得切换到root用户下,ifcfg-ens33为虚拟机网卡的配置文件</span><br><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-ens33</span><br><span class="line"># 将配置文件中的ONBOOT属性改成yes</span><br><span class="line">ONBOOT=yes</span><br><span class="line"># 保存退出后重启网卡</span><br><span class="line">systemctl restart network</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-配置yum的镜像源"><a href="#1-4-配置yum的镜像源" class="headerlink" title="1.4 配置yum的镜像源"></a>1.4 配置yum的镜像源</h3><p>虚拟机安装好之后，会出现yum无法使用的情况，首先禁用掉yum的订阅管理器，否则会让你一直登录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@Oradb1 pluginconf.d]# vi /etc/yum/pluginconf.d/subscription-manager.conf</span><br><span class="line">[main]</span><br><span class="line">enabled=0           #将它禁用掉</span><br></pre></td></tr></table></figure>
+
+<p>禁用之后依旧无法使用，此时没有配置yum的下载源，这里选择下载阿里云镜像源</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 去阿里云下载一个OS对应的仓库：http://mirrors.aliyun.com/repo/</span><br><span class="line"># 由于yum用不了，所以没法下载wget，建议本地下载上传至虚拟机</span><br><span class="line"># 将文件放到/etc/yum.repos.d/目录下</span><br><span class="line"># 这时还需要将全文中的$releasever字符串替换为7，这个7指的是系统版本号</span><br><span class="line">vi /etc/yum.repos.d/Centos-7.repo</span><br><span class="line"># 输入 &quot;:&quot; 进入末行模式</span><br><span class="line"># 然后输入%s/$releasever/7/g</span><br><span class="line"># 保存并退出</span><br><span class="line"># 最后清除yum缓存</span><br><span class="line">yum clean all</span><br></pre></td></tr></table></figure>
+
+<p>之后就可以正常使用yum命令了，wget无法使用的，此时可以执行yum install wget下载即可</p>
+<h3 id="1-5-键盘发出“滴”的声音"><a href="#1-5-键盘发出“滴”的声音" class="headerlink" title="1.5 键盘发出“滴”的声音"></a>1.5 键盘发出“滴”的声音</h3><p>装好虚拟机后，如果没有使用外部终端连接，直接再虚拟机的控制台上操作，有时按某些按键可能会发出”滴”的一声非常的响，推测原因可能是有些按键虚拟机不会识别所以发出警报？总之不影响操作。</p>
+<h2 id="2、安装python环境"><a href="#2、安装python环境" class="headerlink" title="2、安装python环境"></a>2、安装python环境</h2><p>此次安装选择python3.9.16版本，复制以下命令到控制台执行一下即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#==============================================================#</span><br><span class="line"># 此脚本用于python3.9.16版本的安装，虚拟环境等需自行创建</span><br><span class="line">#==============================================================#</span><br><span class="line">yum install -y gcc openssl-devel bzip2-devel libffi-devel</span><br><span class="line"></span><br><span class="line"># 下载python3.9.16包</span><br><span class="line">mkdir -p /opt/soft</span><br><span class="line">cd /opt/soft</span><br><span class="line">wget https://www.python.org/ftp/python/3.9.16/Python-3.9.16.tgz</span><br><span class="line"></span><br><span class="line"># 解压</span><br><span class="line">mkdir -m 755 -p /usr/local/python/3.9</span><br><span class="line">cd /opt/soft</span><br><span class="line">tar zxvf Python-3.9.16.tgz</span><br><span class="line">cd /opt/soft/Python-3.9.16</span><br><span class="line">./configure --prefix=/usr/local/python/3.9 --enable-optimizations --enable-shared</span><br><span class="line">make altinstall</span><br><span class="line"></span><br><span class="line">#复制软链接</span><br><span class="line">cp /usr/local/python/3.9/lib/libpython3.so /usr/lib64/</span><br><span class="line">cp /usr/local/python/3.9/lib/libpython3.9.so.1.0 /usr/lib64/</span><br><span class="line">cd /usr/lib64</span><br><span class="line">ln -s libpython3.9.so.1.0 libpython3.9.so</span><br><span class="line">ln -s /usr/local/python/3.9/bin/python3.9 /usr/bin/python3</span><br><span class="line">ln -s /usr/local/python/3.9/bin/pip3.9 /usr/bin/pip3</span><br></pre></td></tr></table></figure>
+
+<p>安装成功后检查python版本和pip版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost install]# python3 -V</span><br><span class="line">Python 3.9.16</span><br><span class="line">[root@localhost install]# pip3 -V</span><br><span class="line">pip 22.0.4 from /usr/local/python/3.9.16/lib/python3.9/site-packages/pip (python 3.9)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、安装等保数据库-FBase-SLP"><a href="#3、安装等保数据库-FBase-SLP" class="headerlink" title="3、安装等保数据库(FBase-SLP)"></a>3、安装等保数据库(FBase-SLP)</h2><p>上传等保数据库安装包至虚拟机，解压，执行&#x2F;extra_tools&#x2F;install目录下的install脚本，正常情况是不会报错的，这里主要记录笔者出错的一些情况</p>
+<h3 id="3-1-虚拟机卡顿"><a href="#3-1-虚拟机卡顿" class="headerlink" title="3.1 虚拟机卡顿"></a>3.1 虚拟机卡顿</h3><p>若安装过程虚拟机出现卡顿的情况，可能是由于虚拟机运行内存不够所致，检查虚拟机是否安装了桌面UI，如果虚拟机安装了桌面UI，建议将其卸载。参考来源：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhangzhide/p/15878296.html">CentOS删除桌面环境</a>。</p>
+<h4 id="3-1-1-卸载虚拟机桌面"><a href="#3-1-1-卸载虚拟机桌面" class="headerlink" title="3.1.1 卸载虚拟机桌面"></a>3.1.1 卸载虚拟机桌面</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 查找已安装的跟gnome相关的软件</span><br><span class="line">yum list installed |grep -Pi &#x27;(gnome)&#x27;</span><br><span class="line"># 卸载gnome-desktop桌面环境</span><br><span class="line">yum remove gnome-desktop3.x86_64 -y</span><br><span class="line"># 重启</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong>这里其实可以删除全部gnome相关的软件，但未经测试，感兴趣可自行测试。</p>
+<p>如果卸载虚拟机桌面虚拟机仍然非常卡，原因大概是虚拟机运行内存不够，这种情况建议修改虚拟机配置中运行内存的大小，设置为2G(默认是1G)，但某些虚拟机镜像文件貌似会自动安装图形化桌面，这样就还需要手动卸载，因此建议使用本次安装的系统版本rhel-server-7.9-x86_64-dvd.iso。</p>
+<h2 id="4、安装zookeeper"><a href="#4、安装zookeeper" class="headerlink" title="4、安装zookeeper"></a>4、安装zookeeper</h2><p>zookeeper的安装要先配置java环境，即下载安装jdk，这里并没有出现什么问题，具体的步骤参见<a target="_blank" rel="noopener" href="https://wyjtlb.github.io/2024/01/23/centos7%E4%B8%ADzookeeper%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/">个人博客</a>。</p>
+<h2 id="5、安装patroni"><a href="#5、安装patroni" class="headerlink" title="5、安装patroni"></a>5、安装patroni</h2><h3 id="5-1-patroni的配置文件需要对齐"><a href="#5-1-patroni的配置文件需要对齐" class="headerlink" title="5.1 patroni的配置文件需要对齐"></a>5.1 patroni的配置文件需要对齐</h3><p>由于patroni使用的是yml文件，因此需要严格对齐，每一层都要空两格。</p>
+<h3 id="5-2-高可用的理解"><a href="#5-2-高可用的理解" class="headerlink" title="5.2 高可用的理解"></a>5.2 高可用的理解</h3><ol>
+<li>高可用会帮你初始化数据库，因此你上传安装包后不需要自己去手动安装，没啥意义。</li>
+<li>高可用每个节点的名字需要设置不一样，最先进行初始化的节点作为主库，后面的作为备库。</li>
+<li>高可用每个节点的配置文件中的pg_hba配置项需要设置其他节点的流复制的地址。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">比如，节点ip为192.168.9.1的配置文件需要设置另外两个节点ip的流复制地址</span><br><span class="line">- host replication all 192.168.0.44/32 md5</span><br><span class="line">- host replication all 192.168.0.45/32 md5</span><br><span class="line">如果未设置流复制地址，则备库进行高可用初始化时会失败</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-目录权限不对"><a href="#5-3-目录权限不对" class="headerlink" title="5.3 目录权限不对"></a>5.3 目录权限不对</h3><p><strong>问题记录：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(venv-patroni-3.1.0) [fbase@localhost conf]$ patroni postgres0.yml </span><br><span class="line">localhost:5432 - no response</span><br><span class="line">2024-01-30 23:23:23.445 EST [2598] FATAL:  data directory &quot;/data/fbase/fbdata&quot; has wrong ownership</span><br><span class="line">2024-01-30 23:23:23.445 EST [2598] HINT:  The server must be started by the user that owns the data directory.</span><br></pre></td></tr></table></figure>
+
+<p>data目录的权限不对，修改目录权限至fbase用户下</p>
+<h3 id="5-4-多次初始化同一节点"><a href="#5-4-多次初始化同一节点" class="headerlink" title="5.4 多次初始化同一节点"></a>5.4 多次初始化同一节点</h3><p><strong>问题记录：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2024-01-30 21:57:58 CRITICAL: Can&#x27;t start; there is already a node named &#x27;postgresql0&#x27; running</span><br><span class="line">2024-01-30 21:58:00 INFO: Lock owner: None; I am postgresql0</span><br><span class="line">2024-01-30 21:58:00 INFO: waiting for leader to bootstrap</span><br></pre></td></tr></table></figure>
+
+<p>这个问题貌似patroni官网上有人提过，给出的解决方案是删除etcd中这个节点的信息，然后重新初始化，我们这里使用的是zookeeper，那么就进入zookeeper的客户端删除节点信息，下面给出相关命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 进入zookeeper客户端</span><br><span class="line">zkCli.sh</span><br><span class="line"># 查看zk下的节点信息</span><br><span class="line">ls /</span><br><span class="line"># 查看service节点下的子节点</span><br><span class="line">ls /service</span><br><span class="line"># 删除service节点的字节</span><br><span class="line">delete /service/...(填入对应节点名，若还存在子节点，先把子节点删完就行了)</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、安装pgbouncer"><a href="#6、安装pgbouncer" class="headerlink" title="6、安装pgbouncer"></a>6、安装pgbouncer</h2><h3 id="6-1-设置环境变量未生效"><a href="#6-1-设置环境变量未生效" class="headerlink" title="6.1 设置环境变量未生效"></a>6.1 设置环境变量未生效</h3><p>这里必须先退出虚拟环境，然后source才会生效，否则pgbouncer的命令会找不到</p>
+<h3 id="6-2-admin-users的配置"><a href="#6-2-admin-users的配置" class="headerlink" title="6.2 admin_users的配置"></a>6.2 admin_users的配置</h3><p>pgbouncer里面的admin_users指的是数据库里的用户，不是系统用户！！！如果搞错了会出现下面这个错误</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(venv-patroni-3.1.0) [fbase@localhost log]$ psql -p 4432 -d pgbouncer</span><br><span class="line">psql: ERROR:  not allowed</span><br></pre></td></tr></table></figure>
+
+<p>这个错误谷歌都搜不到，只能仔细检查配置项哪里配错了。</p>
+<h3 id="6-3-pg-hba配置错误"><a href="#6-3-pg-hba配置错误" class="headerlink" title="6.3 pg_hba配置错误"></a>6.3 pg_hba配置错误</h3><p><strong>问题记录：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(venv-patroni-3.1.0) [fbase@localhost conf]$ patroni postgres0.yml </span><br><span class="line">pg_basebackup: error: connection to server at &quot;192.168.0.44&quot;, port 5432 failed: FATAL:  no pg_hba.conf entry for replication connection from host &quot;192.168.0.45&quot;, user &quot;postgres&quot;, no encryption</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决方案：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 在每个数据库的pg_hba文件下添加</span><br><span class="line">host    replication     all             0.0.0.0/0               trust</span><br><span class="line"># 之后重新加载数据库文件</span><br><span class="line">pg_ctl reload</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/02/08/%E9%83%A8%E7%BD%B2pg%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-倍增算法求LCA-最近公共祖先" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -814,77 +937,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/10/01/leetcode%E7%AC%AC365%E5%9C%BA%E5%91%A8%E8%B5%9B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode第114场双周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/10/01/leetcode%E7%AC%AC114%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">leetcode第114场双周赛</a>
-    </h1>
-  
-
-        
-        <a href="/2023/10/01/leetcode%E7%AC%AC114%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-01T05:57:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>总结：整体比较简单，但是最后一题想错了导致ak三道题，还得加强练习<br>t1.收集元素的最少操作次数<br>做法：直接模拟,o(n)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minOperations(List&lt;Integer&gt; nums, int k) &#123;</span><br><span class="line">        int n = nums.size();</span><br><span class="line">        Set&lt;Integer&gt; seen = new HashSet&lt;&gt;();</span><br><span class="line">        for (int i = 1;i &lt;= k;i++)&#123;</span><br><span class="line">            seen.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = n - 1;i &gt; -1;i--)&#123;</span><br><span class="line">            if (seen.contains(nums.get(i)))&#123;</span><br><span class="line">                seen.remove(nums.get(i));</span><br><span class="line">            &#125;</span><br><span class="line">            if (seen.size() == 0)&#123;</span><br><span class="line">                return n - i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>t2.使数组为空的最少操作次数<br>做法：哈希表统计，然后分情况讨论，注意余数为1的情况，老套路了,o(n)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minOperations(int[] nums) &#123;</span><br><span class="line">        Map&lt;Integer,Integer&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        for (int i : nums)&#123;</span><br><span class="line">            map.put(i,map.getOrDefault(i,0) + 1);</span><br><span class="line">        &#125;</span><br><span class="line">        int count = 0;</span><br><span class="line">        for (int x : map.values())&#123;</span><br><span class="line">            if (x % 3 == 0)&#123;</span><br><span class="line">                count += x / 3;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            if (x == 1)&#123;</span><br><span class="line">                return -1;</span><br><span class="line">            &#125;</span><br><span class="line">            if (x == 2)&#123;</span><br><span class="line">                count++;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            int y = x % 3;</span><br><span class="line">            if (y == 2)&#123;</span><br><span class="line">                count += x / 3 + 1;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            if (y == 1)&#123;</span><br><span class="line">                count += x / 3 - 1 + 2;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>t3.将数组分割成最多数目的子数组<br>做法：贪心，与运算越多结果越小，这里需要注意是子数组与运算的和，因此只统计与运算结果为0的情况,o(n)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int maxSubarrays(int[] nums) &#123;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        int x = nums[0];</span><br><span class="line">        for (int i : nums)&#123;</span><br><span class="line">            x &amp;= i; // 计算最小的与运算结果</span><br><span class="line">        &#125;</span><br><span class="line">        if(x != 0)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">        int count = 0;</span><br><span class="line">        int tmp = nums[0];</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            tmp &amp;= nums[i];</span><br><span class="line">            if (tmp == x)&#123; // 碰到结果等于最小值就切割，后面的子数组可以分到当前子数组</span><br><span class="line">                count++;</span><br><span class="line">                if (i + 1 &lt; n)&#123;</span><br><span class="line">                    tmp = nums[i + 1];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>t4.可以被K整除连通块的最大数目<br>做法：多叉树后续遍历，后续遍历返回每个结点值的总和就行了,o(n)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line"></span><br><span class="line">    private int count = 0;</span><br><span class="line"></span><br><span class="line">    public int maxKDivisibleComponents(int n, int[][] edges, int[] values, int k) &#123;</span><br><span class="line">        if (n == 1)&#123;</span><br><span class="line">            if (values[0] % k == 0)&#123;</span><br><span class="line">                return 1;</span><br><span class="line">            &#125;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        Map&lt;Integer, Set&lt;Integer&gt;&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        for (int[] f : edges)&#123;</span><br><span class="line">            map.computeIfAbsent(f[0],t -&gt; new HashSet&lt;&gt;()).add(f[1]);</span><br><span class="line">            map.computeIfAbsent(f[1],t -&gt; new HashSet&lt;&gt;()).add(f[0]);</span><br><span class="line">        &#125;</span><br><span class="line">        Set&lt;Integer&gt; seen = new HashSet&lt;&gt;();</span><br><span class="line">        seen.add(0);</span><br><span class="line">        dfs(values,k,map,0,seen);</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    long dfs(int[] values,int k,Map&lt;Integer,Set&lt;Integer&gt;&gt; map,int x,Set&lt;Integer&gt; seen)&#123;</span><br><span class="line">        long sum = 0;</span><br><span class="line">        for (int s : map.getOrDefault(x,new HashSet&lt;&gt;()))&#123;</span><br><span class="line">            if (seen.add(s))&#123;</span><br><span class="line">                sum += dfs(values,k,map,s,seen);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if ((sum + values[x]) % k == 0)&#123;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">        return sum + values[x];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>总结：这道题比赛时坐牢一小时没写出来，受到之前那道收金币的影响，想的是拓扑排序，感觉有点死脑筋了，碰到树优先考虑递归</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/10/01/leetcode%E7%AC%AC114%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">展开全文 >></a>
         </p>
       
 
