@@ -6,15 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | Hexo</title>
+  <title>深度学习笔记2025-6-16-2025-6-30 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/page/2/index.html">
+  <meta name="description" content="右键点击另存为保存这篇文档：学习文档&#x2F;深度学习笔记2025-6-16-2025-6-30.md 1、目标检测和边界框目标检测是计算机视觉中的一项重要任务，旨在识别图像或视频中所有感兴趣的目标，并确定每个目标的位置和类别。目标检测不仅要判断图像中有什么，还要指出它们在哪里。 边界宽的两种存储方式： 12345678910111213141516171819def box_corner_t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习笔记2025-6-16-2025-6-30">
+<meta property="og:url" content="http://example.com/2025/06/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02025-6-16-2025-6-30/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="右键点击另存为保存这篇文档：学习文档&#x2F;深度学习笔记2025-6-16-2025-6-30.md 1、目标检测和边界框目标检测是计算机视觉中的一项重要任务，旨在识别图像或视频中所有感兴趣的目标，并确定每个目标的位置和类别。目标检测不仅要判断图像中有什么，还要指出它们在哪里。 边界宽的两种存储方式： 12345678910111213141516171819def box_corner_t">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/output_anchor_f592d1_66_0.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/anchor-label.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/output_multiscale-object-detection_ad7147_30_0.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/ssd.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/segmentation.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/fcn.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/style-transfer.svg">
+<meta property="og:image" content="https://zh-v2.d2l.ai/_images/neural-style.svg">
+<meta property="article:published_time" content="2025-06-17T14:20:30.000Z">
+<meta property="article:modified_time" content="2025-06-27T16:50:13.620Z">
 <meta property="article:author" content="neja">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zh-v2.d2l.ai/_images/output_anchor_f592d1_66_0.svg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -160,305 +173,353 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-深度学习笔记2025-6-16-2025-6-30" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深度学习笔记2025-6-16-2025-6-30
+    </h1>
+  
+
+        
+        <a href="/2025/06/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02025-6-16-2025-6-30/" class="archive-article-date">
+  	<time datetime="2025-06-17T14:20:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-06-17</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 右键点击另存为保存这篇文档：<a target="_blank" rel="noopener" href="https://gitee.com/wyjtlb/deep_study/blob/master/%E5%AD%A6%E4%B9%A0%E6%96%87%E6%A1%A3/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02025-6-16-2025-6-30.md">学习文档&#x2F;深度学习笔记2025-6-16-2025-6-30.md</a></p>
+<h2 id="1、目标检测和边界框"><a href="#1、目标检测和边界框" class="headerlink" title="1、目标检测和边界框"></a>1、目标检测和边界框</h2><p>目标检测是计算机视觉中的一项重要任务，旨在识别图像或视频中所有感兴趣的目标，并确定每个目标的位置和类别。目标检测不仅要判断图像中有什么，还要指出它们在哪里。</p>
+<p>边界宽的两种存储方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">def box_corner_to_center(boxes):</span><br><span class="line">    &quot;&quot;&quot;从（左上，右下）转换到（中间，宽度，高度）&quot;&quot;&quot;</span><br><span class="line">    x1, y1, x2, y2 = boxes[:, 0], boxes[:, 1], boxes[:, 2], boxes[:, 3]</span><br><span class="line">    cx = (x1 + x2) / 2</span><br><span class="line">    cy = (y1 + y2) / 2</span><br><span class="line">    w = x2 - x1</span><br><span class="line">    h = y2 - y1</span><br><span class="line">    boxes = torch.stack((cx, cy, w, h), axis=-1)</span><br><span class="line">    return boxes</span><br><span class="line"></span><br><span class="line">def box_center_to_corner(boxes):</span><br><span class="line">    &quot;&quot;&quot;从（中间，宽度，高度）转换到（左上，右下）&quot;&quot;&quot;</span><br><span class="line">    cx, cy, w, h = boxes[:, 0], boxes[:, 1], boxes[:, 2], boxes[:, 3]</span><br><span class="line">    x1 = cx - 0.5 * w</span><br><span class="line">    y1 = cy - 0.5 * h</span><br><span class="line">    x2 = cx + 0.5 * w</span><br><span class="line">    y2 = cy + 0.5 * h</span><br><span class="line">    boxes = torch.stack((x1, y1, x2, y2), axis=-1)</span><br><span class="line">    return boxes</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、锚框"><a href="#2、锚框" class="headerlink" title="2、锚框"></a>2、锚框</h2><p>在目标检测的过程中，会生成大量的锚框用来进行训练，这里介绍一种基于像素点生成锚框的策略，所用的超参数为</p>
+<ul>
+<li><strong>缩放比</strong>：s，生成的锚框占整个图像的比例。</li>
+<li><strong>宽高比</strong>：r，锚框的宽高比。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">def multibox_prior(data, sizes, ratios):</span><br><span class="line">    &quot;&quot;&quot;生成以每个像素为中心具有不同形状的锚框&quot;&quot;&quot;</span><br><span class="line">    in_height, in_width = data.shape[-2:]</span><br><span class="line">    device, num_sizes, num_ratios = data.device, len(sizes), len(ratios)</span><br><span class="line">    boxes_per_pixel = (num_sizes + num_ratios - 1)</span><br><span class="line">    size_tensor = torch.tensor(sizes, device=device)</span><br><span class="line">    ratio_tensor = torch.tensor(ratios, device=device)</span><br><span class="line"></span><br><span class="line">    # 为了将锚点移动到像素的中心，需要设置偏移量。</span><br><span class="line">    # 因为一个像素的高为1且宽为1，我们选择偏移我们的中心0.5</span><br><span class="line">    offset_h, offset_w = 0.5, 0.5</span><br><span class="line">    steps_h = 1.0 / in_height  # 在y轴上缩放步长</span><br><span class="line">    steps_w = 1.0 / in_width  # 在x轴上缩放步长</span><br><span class="line"></span><br><span class="line">    # 生成锚框的所有中心点</span><br><span class="line">    center_h = (torch.arange(in_height, device=device) + offset_h) * steps_h</span><br><span class="line">    center_w = (torch.arange(in_width, device=device) + offset_w) * steps_w</span><br><span class="line">    shift_y, shift_x = torch.meshgrid(center_h, center_w, indexing=&#x27;ij&#x27;)</span><br><span class="line">    shift_y, shift_x = shift_y.reshape(-1), shift_x.reshape(-1)</span><br><span class="line"></span><br><span class="line">    # 生成“boxes_per_pixel”个高和宽，</span><br><span class="line">    # 之后用于创建锚框的四角坐标(xmin,xmax,ymin,ymax)</span><br><span class="line">    w = torch.cat((size_tensor * torch.sqrt(ratio_tensor[0]),</span><br><span class="line">                   sizes[0] * torch.sqrt(ratio_tensor[1:])))\</span><br><span class="line">                   * in_height / in_width  # 处理矩形输入</span><br><span class="line">    h = torch.cat((size_tensor / torch.sqrt(ratio_tensor[0]),</span><br><span class="line">                   sizes[0] / torch.sqrt(ratio_tensor[1:])))</span><br><span class="line">    # 除以2来获得半高和半宽</span><br><span class="line">    anchor_manipulations = torch.stack((-w, -h, w, h)).T.repeat(</span><br><span class="line">                                        in_height * in_width, 1) / 2</span><br><span class="line"></span><br><span class="line">    # 每个中心点都将有“boxes_per_pixel”个锚框，</span><br><span class="line">    # 所以生成含所有锚框中心的网格，重复了“boxes_per_pixel”次</span><br><span class="line">    out_grid = torch.stack([shift_x, shift_y, shift_x, shift_y],</span><br><span class="line">                dim=1).repeat_interleave(boxes_per_pixel, dim=0)</span><br><span class="line">    output = out_grid + anchor_manipulations</span><br><span class="line">    return output.unsqueeze(0)</span><br></pre></td></tr></table></figure>
+
+<p><strong>生成的锚框示例</strong>：</p>
+<p><img src="https://zh-v2.d2l.ai/_images/output_anchor_f592d1_66_0.svg" alt="../_images/output_anchor_f592d1_66_0.svg"></p>
+<p><strong>为锚框打标签</strong>：</p>
+<p>1、找到每个锚框对应的真实框：</p>
+<p><img src="https://zh-v2.d2l.ai/_images/anchor-label.svg" alt="../_images/anchor-label.svg"></p>
+<p><strong>代码实现</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">def assign_anchor_to_bbox(ground_truth, anchors, device, iou_threshold=0.5):</span><br><span class="line">    &quot;&quot;&quot;将最接近的真实边界框分配给锚框&quot;&quot;&quot;</span><br><span class="line">    num_anchors, num_gt_boxes = anchors.shape[0], ground_truth.shape[0]</span><br><span class="line">    # 位于第i行和第j列的元素x_ij是锚框i和真实边界框j的IoU</span><br><span class="line">    jaccard = box_iou(anchors, ground_truth)</span><br><span class="line">    # 对于每个锚框，分配的真实边界框的张量</span><br><span class="line">    anchors_bbox_map = torch.full((num_anchors,), -1, dtype=torch.long,</span><br><span class="line">                                  device=device)</span><br><span class="line">    # 根据阈值，决定是否分配真实边界框</span><br><span class="line">    max_ious, indices = torch.max(jaccard, dim=1)</span><br><span class="line">    anc_i = torch.nonzero(max_ious &gt;= iou_threshold).reshape(-1)</span><br><span class="line">    box_j = indices[max_ious &gt;= iou_threshold]</span><br><span class="line">    anchors_bbox_map[anc_i] = box_j</span><br><span class="line">    col_discard = torch.full((num_anchors,), -1)</span><br><span class="line">    row_discard = torch.full((num_gt_boxes,), -1)</span><br><span class="line">    for _ in range(num_gt_boxes):</span><br><span class="line">        max_idx = torch.argmax(jaccard)</span><br><span class="line">        box_idx = (max_idx % num_gt_boxes).long()</span><br><span class="line">        anc_idx = (max_idx / num_gt_boxes).long()</span><br><span class="line">        anchors_bbox_map[anc_idx] = box_idx</span><br><span class="line">        jaccard[:, box_idx] = col_discard</span><br><span class="line">        jaccard[anc_idx, :] = row_discard</span><br><span class="line">    return anchors_bbox_map</span><br></pre></td></tr></table></figure>
+
+<p>2、标识类别和计算偏移量</p>
+<p>锚框找到真实框之后，标识这个锚框框住的物体类别并且计算，锚框和真实框的偏移量（中心点偏移和缩放程度）。</p>
+<h2 id="3、多尺度目标检测"><a href="#3、多尺度目标检测" class="headerlink" title="3、多尺度目标检测"></a>3、多尺度目标检测</h2><p>指的就是会根据特征图的大小，生成不同尺度的锚框。</p>
+<p><strong>代码实现</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def display_anchors(fmap_w, fmap_h, s):</span><br><span class="line">    d2l.set_figsize()</span><br><span class="line">    # 前两个维度上的值不影响输出</span><br><span class="line">    fmap = torch.zeros((1, 10, fmap_h, fmap_w))</span><br><span class="line">    anchors = d2l.multibox_prior(fmap, sizes=s, ratios=[1, 2, 0.5])</span><br><span class="line">    bbox_scale = torch.tensor((w, h, w, h))</span><br><span class="line">    d2l.show_bboxes(d2l.plt.imshow(img).axes,</span><br><span class="line">                    anchors[0] * bbox_scale)</span><br></pre></td></tr></table></figure>
+
+<p><strong>代码执行</strong>：</p>
+<p><img src="https://zh-v2.d2l.ai/_images/output_multiscale-object-detection_ad7147_30_0.svg" alt="../_images/output_multiscale-object-detection_ad7147_30_0.svg"></p>
+<h2 id="4、物体检测算法"><a href="#4、物体检测算法" class="headerlink" title="4、物体检测算法"></a>4、物体检测算法</h2><p>以下是基于锚框的物体检测算法，在此不做深入了解。</p>
+<table>
+<thead>
+<tr>
+<th>算法名称</th>
+<th>年份</th>
+<th>类型</th>
+<th>特点</th>
+<th>检测速度</th>
+<th>检测精度</th>
+<th>多尺度处理</th>
+<th>代表性网络结构</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>R-CNN</strong></td>
+<td>2014</td>
+<td>两阶段（Two-stage）</td>
+<td>使用 Selective Search 提取候选框，逐个送入 CNN 分类</td>
+<td>慢（数秒&#x2F;图）</td>
+<td>高（最初很高）</td>
+<td>❌ 手工区域提议，固定大小</td>
+<td>AlexNet &#x2F; VGG</td>
+</tr>
+<tr>
+<td><strong>Fast R-CNN</strong></td>
+<td>2015</td>
+<td>两阶段</td>
+<td>候选框在 feature map 上计算，RoI Pooling 统一尺寸</td>
+<td>中等</td>
+<td>高</td>
+<td>❌（固定 RoI 尺寸）</td>
+<td>VGG</td>
+</tr>
+<tr>
+<td><strong>Faster R-CNN</strong></td>
+<td>2015</td>
+<td>两阶段</td>
+<td>引入 RPN 生成候选框，端到端训练</td>
+<td>中等偏慢</td>
+<td>高</td>
+<td>✅（不同 anchor 尺寸&#x2F;比例）</td>
+<td>VGG &#x2F; ResNet</td>
+</tr>
+<tr>
+<td><strong>Mask R-CNN</strong></td>
+<td>2017</td>
+<td>两阶段</td>
+<td>Faster R-CNN + 分割分支，检测+分割</td>
+<td>中等偏慢</td>
+<td>高</td>
+<td>✅</td>
+<td>ResNet + FPN</td>
+</tr>
+<tr>
+<td><strong>SSD</strong></td>
+<td>2016</td>
+<td>单阶段（One-stage）</td>
+<td>多尺度特征图检测目标，速度快</td>
+<td>快</td>
+<td>中高</td>
+<td>✅（多层特征图）</td>
+<td>VGG &#x2F; MobileNet</td>
+</tr>
+<tr>
+<td><strong>YOLOv1</strong></td>
+<td>2016</td>
+<td>单阶段</td>
+<td>整图回归，快但召回率低</td>
+<td>很快</td>
+<td>一般</td>
+<td>❌</td>
+<td>自定义 YOLONet</td>
+</tr>
+</tbody></table>
+<h2 id="5、SSD"><a href="#5、SSD" class="headerlink" title="5、SSD"></a>5、SSD</h2><p>在这里学习下比较简单的SSD网络模型，主要是理解整个目标检测的训练过程。</p>
+<p><strong>模型架构</strong>：</p>
+<p><img src="https://zh-v2.d2l.ai/_images/ssd.svg" alt="../_images/ssd.svg"></p>
+<p>从模型的架构上可以清晰地看到整个目标检测的设计思路，用 <code>cnn</code> 去做图片的特征抽取，抽取之后生成锚框，然后对抽取得到的特征对锚框进行类别训练和边界框的偏移量的训练，从而提高物体检测模型的泛化能力，使得在预测时，每个锚框能够正确预测出框住物体的类别和与真实框之间的偏移量。</p>
+<h3 id="5-1-类别预测层"><a href="#5-1-类别预测层" class="headerlink" title="5.1 类别预测层"></a>5.1 类别预测层</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line">import torch</span><br><span class="line">import torchvision</span><br><span class="line">from torch import nn</span><br><span class="line">from torch.nn import functional as F</span><br><span class="line">from d2l import torch as d2l</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def cls_predictor(num_inputs, num_anchors, num_classes):</span><br><span class="line">    return nn.Conv2d(num_inputs, num_anchors * (num_classes + 1),</span><br><span class="line">                     kernel_size=3, padding=1)</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-边界框预测层"><a href="#5-2-边界框预测层" class="headerlink" title="5.2 边界框预测层"></a>5.2 边界框预测层</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">def bbox_predictor(num_inputs, num_anchors):</span><br><span class="line">    return nn.Conv2d(num_inputs, num_anchors * 4, kernel_size=3, padding=1)</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-连结多尺度的预测"><a href="#5-3-连结多尺度的预测" class="headerlink" title="5.3 连结多尺度的预测"></a>5.3 连结多尺度的预测</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def flatten_pred(pred):</span><br><span class="line">    return torch.flatten(pred.permute(0, 2, 3, 1), start_dim=1)</span><br><span class="line"></span><br><span class="line">def concat_preds(preds):</span><br><span class="line">    return torch.cat([flatten_pred(p) for p in preds], dim=1)</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-4-高和宽减半块"><a href="#5-4-高和宽减半块" class="headerlink" title="5.4 高和宽减半块"></a>5.4 高和宽减半块</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def down_sample_blk(in_channels, out_channels):</span><br><span class="line">    blk = []</span><br><span class="line">    for _ in range(2):</span><br><span class="line">        blk.append(nn.Conv2d(in_channels, out_channels,</span><br><span class="line">                             kernel_size=3, padding=1))</span><br><span class="line">        blk.append(nn.BatchNorm2d(out_channels))</span><br><span class="line">        blk.append(nn.ReLU())</span><br><span class="line">        in_channels = out_channels</span><br><span class="line">    blk.append(nn.MaxPool2d(2))</span><br><span class="line">    return nn.Sequential(*blk)</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-5-基本网络块"><a href="#5-5-基本网络块" class="headerlink" title="5.5 基本网络块"></a>5.5 基本网络块</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def base_net():</span><br><span class="line">    blk = []</span><br><span class="line">    num_filters = [3, 16, 32, 64]</span><br><span class="line">    for i in range(len(num_filters) - 1):</span><br><span class="line">        blk.append(down_sample_blk(num_filters[i], num_filters[i+1]))</span><br><span class="line">    return nn.Sequential(*blk)</span><br><span class="line"></span><br><span class="line">forward(torch.zeros((2, 3, 256, 256)), base_net()).shape</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-6-完整的模型"><a href="#5-6-完整的模型" class="headerlink" title="5.6 完整的模型"></a>5.6 完整的模型</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def get_blk(i):</span><br><span class="line">    if i == 0:</span><br><span class="line">        blk = base_net()</span><br><span class="line">    elif i == 1:</span><br><span class="line">        blk = down_sample_blk(64, 128)</span><br><span class="line">    elif i == 4:</span><br><span class="line">        blk = nn.AdaptiveMaxPool2d((1,1))</span><br><span class="line">    else:</span><br><span class="line">        blk = down_sample_blk(128, 128)</span><br><span class="line">    return blk</span><br></pre></td></tr></table></figure>
+
+<p><strong>前向传播函数</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def blk_forward(X, blk, size, ratio, cls_predictor, bbox_predictor):</span><br><span class="line">    Y = blk(X)</span><br><span class="line">    anchors = d2l.multibox_prior(Y, sizes=size, ratios=ratio)</span><br><span class="line">    cls_preds = cls_predictor(Y)</span><br><span class="line">    bbox_preds = bbox_predictor(Y)</span><br><span class="line">    return (Y, anchors, cls_preds, bbox_preds)</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、语义分割"><a href="#6、语义分割" class="headerlink" title="6、语义分割"></a>6、语义分割</h2><p>指的是为图片中的每个像素进行分类，例如，训练后的模型能够将图片中的不同物体的像素进行分类，如下图所示。</p>
+<p><img src="https://zh-v2.d2l.ai/_images/segmentation.svg" alt="../_images/segmentation.svg"></p>
+<h2 id="7、转置卷积"><a href="#7、转置卷积" class="headerlink" title="7、转置卷积"></a>7、转置卷积</h2><p>转置卷积就是普通卷积的反过来的操作，一个是压缩图片，另一个是扩大图片，当然也不是完全可逆的，毕竟二者在计算的过程中本身就存在损失，不过一般而言压缩再还原出来的图片，人眼来看是区别不大的，不过确确实实图片的像素值和原图片是不一样的。</p>
+<table>
+<thead>
+<tr>
+<th>方面</th>
+<th>普通卷积（Conv）</th>
+<th>转置卷积（Transposed Conv）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>功能</td>
+<td>降低空间维度，提取特征</td>
+<td>增加空间维度，上采样</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>压缩</td>
+<td>展开（反卷积）</td>
+</tr>
+<tr>
+<td>学习参数</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>应用</td>
+<td>特征提取、降采样</td>
+<td>特征图恢复、图像生成</td>
+</tr>
+</tbody></table>
+<h2 id="8、FCN"><a href="#8、FCN" class="headerlink" title="8、FCN"></a>8、FCN</h2><p><code>FCN</code> 是最早用于做语义分割的神经网络模型，网络模型也比较简单，基于 <code>FCN</code> 之后也出现了许多新的做语义分割的模型，这里主要学习下 <code>FCN</code> 的设计思想。</p>
+<p><strong>模型架构</strong>：</p>
+<p><img src="https://zh-v2.d2l.ai/_images/fcn.svg" alt="../_images/fcn.svg"></p>
+<p>可以看到 <code>FCN</code> 就是将一个卷积神经网络的最后的输出层给替换成了转置卷积层，这个其实也非常好理解，最后的层次卷积神经网络已经将特征学习分类好了，那么只需要通过转置卷积层将这个特征对应的图片区域找到就行了，找到这片区域之后，就知道像素的位置，然后就能给这片区域的像素表示类别了。</p>
+<h2 id="9、样式迁移"><a href="#9、样式迁移" class="headerlink" title="9、样式迁移"></a>9、样式迁移</h2><p>指的是说融合两张图片，一个保留内容，一个保留样式。如下图所示是经过样式迁移所生成的一张新的图片。样式迁移是一种无监督学习（不需要打标签）。</p>
+<p><img src="https://zh-v2.d2l.ai/_images/style-transfer.svg" alt="../_images/style-transfer.svg"></p>
+<p><strong>模型设计</strong>：</p>
+<p><img src="https://zh-v2.d2l.ai/_images/neural-style.svg" alt="../_images/neural-style.svg"></p>
+<p>这里的损失是内容损失和风格损失和总变化损失（相邻像素变化过大）的加权和，样式迁移的梯度下降过程是直接作用到输出的图片的像素上的，因此输出图片的像素就是训练的参数，而卷积层内做特征提取的权重是全程不变的。</p>
+<h2 id="10、阶段总结"><a href="#10、阶段总结" class="headerlink" title="10、阶段总结"></a>10、阶段总结</h2><p><strong>当前阶段学习内容</strong>：</p>
+<ol>
+<li>学习物体检测和边界框相关的概念，了解物体检测的应用场景和边界框的定义方式。</li>
+<li>学习锚框的定义、创建、以及如何打标签的相关知识。</li>
+<li>学习了解基于锚框的物体检测算法：<code>R-CNN</code>，<code>SSD</code>，<code>YOLO</code>。</li>
+<li>学习 <code>SSD</code> 物体检测算法的代码流程。</li>
+<li>学习语义分割的相关概念和使用场景。</li>
+<li>学习转置卷积的相关概念和执行的流程，以及填充和步幅在其中的使用影响。</li>
+<li>学习全连接卷积神经网络(<code>FCN</code>)的架构设计和实现。</li>
+<li>学习样式迁移的相关概念和对应的模型训练原理。</li>
+</ol>
+<p><strong>下一阶段学习内容</strong>：</p>
+<p>循环神经网络：</p>
+<ol>
+<li>学习和了解序列模型和文本预处理。</li>
+<li>学习语言模型和循环神经网路的模型设计。</li>
+<li>学习循环神经网络的代码实现。</li>
+<li>学习门控循环单元（GRU）和长短期记忆网络（LSTM）的相关知识。</li>
+<li>学习深层循环神经网络和双向循环神经网络的模型设计。</li>
+<li>学习解机器翻译的相关概念。</li>
+<li>学习编码器-解码器结构的相关知识。</li>
+<li>学习序列到序列学习（seq2seq）和束搜索的相关内容。</li>
+</ol>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/02/08/leetcode%E7%AC%AC123%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2024-02-08T07:11:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/02/08/leetcode%E7%AC%AC123%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">leetcode第123场双周赛</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/02/08/%E9%83%A8%E7%BD%B2pg%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="archive-article-date">
-  	<time datetime="2024-02-08T07:07:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/02/08/%E9%83%A8%E7%BD%B2pg%E9%AB%98%E5%8F%AF%E7%94%A8%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">部署pg高可用问题记录</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/01/26/%E5%80%8D%E5%A2%9E%E7%AE%97%E6%B3%95%E6%B1%82LCA-%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/" class="archive-article-date">
-  	<time datetime="2024-01-26T14:58:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/01/26/%E5%80%8D%E5%A2%9E%E7%AE%97%E6%B3%95%E6%B1%82LCA-%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/">倍增算法求LCA(最近公共祖先)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/01/23/centos7%E4%B8%ADzookeeper%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2024-01-23T14:32:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/01/23/centos7%E4%B8%ADzookeeper%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/">centos7中zookeeper的安装及配置</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/01/21/leetcode%E7%AC%AC381%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2024-01-21T06:32:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/01/21/leetcode%E7%AC%AC381%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第381场周赛</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/01/21/leetcode%E7%AC%AC122%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2024-01-21T06:02:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-01-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/01/21/leetcode%E7%AC%AC122%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">leetcode第122场双周赛</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2023" class="archive-year">2023</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/10/22/leetcode%E7%AC%AC368%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-22T09:09:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/10/22/leetcode%E7%AC%AC368%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第368场周赛</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-          
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://wyjtlb.github.io/025/06/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02025-6-16-2025-6-30/" alt="微信分享二维码">
+    </div>
+</div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/10/15/leetcode%E7%AC%AC115%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-15T07:21:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-15</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2025/06/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02025-5-31-2025-6-15/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">深度学习笔记2025-5-31~2025-6-15</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/10/15/leetcode%E7%AC%AC115%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">leetcode第115场双周赛</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E5%92%8C%E8%BE%B9%E7%95%8C%E6%A1%86"><span class="toc-number">1.</span> <span class="toc-text">1、目标检测和边界框</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E9%94%9A%E6%A1%86"><span class="toc-number">2.</span> <span class="toc-text">2、锚框</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B"><span class="toc-number">3.</span> <span class="toc-text">3、多尺度目标检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E7%89%A9%E4%BD%93%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">4、物体检测算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81SSD"><span class="toc-number">5.</span> <span class="toc-text">5、SSD</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E7%B1%BB%E5%88%AB%E9%A2%84%E6%B5%8B%E5%B1%82"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 类别预测层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E8%BE%B9%E7%95%8C%E6%A1%86%E9%A2%84%E6%B5%8B%E5%B1%82"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 边界框预测层</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E8%BF%9E%E7%BB%93%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%9A%84%E9%A2%84%E6%B5%8B"><span class="toc-number">5.3.</span> <span class="toc-text">5.3 连结多尺度的预测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E9%AB%98%E5%92%8C%E5%AE%BD%E5%87%8F%E5%8D%8A%E5%9D%97"><span class="toc-number">5.4.</span> <span class="toc-text">5.4 高和宽减半块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-%E5%9F%BA%E6%9C%AC%E7%BD%91%E7%BB%9C%E5%9D%97"><span class="toc-number">5.5.</span> <span class="toc-text">5.5 基本网络块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-6-%E5%AE%8C%E6%95%B4%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-number">5.6.</span> <span class="toc-text">5.6 完整的模型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6%E3%80%81%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2"><span class="toc-number">6.</span> <span class="toc-text">6、语义分割</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7%E3%80%81%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF"><span class="toc-number">7.</span> <span class="toc-text">7、转置卷积</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8%E3%80%81FCN"><span class="toc-number">8.</span> <span class="toc-text">8、FCN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9%E3%80%81%E6%A0%B7%E5%BC%8F%E8%BF%81%E7%A7%BB"><span class="toc-number">9.</span> <span class="toc-text">9、样式迁移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10%E3%80%81%E9%98%B6%E6%AE%B5%E6%80%BB%E7%BB%93"><span class="toc-number">10.</span> <span class="toc-text">10、阶段总结</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/10/15/leetcode%E7%AC%AC367%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-15T07:09:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-15</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/10/15/leetcode%E7%AC%AC367%E5%9C%BA%E5%91%A8%E8%B5%9B/">第367场周赛</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2023/10/08/leetcode%E7%AC%AC366%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-08T14:31:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2023/10/08/leetcode%E7%AC%AC366%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第366场周赛</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&amp;laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="page-number" href="/archives/page/5/">5</a><a class="extend next" rel="next" href="/archives/page/3/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -484,8 +545,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -162,6 +162,146 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-leetcode第123场双周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/02/08/leetcode%E7%AC%AC123%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">leetcode第123场双周赛</a>
+    </h1>
+  
+
+        
+        <a href="/2024/02/08/leetcode%E7%AC%AC123%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/" class="archive-article-date">
+  	<time datetime="2024-02-08T07:11:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>本场总结：</strong></p>
+<p>星期天要调休，没打，总体上看难度不高，但是题目的文字比较多，属于是考查心态。</p>
+<h1 id="t1-三角形类型II"><a href="#t1-三角形类型II" class="headerlink" title="t1. 三角形类型II"></a>t1. 三角形类型II</h1><p>给你一个下标从 <strong>0</strong> 开始长度为 <code>3</code> 的整数数组 <code>nums</code> ，需要用它们来构造三角形。</p>
+<ul>
+<li>如果一个三角形的所有边长度相等，那么这个三角形称为 <strong>equilateral</strong> 。</li>
+<li>如果一个三角形恰好有两条边长度相等，那么这个三角形称为 <strong>isosceles</strong> 。</li>
+<li>如果一个三角形三条边的长度互不相同，那么这个三角形称为 <strong>scalene</strong> 。</li>
+</ul>
+<p>如果这个数组无法构成一个三角形，请你返回字符串 <code>&quot;none&quot;</code> ，否则返回一个字符串表示这个三角形的类型。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [3,3,3]</span><br><span class="line">输出：&quot;equilateral&quot;</span><br><span class="line">解释：由于三条边长度相等，所以可以构成一个等边三角形，返回 &quot;equilateral&quot; 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [3,4,5]</span><br><span class="line">输出：&quot;scalene&quot;</span><br><span class="line">解释：</span><br><span class="line">nums[0] + nums[1] = 3 + 4 = 7 ，大于 nums[2] = 5 。</span><br><span class="line">nums[0] + nums[2] = 3 + 5 = 8 ，大于 nums[1] = 4 。</span><br><span class="line">nums[1] + nums[2] = 4 + 5 = 9 ，大于 nums[0] = 3 。</span><br><span class="line">由于任意两边纸盒都大于第三边，所以可以构成一个三角形。</span><br><span class="line">因为三条边的长度互不相等，所以返回 &quot;scalene&quot; 。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>nums.length == 3</code></li>
+<li><code>1 &lt;= nums[i] &lt;= 100</code></li>
+</ul>
+<p><strong>做法：</strong>模拟，根据不同三角形的类型特征来判断即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def triangleType(self, nums: List[int]) -&gt; str:</span><br><span class="line">        if nums[0] == nums[1] and nums[0] == nums[-1]:</span><br><span class="line">            return &quot;equilateral&quot;</span><br><span class="line">        if nums[0] + nums[1] &gt; nums[-1] and abs(nums[0] - nums[1]) &lt; nums[-1]:</span><br><span class="line">            if len(set(nums)) == 2:</span><br><span class="line">                return &quot;isosceles&quot;</span><br><span class="line">            if len(set(nums)) == 3:</span><br><span class="line">                return &quot;scalene&quot;</span><br><span class="line">        return &quot;none&quot;</span><br></pre></td></tr></table></figure>
+
+<h1 id="t2-见t4"><a href="#t2-见t4" class="headerlink" title="t2. 见t4"></a>t2. 见t4</h1><h1 id="t3-最大好子数组和"><a href="#t3-最大好子数组和" class="headerlink" title="t3. 最大好子数组和"></a>t3. 最大好子数组和</h1><p>给你一个长度为 <code>n</code> 的数组 <code>nums</code> 和一个 <strong>正</strong> 整数 <code>k</code> 。</p>
+<p>如果 <code>nums</code> 的一个子数组中，第一个元素和最后一个元素 <strong>差的绝对值恰好</strong> 为 <code>k</code> ，我们称这个子数组为 <strong>好</strong> 的。换句话说，如果子数组 <code>nums[i..j]</code> 满足 <code>|nums[i] - nums[j]| == k</code> ，那么它是一个好子数组。</p>
+<p>请你返回 <code>nums</code> 中 <strong>好</strong> 子数组的 <strong>最大</strong> 和，如果没有好子数组，返回 <code>0</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,3,4,5,6], k = 1</span><br><span class="line">输出：11</span><br><span class="line">解释：好子数组中第一个元素和最后一个元素的差的绝对值必须为 1 。好子数组有 [1,2] ，[2,3] ，[3,4] ，[4,5] 和 [5,6] 。最大子数组和为 11 ，对应的子数组为 [5,6] 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-1,3,2,4,5], k = 3</span><br><span class="line">输出：11</span><br><span class="line">解释：好子数组中第一个元素和最后一个元素的差的绝对值必须为 3 。好子数组有 [-1,3,2] 和 [2,4,5] 。最大子数组和为 11 ，对应的子数组为 [2,4,5] 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-1,-2,-3,-4], k = 2</span><br><span class="line">输出：-6</span><br><span class="line">解释：好子数组中第一个元素和最后一个元素的差的绝对值必须为 2 。好子数组有 [-1,-2,-3] 和 [-2,-3,-4] 。最大子数组和为 -6 ，对应的子数组为 [-1,-2,-3] 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= nums.length &lt;= 105</code></li>
+<li><code>-109 &lt;= nums[i] &lt;= 109</code></li>
+<li><code>1 &lt;= k &lt;= 109</code></li>
+</ul>
+<p><strong>做法：</strong>固定右端点，哈希表记录左端点的最小的前缀和</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">from collections import defaultdict</span><br><span class="line">from typing import List</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class Solution:</span><br><span class="line">    def maximumSubarraySum(self, nums: List[int], k: int) -&gt; int:</span><br><span class="line">        n = len(nums)</span><br><span class="line">        f = &#123;&#125;</span><br><span class="line">        f1 = [0] * (n + 1)</span><br><span class="line">        for i in range(n):</span><br><span class="line">            f1[i + 1] = f1[i] + nums[i]</span><br><span class="line">        ans = -float(&quot;inf&quot;) </span><br><span class="line">        for i in range(n):</span><br><span class="line">            if nums[i] + k in f:</span><br><span class="line">                ans = max(ans,f1[i + 1] - f[nums[i] + k])</span><br><span class="line">            if nums[i] - k in f:</span><br><span class="line">                ans = max(ans,f1[i + 1] - f[nums[i] - k])</span><br><span class="line">            if nums[i] not in f:</span><br><span class="line">                f[nums[i]] = float(&quot;inf&quot;)</span><br><span class="line">            f[nums[i]] = min(f[nums[i]],f1[i])</span><br><span class="line">        return 0 if ans == -float(&quot;inf&quot;) else ans</span><br></pre></td></tr></table></figure>
+
+<h1 id="t4-人员站位的方案数II"><a href="#t4-人员站位的方案数II" class="headerlink" title="t4. 人员站位的方案数II"></a>t4. 人员站位的方案数II</h1><p>给你一个 <code>n x 2</code> 的二维数组 <code>points</code> ，它表示二维平面上的一些点坐标，其中 <code>points[i] = [xi, yi]</code> 。</p>
+<p>我们定义 x 轴的正方向为 <strong>右</strong> （<strong>x 轴递增的方向</strong>），x 轴的负方向为 <strong>左</strong> （<strong>x 轴递减的方向</strong>）。类似的，我们定义 y 轴的正方向为 <strong>上</strong> （<strong>y 轴递增的方向</strong>），y 轴的负方向为 <strong>下</strong> （<strong>y 轴递减的方向</strong>）。</p>
+<p>你需要安排这 <code>n</code> 个人的站位，这 <code>n</code> 个人中包括 liupengsay 和小羊肖恩 。你需要确保每个点处 <strong>恰好</strong> 有 <strong>一个</strong> 人。同时，liupengsay 想跟小羊肖恩单独玩耍，所以 liupengsay 会以 liupengsay 的坐标为 <strong>左上角</strong> ，小羊肖恩的坐标为 <strong>右下角</strong> 建立一个矩形的围栏（<strong>注意</strong>，围栏可能 <strong>不</strong> 包含任何区域，也就是说围栏可能是一条线段）。如果围栏的 <strong>内部</strong> 或者 <strong>边缘</strong> 上有任何其他人，liupengsay 都会难过。</p>
+<p>请你在确保 liupengsay <strong>不会</strong> 难过的前提下，返回 liupengsay 和小羊肖恩可以选择的 <strong>点对</strong> 数目。</p>
+<p><strong>注意</strong>，liupengsay 建立的围栏必须确保 liupengsay 的位置是矩形的左上角，小羊肖恩的位置是矩形的右下角。比方说，以 <code>(1, 1)</code> ，<code>(1, 3)</code> ，<code>(3, 1)</code> 和 <code>(3, 3)</code> 为矩形的四个角，给定下图的两个输入，liupengsay 都不能建立围栏，原因如下：</p>
+<ul>
+<li>图一中，liupengsay 在 <code>(3, 3)</code> 且小羊肖恩在 <code>(1, 1)</code> ，liupengsay 的位置不是左上角且小羊肖恩的位置不是右下角。</li>
+<li>图二中，liupengsay 在 <code>(1, 3)</code> 且小羊肖恩在 <code>(1, 1)</code> ，小羊肖恩的位置不是在围栏的右下角。</li>
+</ul>
+<p><img src="https://assets.leetcode.com/uploads/2024/01/04/example0alicebob-1.png" alt="img"></p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2024/01/04/example1alicebob.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：points = [[1,1],[2,2],[3,3]]</span><br><span class="line">输出：0</span><br><span class="line">解释：没有办法可以让 liupengsay 的围栏以 liupengsay 的位置为左上角且小羊肖恩的位置为右下角。所以我们返回 0 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://pic.leetcode.cn/1706880313-YelabI-example2.jpeg"><img src="https://pic.leetcode.cn/1706880313-YelabI-example2.jpeg" alt="img"></a></strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：points = [[6,2],[4,4],[2,6]]</span><br><span class="line">输出：2</span><br><span class="line">解释：总共有 2 种方案安排 liupengsay 和小羊肖恩的位置，使得 liupengsay 不会难过：</span><br><span class="line">- liupengsay 站在 (4, 4) ，小羊肖恩站在 (6, 2) 。</span><br><span class="line">- liupengsay 站在 (2, 6) ，小羊肖恩站在 (4, 4) 。</span><br><span class="line">不能安排 liupengsay 站在 (2, 6) 且小羊肖恩站在 (6, 2) ，因为站在 (4, 4) 的人处于围栏内。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://pic.leetcode.cn/1706880311-mtPGYC-example3.jpeg"><img src="https://pic.leetcode.cn/1706880311-mtPGYC-example3.jpeg" alt="img"></a></strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：points = [[3,1],[1,3],[1,1]]</span><br><span class="line">输出：2</span><br><span class="line">解释：总共有 2 种方案安排 liupengsay 和小羊肖恩的位置，使得 liupengsay 不会难过：</span><br><span class="line">- liupengsay 站在 (1, 1) ，小羊肖恩站在 (3, 1) 。</span><br><span class="line">- liupengsay 站在 (1, 3) ，小羊肖恩站在 (1, 1) 。</span><br><span class="line">不能安排 liupengsay 站在 (1, 3) 且小羊肖恩站在 (3, 1) ，因为站在 (1, 1) 的人处于围栏内。</span><br><span class="line">注意围栏是可以不包含任何面积的，上图中第一和第二个围栏都是合法的。</span><br></pre></td></tr></table></figure>
+
+<p><strong>提示：</strong></p>
+<ul>
+<li><code>2 &lt;= n &lt;= 1000</code></li>
+<li><code>points[i].length == 2</code></li>
+<li><code>-109 &lt;= points[i][0], points[i][1] &lt;= 109</code></li>
+<li><code>points[i]</code> 点对两两不同。</li>
+</ul>
+<p><strong>做法：</strong>排序加枚举，按照从上到下，从左到右的顺序进行枚举，期间维护符合条件的上下边界。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def numberOfPairs(self, points: List[List[int]]) -&gt; int:</span><br><span class="line">        points.sort(key=lambda p: (p[0], -p[1]))</span><br><span class="line">        ans = 0</span><br><span class="line">        for i, (_, y0) in enumerate(points):</span><br><span class="line">            max_y = -inf</span><br><span class="line">            for (_, y) in points[i + 1:]:</span><br><span class="line">                if max_y &lt; y &lt;= y0:</span><br><span class="line">                    max_y = y</span><br><span class="line">                    ans += 1</span><br><span class="line">        return ans</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/02/08/leetcode%E7%AC%AC123%E5%9C%BA%E5%8F%8C%E5%91%A8%E8%B5%9B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-部署pg高可用问题记录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -868,75 +1008,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2023/10/08/leetcode%E7%AC%AC366%E5%9C%BA%E5%91%A8%E8%B5%9B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-leetcode第365场周赛" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2023/10/01/leetcode%E7%AC%AC365%E5%9C%BA%E5%91%A8%E8%B5%9B/">leetcode第365场周赛</a>
-    </h1>
-  
-
-        
-        <a href="/2023/10/01/leetcode%E7%AC%AC365%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="archive-article-date">
-  	<time datetime="2023-10-01T06:25:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-10-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>总结：成功AK，整体难度不高，都是经典套路<br>t1.有序三元组的最大值I<br>做法：题目给的数据范围小，暴力枚举,o(n^3)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public long maximumTripletValue(int[] nums) &#123;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        long max = 0;</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            for (int j = i + 1;j &lt; n;j++)&#123;</span><br><span class="line">                for (int z = j + 1;z &lt; n;z++)&#123;</span><br><span class="line">                    max = Math.max(max,((long) nums[i] - nums[j]) * nums[z]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>t2.有序三元组的最大值II<br>做法：预处理+枚举，o(n)，预处理好从右往左最大值和从左往右最大值，然后枚举最后一个变量即可，和上周t3差不多</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public long maximumTripletValue(int[] nums) &#123;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        int[] f = new int[n];</span><br><span class="line">        f[n - 1] = nums[n - 1];</span><br><span class="line">        for (int i = n - 2;i &gt; -1;i--)&#123;</span><br><span class="line">            f[i] = Math.max(nums[i],f[i + 1]);</span><br><span class="line">        &#125;</span><br><span class="line">        long max = 0;</span><br><span class="line">        int[] f1 = new int[n];</span><br><span class="line">        f1[0] = nums[0];</span><br><span class="line">        for (int i = 1;i &lt; n;i++)&#123;</span><br><span class="line">            f1[i] = Math.max(f1[i - 1],nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 1;i &lt; n - 1;i++)&#123;</span><br><span class="line">            max = Math.max(max, (long) (f1[i - 1] - nums[i]) * f[i + 1]);</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>t3.无限数组的最短子数组<br>做法：滑动窗口，预处理后滑两圈就行，有点贪心的意思,o(n)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int minSizeSubarray(int[] nums, int target) &#123;</span><br><span class="line">        int n = nums.length;</span><br><span class="line">        long sum = 0;</span><br><span class="line">        for (int i : nums)&#123;</span><br><span class="line">            sum = sum + i;</span><br><span class="line">        &#125;</span><br><span class="line">        int count = 0;</span><br><span class="line">        if (sum &lt; target)&#123;</span><br><span class="line">            count += (target / sum) * n;</span><br><span class="line">            target %= sum;</span><br><span class="line">        &#125;</span><br><span class="line">        int min = Integer.MAX_VALUE;</span><br><span class="line">        for (int i = 0,j = 0;j &lt; 2 * n;j++)&#123;</span><br><span class="line">            target -= nums[j % n];</span><br><span class="line">            count++;</span><br><span class="line">            if (target == 0)&#123;</span><br><span class="line">                min = Math.min(min,count);</span><br><span class="line">            &#125;</span><br><span class="line">            while (target &lt; 0)&#123;</span><br><span class="line">                target += nums[i % n];</span><br><span class="line">                i++;</span><br><span class="line">                count--;</span><br><span class="line">            &#125;</span><br><span class="line">            if (target == 0)&#123;</span><br><span class="line">                min = Math.min(min,count);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return min == Integer.MAX_VALUE ? -1 : min;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>t4.有向图访问计数<br>做法：经典基环数的题了，需要注意这道题没说所有点连在一起，因此可能存在不止一个环，对于所有可能成环的点再判断一次就行,o(n)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int[] countVisitedNodes(List&lt;Integer&gt; edges) &#123;</span><br><span class="line">        // 图中不止一个环</span><br><span class="line">        // 问我们每个点入环要多少步</span><br><span class="line">        int n = edges.size();</span><br><span class="line">        int[] f = new int[n];</span><br><span class="line">        Map&lt;Integer, Set&lt;Integer&gt;&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            map.computeIfAbsent(i,t -&gt; new HashSet&lt;&gt;()).add(edges.get(i));</span><br><span class="line">            f[i]++;</span><br><span class="line">            f[edges.get(i)]++;</span><br><span class="line">        &#125;</span><br><span class="line">        Queue&lt;Integer&gt; q = new LinkedList&lt;&gt;();</span><br><span class="line">        Set&lt;Integer&gt; seen = new HashSet&lt;&gt;();</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            if (f[i] == 1)&#123;</span><br><span class="line">                q.offer(i);</span><br><span class="line">                seen.add(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        int[] ans = new int[n];</span><br><span class="line">        while(!q.isEmpty())&#123;</span><br><span class="line">            int sz = q.size();</span><br><span class="line">            for (int i = 0;i &lt; sz;i++)&#123;</span><br><span class="line">                int x = q.poll();</span><br><span class="line">                for (int s : map.getOrDefault(x,new HashSet&lt;&gt;()))&#123;</span><br><span class="line">                    f[s]--;</span><br><span class="line">                    if(f[s] == 1 &amp;&amp; !seen.contains(s))&#123;</span><br><span class="line">                        q.offer(s);</span><br><span class="line">                        seen.add(s);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            if (!seen.contains(i))&#123;</span><br><span class="line">                seen.add(i);</span><br><span class="line">                Set&lt;Integer&gt; seen1 = new HashSet&lt;&gt;();</span><br><span class="line">                seen1.add(i);</span><br><span class="line">                dfs(seen,i,map,seen1);</span><br><span class="line">                for (int x : seen1)&#123;</span><br><span class="line">                    ans[x] = seen1.size();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 0;i &lt; n;i++)&#123;</span><br><span class="line">            if (f[i] == 1)&#123;</span><br><span class="line">                Queue&lt;Integer&gt; tmp = new LinkedList&lt;&gt;();</span><br><span class="line">                tmp.offer(i);</span><br><span class="line">                Set&lt;Integer&gt; seen1 = new LinkedHashSet&lt;&gt;();</span><br><span class="line">                seen1.add(i);</span><br><span class="line">                while(!tmp.isEmpty())&#123;</span><br><span class="line">                    int sz = tmp.size();</span><br><span class="line">                    for (int j = 0;j &lt; sz;j++)&#123;</span><br><span class="line">                        int x = tmp.poll();</span><br><span class="line">                        for (int s : map.getOrDefault(x,new HashSet&lt;&gt;()))&#123;</span><br><span class="line">                            if (!seen1.contains(s) &amp;&amp; ans[s] == 0)&#123;</span><br><span class="line">                                seen1.add(s);</span><br><span class="line">                                tmp.offer(s);</span><br><span class="line">                            &#125;</span><br><span class="line">                            if (ans[s] != 0)&#123;</span><br><span class="line">                                int y = seen1.size();</span><br><span class="line">                                for (int z : seen1)&#123;</span><br><span class="line">                                    ans[z] = y + ans[s];</span><br><span class="line">                                    y--;</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void dfs(Set&lt;Integer&gt; seen,int x,Map&lt;Integer,Set&lt;Integer&gt;&gt; map,Set&lt;Integer&gt; seen1)&#123;</span><br><span class="line">        for (int s : map.getOrDefault(x,new HashSet&lt;&gt;()))&#123;</span><br><span class="line">            if (!seen.contains(s) &amp;&amp; !seen1.contains(s))&#123;</span><br><span class="line">                seen.add(s);</span><br><span class="line">                seen1.add(s);</span><br><span class="line">                dfs(seen,s,map,seen1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2023/10/01/leetcode%E7%AC%AC365%E5%9C%BA%E5%91%A8%E8%B5%9B/">展开全文 >></a>
         </p>
       
 
